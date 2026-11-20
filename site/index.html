@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keyln - a touch console for your Mac</title>
+  <meta name="description" content="Keyln turns a tablet or phone on your local network into a touch console for your Mac: open apps, bring windows forward, send shortcuts, run approved scripts and workflows.">
+  <meta name="theme-color" content="#141311">
+  <link rel="icon" type="image/svg+xml" href="keyln.svg">
+  <link rel="stylesheet" href="style.css">
+  <!-- three.js is pinned to an exact version and loaded from jsDelivr. -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <!-- config.js holds the single GITHUB URL constant; every link marked data-github uses it. -->
+  <script src="config.js"></script>
+  <script type="module" src="main.js"></script>
+  <noscript><style>.stage .fallback { display: grid !important; } .stage .canvas-wrap canvas, .stage .controls { display: none; }</style></noscript>
+</head>
+<body>
+  <a class="skip" href="#features">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="#top" aria-label="Keyln home">
+        <img src="keyln.svg" width="32" height="32" alt="">
+        <span>Keyln</span>
+      </a>
+      <nav aria-label="Main">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#security">Security</a>
+        <a href="#" data-github>GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <h1>Turn a tablet or phone into a touch console for your Mac.</h1>
+      <p class="sub">Pair a device once, tap a key, and your Mac runs the saved action. Everything stays on your local network.</p>
+      <div class="cta">
+        <a class="btn primary" href="#" data-github>Get it on GitHub</a>
+        <a class="btn" href="#how">How it works</a>
+      </div>
+
+      <div class="stage" id="stage" data-mode="loading">
+        <div class="canvas-wrap">
+          <canvas id="hero-canvas" aria-hidden="true"></canvas>
+          <div class="fallback" aria-hidden="true">
+            <div class="fb-flow">
+              <div class="fb-node"><strong>Tablet or phone</strong><span>Tap a key</span></div>
+              <div class="fb-arrow">&rarr;</div>
+              <div class="fb-node"><strong>Your Mac</strong><span>Runs the saved action</span></div>
+              <div class="fb-arrow">&rarr;</div>
+              <div class="fb-node"><strong>Result</strong><span>Received &middot; Finished &middot; Failed &middot; Unknown</span></div>
+            </div>
+            <ul class="fb-actions">
+              <li>Open app</li><li>Activate window</li><li>Run script</li><li>Shortcut</li><li>Workflow</li>
+            </ul>
+          </div>
+        </div>
+        <p class="caption" id="caption" aria-live="polite" aria-atomic="true">Turn a tablet into a touch console for your Mac.</p>
+        <div class="controls">
+          <button class="play" id="play" type="button" aria-pressed="true">
+            <svg class="icon-pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg>
+            <svg class="icon-play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" hidden><path d="M3 1.5v11l9-5.5z"/></svg>
+            <span class="play-label">Pause</span>
+            <span class="sr-only"> animation</span>
+          </button>
+          <div class="dots" id="dots" role="group" aria-label="Animation chapters"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section wrap">
+      <h2>What it does</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Actions</h3>
+          <p>Open an app, activate a named window, send a keyboard shortcut, run a macOS Shortcut, run an approved Shell script, or chain steps into a sequential workflow.</p>
+        </article>
+        <article class="card">
+          <h3>Clear results</h3>
+          <p>Each run shows whether the Mac received it, finished it, failed, or the result is unknown. Unknown results are never retried automatically.</p>
+        </article>
+        <article class="card">
+          <h3>Layouts &amp; components</h3>
+          <p>Keys, App groups, Action groups, swipeable Pages, a clock, text and recent activity, placed freely on a canvas. Export and import layouts; the Mac keeps a backup of the last valid one.</p>
+        </article>
+        <article class="card">
+          <h3>Themes &amp; icons</h3>
+          <p>Built-in and custom themes, key colours, real Mac app icons, a built-in icon set, your own PNG/WebP images, and optional Iconify search through the Mac.</p>
+        </article>
+        <article class="card">
+          <h3>Installable web app</h3>
+          <p>Install it as a PWA on the device for a full-screen console. It is online-first; there is no offline mode.</p>
+        </article>
+        <article class="card">
+          <h3>Runs at login</h3>
+          <p>A per-user background service starts with your Mac. A menu bar app shows status, starts and stops it, opens management login and shows a QR code of the address.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how" class="section wrap">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>
+          <h3>Build and set up on the Mac</h3>
+          <p>Clone the repository, build it, then choose your Mac's private address. Setup creates a Keyln-only certificate authority and a server certificate for that address.</p>
+        </li>
+        <li>
+          <h3>Trust the Keyln certificate on your device</h3>
+          <p>Export the public CA certificate, compare its fingerprint, and install it as a trusted root on the tablet or phone. Never copy private keys.</p>
+        </li>
+        <li>
+          <h3>Pair and approve on the Mac</h3>
+          <p>Open the address on the device, enter a pairing code, then approve the request on the Mac. Knowing the code alone grants nothing.</p>
+        </li>
+      </ol>
+<pre class="code" tabindex="0"><code>npm ci --ignore-scripts &amp;&amp; npm run build
+npm run setup -- --address 192.168.1.20</code></pre>
+      <p class="note">Replace <code>192.168.1.20</code> with your Mac's private address. See the README for the full install guide.</p>
+    </section>
+
+    <section id="security" class="section wrap">
+      <h2>Security</h2>
+      <ul class="ticks">
+        <li><strong>Local network only.</strong> The Mac listens on the address you chose, over HTTPS with its own certificate authority. Never forward the port through your router.</li>
+        <li><strong>Approval on the Mac.</strong> A device can only join after you approve it on the Mac. Sessions use Secure, HttpOnly, SameSite=Strict cookies and last 30 days.</li>
+        <li><strong>Actions by ID only.</strong> A device can only trigger actions already saved on the Mac. No endpoint accepts an arbitrary command, and scripts are approved on the Mac.</li>
+        <li><strong>Management stays on the Mac.</strong> The <code>/admin</code> page only accepts connections from the Mac itself and needs its own short-lived login code.</li>
+        <li><strong>One action at a time.</strong> Busy requests are rejected, not queued.</li>
+      </ul>
+    </section>
+
+    <section id="requirements" class="section wrap two">
+      <div>
+        <h2>Requirements</h2>
+        <p>A Mac with macOS 13 or later, Node.js 24 LTS or 26, the Xcode Command Line Tools, OpenSSL, and a device with a modern browser on the same private network.</p>
+      </div>
+      <div>
+        <h2>Limitations</h2>
+        <ul class="plain">
+          <li>macOS only on the Mac side. Keyboard actions support the ABC / U.S. layout.</li>
+          <li>Helpers are ad-hoc signed, so macOS permissions may need to be granted again after rebuilding or upgrading Node.</li>
+          <li>Window matching uses exact titles; titles that change may not match.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>MIT License</span>
+      <span aria-hidden="true">&middot;</span>
+      <a href="#" data-github>GitHub</a>
+    </div>
+  </footer>
+</body>
+</html>

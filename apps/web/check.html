@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark">
+  <title>Keyln · Surface connection check</title><link rel="stylesheet" href="./check.css"><script type="module" src="./apps/web/check.js"></script>
+</head>
+<body><main>
+  <header><a href="/">k. Keyln</a><span>SURFACE / M1 CHECK</span></header>
+  <h1>Surface connection check</h1><p class="description">This page only measures network echoes. It does not open apps or send keyboard shortcuts. Results stay in this page.</p>
+  <p id="check-status" role="status" aria-live="polite">Checking device authorization…</p>
+  <div class="toolbar"><button id="check-start" type="button" disabled>Record 30 touches</button><button id="check-reconnect" type="button" hidden>Check connection again</button><button id="check-export" type="button" disabled>Download results</button><a href="/" target="_blank" rel="noopener">Open control desk ↗</a></div>
+  <p class="description">Choose Record, then touch a key and wait for its echo before the next touch. Any key works. Requests are not queued or resent.</p>
+  <div id="check-grid" class="grid" role="group" aria-label="12 network echo test keys"></div>
+  <div class="metrics" aria-live="polite"><p>Samples <strong id="check-count">0 / 30</strong></p><p>Trusted touch events <strong id="check-touch">0</strong></p><p>Failed <strong id="check-failed">0</strong></p><p>Network round trip p95 <strong id="check-rtt">—</strong></p><p>Press to next frame p95 <strong id="check-frame">—</strong></p></div>
+  <p class="description">Trusted touch events are touch inputs marked as trusted by the browser; they do not prove the device model. Next frame is a page scheduling estimate, not physical display latency. Network round trip excludes action execution.</p>
+  <section><h2>Environment</h2><p id="check-environment" class="description"></p><div class="fields">
+    <label>Windows version / build<input id="check-windows" maxlength="100" placeholder="Version and OS build from winver"></label>
+    <label>Windows display scale<input id="check-scale" maxlength="30" placeholder="For example, 150%"></label>
+    <label>Control desk Edge memory (MB)<input id="check-memory" type="number" min="0" max="100000" step="0.1" placeholder="Read the control desk tab in Edge Task Manager"></label>
+  </div><label class="checkbox"><input id="check-certificate" type="checkbox">I confirmed there is no certificate warning</label>
+  <p class="description">Enter the LTSC build, Windows display scale and Edge memory from the device. Browsers cannot read these reliably. This check page memory is not the control desk memory baseline.</p></section>
+  <footer>30 echoes provide touch and network evidence. Editing, real Mac actions, revocation and sleep recovery need separate verification.</footer>
+</main></body></html>

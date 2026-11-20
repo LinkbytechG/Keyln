@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" data-theme="braun">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1A1917">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Keyln">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Keyln · Control desk</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/keyln-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/keyln-180.png">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="/apps/web/app.js"></script>
+</head>
+<body>
+  <div id="shell" class="shell" data-paired="false" data-editing="false" data-loading="true">
+    <div id="system-layer" class="system-layer" hidden aria-label="Keyln controls"><div id="system-bar" class="system-bar" aria-hidden="true"></div></div>
+    <div id="mac-dock" class="mac-dock" hidden></div>
+    <main>
+      <p id="connection-recovery" class="connection-recovery" role="status" aria-live="polite" hidden></p>
+      <section id="startup-help" class="startup-help" role="status">
+        <h2>Open Keyln through the Mac Host</h2><p>Opening index.html directly does not start the console.</p><p>On the Mac, double-click <strong>Start-Keyln.command</strong> in the project folder, or run <code>npm start</code> there. Then open the HTTPS address shown in the startup terminal.</p><p>If you opened this page over HTTPS, check that the Host is running and restart it to load the latest build.</p>
+      </section>
+      <section id="configuration-recovery" class="startup-help" role="status" hidden><h2>Mac layout needs recovery</h2><p>The configuration was preserved. Control and pairing are disabled. Open <strong>/admin on the Mac</strong> to review its backup, then recover deliberately.</p><p>After recovery, pair this device again. Nothing will be resent.</p></section>
+      <section id="install-panel" class="install-panel" hidden aria-labelledby="install-title">
+        <div class="install-heading"><h2 id="install-title">Keyln on this device</h2><button id="install-close" class="quiet" type="button">Close</button></div>
+        <p>Install Keyln for an app icon and its own window. Your Mac must still be running and reachable on the local network.</p>
+        <p id="install-status" role="status" aria-live="polite"></p>
+        <button id="install-confirm" class="solid" type="button" hidden>Install Keyln</button>
+        <ul><li><strong>Surface / Windows Edge:</strong> choose the install icon in the address bar, or the browser menu → Apps → Install Keyln.</li><li><strong>Android:</strong> open this HTTPS address in Chrome, then use the browser menu → Install app / Add to Home screen.</li><li><strong>iPad / iPhone:</strong> open this HTTPS address in Safari, then Share → Add to Home Screen. Enable Open as Web App if offered.</li></ul>
+        <p>Keep this Mac address and its trusted certificate. Each installed app may need its own pairing. When the Mac is unreachable, execution stays disabled and no action is queued or resent.</p>
+      </section>
+
+      <section id="layout-files-panel" class="layout-files" hidden aria-labelledby="layout-files-title"><div class="layout-files-heading"><h2 id="layout-files-title">Layout files</h2><button id="layout-files-close" class="quiet" type="button">Close</button></div><p>Export the saved Mac layout, including pages, keys and workflows. Files include non-secret script arguments; keep passwords and tokens out of your layout. Devices, certificates, script bodies and approvals are not exported.</p><div class="layout-file-actions"><button id="layout-export" class="quiet" type="button">Export saved layout</button><label for="layout-import-file">Import JSON file (max 256 KiB)<input id="layout-import-file" type="file" accept=".json,application/json"></label><button id="layout-import-check" class="quiet" type="button" disabled>Check file again</button></div><p id="layout-file-message" role="status" aria-live="polite">Import starts with a preview. It does not execute actions or save automatically.</p><div id="layout-import-preview" hidden><strong id="layout-import-summary"></strong><ul id="layout-import-issues"></ul><p>Loading replaces any unsaved draft in this tab. Review and fix the imported draft, then Save layout and confirm replacement.</p><button id="layout-import-load" class="solid" type="button" disabled>Replace draft and review</button></div><p>Each save keeps the previous valid layout as a backup. Backup recovery is available in <strong>/admin on the Mac</strong> and revokes control-device authorization.</p></section>
+      <section id="pair-panel" class="pair-panel" hidden aria-labelledby="pair-title">
+        <div class="pair-intro"><span class="pair-brand" data-ui-icon="keyboard"></span><h1 id="pair-title">Your Mac.<br>One touch away.</h1><p>Connect your Surface to a desk that’s yours.</p><ol><li>Generate a pairing code in Mac management at <code>/admin</code>, or type <code>pair</code> in the Keyln window.</li><li>Enter the code below.</li><li>Compare the request ID, then approve it on the Mac.</li></ol><p class="muted">The code expires after 2 minutes.</p><button id="pair-install-open" class="text-button" type="button">Install Keyln on this device</button></div>
+        <form id="pair-form"><h2>A trusted connection.</h2><label for="device-name">Device name</label><input id="device-name" maxlength="40" value="My Surface" required autocomplete="off"><label for="pair-code">8-digit pairing code</label><input id="pair-code" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" required autocomplete="one-time-code" placeholder="00000000"><button id="pair-submit" class="solid" type="submit">Request connection <span aria-hidden="true">↗</span></button><p id="pair-message" class="form-message" role="status" aria-live="polite"></p></form>
+      </section>
+      <section id="desk" class="desk" hidden aria-label="Mac control desk" data-editing="false">
+        <div id="grid-frame" class="grid-frame"><div id="button-grid" class="button-grid" role="group" aria-label="Canvas" aria-busy="true"></div></div>
+        <div id="edit-float" class="edit-float" role="group" aria-label="Edit settings and messages" hidden>
+        <section id="editor" class="settings-card" hidden aria-labelledby="editor-title">
+          <header class="card-head"><button id="editor-grip" class="edit-grip card-grip" type="button" title="Move the card (double-click to put it back)" aria-label="Move settings card"><span class="edit-grip-dots" aria-hidden="true"></span></button><h2 id="editor-title" tabindex="-1">Key</h2><span id="editor-sub" class="card-sub"></span><button id="editor-collapse" class="icon-close card-collapse" type="button" title="Collapse settings" aria-label="Collapse settings" aria-expanded="true" aria-controls="config-form"><span class="ui-icon" data-ui-icon="chevron-right" aria-hidden="true"></span></button><button id="editor-close" class="icon-close" type="button" aria-label="Close settings"><span class="x-mark" aria-hidden="true"></span></button></header>
+          <div id="card-size" class="card-size" hidden><div id="key-size-options" class="size-options" role="group" aria-label="Size"></div><p id="card-size-message" class="field-note" role="status" aria-live="polite"></p></div>
+          <form id="config-form" novalidate>
+            <div id="popup-body" class="popup-body">
+            <div id="widget-order" class="widget-order" hidden><span class="group-label">Order</span><div class="order-buttons"><button id="order-first" class="quiet" type="button">First</button><button id="order-earlier" class="quiet" type="button">Earlier</button><button id="order-later" class="quiet" type="button">Later</button><button id="order-last" class="quiet" type="button">Last</button></div></div>
+            <fieldset id="editor-fields" disabled>
+              <div id="display-settings" hidden>
+                <div id="display-form-field"><span id="display-form-label" class="group-label">Form</span><div id="display-forms" class="form-options" role="group" aria-labelledby="display-form-label"></div></div>
+                <div id="display-text-field" hidden><label for="display-text">Words</label><input id="display-text" maxlength="80" autocomplete="off" placeholder="Title or note"></div>
+                <p id="display-message" class="field-note" role="status" aria-live="polite"></p>
+              </div>
+              <div id="pages-settings" hidden>
+                <span class="group-label">Pages size</span>
+                <div><span class="group-label">Width</span><div class="form-options" role="group" aria-label="Pages width mode"><button id="pages-width-fixed" type="button" class="form-choice">Fixed</button><button id="pages-width-fill" type="button" class="form-choice">Fill</button><button id="pages-width-percent" type="button" class="form-choice">%</button></div><label id="pages-width-label" for="pages-width">Width (u)</label><input id="pages-width" type="number" step="1" aria-describedby="pages-size-error"><div id="pages-percent-presets" class="form-options" role="group" aria-label="Width percent presets"><button id="pages-percent-25" type="button" class="form-choice">25%</button><button id="pages-percent-33" type="button" class="form-choice">33%</button><button id="pages-percent-50" type="button" class="form-choice">50%</button><button id="pages-percent-67" type="button" class="form-choice">67%</button><button id="pages-percent-75" type="button" class="form-choice">75%</button><button id="pages-percent-100" type="button" class="form-choice">100%</button></div></div>
+                <div><span class="group-label">Height</span><div class="form-options" role="group" aria-label="Pages height mode"><button id="pages-height-fixed" type="button" class="form-choice">Fixed</button><button id="pages-height-fill" type="button" class="form-choice">Fill</button></div><label id="pages-height-label" for="pages-height">Height (u)</label><input id="pages-height" type="number" step="1" aria-describedby="pages-size-error"></div>
+                <div id="pages-columns" class="pages-columns" role="group" aria-labelledby="pages-columns-title">
+                  <span id="pages-columns-title" class="group-label">Keys per row</span><span id="pages-columns-side" class="theme-scope"></span>
+                  <div id="pages-columns-wide-row" class="columns-row" data-side="wide"><span class="columns-name">Wide screens</span><button id="pages-columns-wide-auto" type="button" class="form-choice" aria-pressed="true">Auto</button><input id="pages-columns-wide" type="number" min="1" max="16" step="1" inputmode="numeric" placeholder="Auto" aria-label="Keys per row on wide screens" aria-describedby="pages-columns-error" disabled></div>
+                  <div id="pages-columns-narrow-row" class="columns-row" data-side="narrow"><span class="columns-name">Narrow screens</span><button id="pages-columns-narrow-auto" type="button" class="form-choice" aria-pressed="true">Auto</button><input id="pages-columns-narrow" type="number" min="1" max="16" step="1" inputmode="numeric" placeholder="Auto" aria-label="Keys per row on narrow screens" aria-describedby="pages-columns-error" disabled></div>
+                  <p id="pages-columns-note" class="field-note"></p><p id="pages-columns-error" class="field-note" role="alert"></p>
+                </div>
+                <p class="field-note">120u is one standard key; each page scrolls vertically.</p><p id="pages-size-error" class="field-note" role="alert"></p>
+                <h3 class="section-title">Pages</h3>
+                <ul id="pages-list" class="pages-list" aria-label="Pages"></ul>
+                <button id="pages-add" class="quiet" type="button">Add page</button>
+              </div>
+              <div id="button-fields" hidden>
+                <div class="input-label"><label for="button-name">Name</label><span id="label-count" class="muted">0/40</span></div><input id="button-name" maxlength="40" aria-describedby="field-error" placeholder="e.g. Calculator" autocomplete="off">
+                <p id="action-note" class="field-note"></p>
+                <div id="main-icon-host" class="icon-host"></div>
+                <div id="action-section">
+                <label id="action-label">When tapped</label><div id="action-options" class="action-options" role="group" aria-labelledby="action-label"></div><select id="action-type" class="sr-only" tabindex="-1" aria-hidden="true"><option value="none">No action yet</option><option value="app.open">Open a Mac app</option><option value="window.activate">Activate a Mac window</option><option value="keyboard.shortcut">Send a keyboard shortcut</option><option value="shell.run">Run an approved script</option><option value="shortcuts.run">Run a Mac shortcut</option><option value="workflow.run">Run a workflow</option></select><button id="clear-action" class="text-button" type="button">Clear action</button>
+                <div id="app-fields"><label for="app-select">Mac application</label><div id="app-select-host"></div></div><div id="window-fields" hidden></div>
+                <div id="shortcut-fields" hidden><label for="shortcut-key">Key</label><select id="shortcut-key" aria-describedby="field-error" disabled></select><fieldset class="modifier-fieldset"><legend>Modifiers</legend><div class="modifier-grid"><label><input id="modifier-command" type="checkbox" checked disabled><span>⌘ Command</span></label><label><input id="modifier-option" type="checkbox" disabled><span>⌥ Option</span></label><label><input id="modifier-control" type="checkbox" disabled><span>⌃ Control</span></label><label><input id="modifier-shift" type="checkbox" disabled><span>⇧ Shift</span></label></div></fieldset><p class="field-note">Sends to the Mac’s current foreground app. Requires ABC / U.S. layout and Accessibility. “Sent” confirms key delivery, not the app’s result.</p></div>
+                <div id="shell-fields" hidden><label for="script-select">Mac-approved script</label><select id="script-select" aria-describedby="field-error"><option value="">Choose a Mac-approved script</option></select><div id="script-args"></div><p class="field-note">Register and approve scripts in Mac management. Only approved versions appear here. Parameter values are saved in the layout and shared with paired devices: do not enter passwords or tokens.</p></div>
+                <div id="mac-shortcuts-fields" hidden><label for="mac-shortcut-select">Mac shortcut</label><select id="mac-shortcut-select"><option value="">Choose a Mac shortcut</option></select><label for="mac-shortcut-timeout">Wait limit (seconds)</label><input id="mac-shortcut-timeout" type="number" min="0.1" max="60" step="0.1" value="30"><button id="refresh-shortcuts" class="text-button" type="button">Refresh Mac shortcuts</button><p id="shortcuts-note" class="field-note">Shortcuts that ask for input may need attention on the Mac.</p></div>
+                <div id="workflow-fields" hidden><label for="workflow-select">Saved workflow</label><select id="workflow-select"></select><button id="workflow-new" class="quiet" type="button">New workflow</button>
+                  <div id="workflow-definition" hidden><label for="workflow-name">Workflow name</label><input id="workflow-name" maxlength="40" autocomplete="off"><label for="workflow-timeout">Whole workflow limit (seconds)</label><input id="workflow-timeout" type="number" min="0.1" max="180" step="0.1" value="60"><label class="workflow-check"><input id="workflow-risk" type="checkbox"><span>High risk — confirm the whole workflow</span></label><p class="field-note">Steps run in order. Failure or timeout stops later steps; earlier effects are not rolled back. After Open app, keyboard steps require that app to remain in front. Shell parameters are saved and shared with paired devices; do not enter passwords or tokens.</p><div id="workflow-steps"></div><button id="workflow-add-step" class="quiet" type="button">Add step</button><button id="workflow-delete" class="text-button danger-text" type="button">Delete workflow</button><div id="workflow-delete-confirm" class="layout-confirm" hidden><p>Delete this workflow and clear every key bound to it? Save layout to apply.</p><button id="workflow-delete-yes" class="quiet" type="button">Delete from draft</button><button id="workflow-delete-no" class="quiet" type="button">Keep workflow</button></div></div>
+                </div>
+                </div>
+              </div>
+              <details id="more-settings" class="more-settings" hidden>
+                <summary>More…</summary>
+                <div id="button-more">
+                  <label id="risk-field" class="workflow-check"><input id="button-risk" type="checkbox"><span id="risk-text">High risk — ask before running this key</span></label>
+                  <section id="key-appearance" class="appearance" aria-labelledby="appearance-title">
+                    <h3 id="appearance-title" class="section-title">Appearance</h3>
+                <div id="key-color-group" data-emphasis="normal"><span class="group-label">Key color</span><div id="color-options" class="color-options" role="group" aria-label="Key color"></div><p id="key-color-note" class="field-note" hidden>Only affects the Outline ring and the Classic theme.</p></div>
+                <div><span class="group-label">Icon style</span>
+                  <span id="icon-style-label" class="sub-label">Background</span><div id="icon-style" class="style-options" role="group" aria-labelledby="icon-style-label"></div>
+                  <span id="icon-shape-label" class="sub-label">Shape</span><div id="icon-shape" class="style-options" role="group" aria-labelledby="icon-shape-label"></div>
+                  <span id="icon-scale-label" class="sub-label">Icon size</span><div id="icon-scale" class="style-options" role="group" aria-labelledby="icon-scale-label"></div>
+                  <span id="key-content-layout-label" class="sub-label">Content layout</span><div id="key-content-layout" class="style-options" role="group" aria-labelledby="key-content-layout-label"></div>
+                  <label class="workflow-check"><input id="custom-color-enabled" type="checkbox"><span>Custom icon color</span></label><input id="key-tint" type="color" value="#5aa9ff" aria-label="Custom icon color" disabled hidden><button id="reset-key-style" class="text-button" type="button">Reset icon style</button>
+                </div>
+                <p id="design-message" class="field-note" role="status" aria-live="polite"></p>
+                  </section>
+                  <details id="key-technical" class="key-technical"><summary>Details</summary><span id="revision" class="muted">REV 0</span><button id="export-item" class="text-button" type="button">Export this key…</button></details>
+                  <button id="test-key" class="quiet" type="button" disabled><span class="ui-icon" data-ui-icon="play"></span>Test on Mac</button>
+                  <button id="delete-button" class="text-button danger-text" type="button">Remove this key</button>
+                </div>
+              </details>
+            </fieldset>
+            <section id="key-icon-section" class="icon-section" aria-labelledby="icon-source-label">
+                <span id="icon-source-label" class="group-label">Icon</span>
+                <input id="icon-source" type="hidden" value="app">
+                <div id="icon-tabs" class="icon-tabs" role="tablist" aria-labelledby="icon-source-label">
+                  <button id="icon-tab-app" type="button" role="tab" aria-selected="true" aria-controls="icon-panel-app" tabindex="0">App icon</button>
+                  <button id="icon-tab-builtin" type="button" role="tab" aria-selected="false" aria-controls="icon-panel-builtin" tabindex="-1">Built-in icon</button>
+                  <button id="icon-tab-text" type="button" role="tab" aria-selected="false" aria-controls="icon-panel-text" tabindex="-1">Text / Emoji</button>
+                  <button id="icon-tab-image" type="button" role="tab" aria-selected="false" aria-controls="icon-panel-image" tabindex="-1">My image</button>
+                </div>
+                <div id="icon-panel-app" class="icon-panel" role="tabpanel" aria-labelledby="icon-tab-app"><p id="app-icon-note" class="field-note" hidden>Uses the selected Mac app's icon. If unavailable, a built-in icon is shown.</p></div>
+                <div id="icon-panel-builtin" class="icon-panel" role="tabpanel" aria-labelledby="icon-tab-builtin" hidden>
+                <div id="icon-library"><label for="icon-search">Find an icon</label><input id="icon-search" type="search" placeholder="Search icons" autocomplete="off"><div id="icon-gallery" class="icon-gallery" role="group" aria-label="Built-in icon library"></div><p id="icon-search-empty" class="field-note" hidden>No matching icons.</p></div>
+                </div>
+                <div id="icon-panel-text" class="icon-panel" role="tabpanel" aria-labelledby="icon-tab-text" hidden>
+                <div id="text-icon-fields" hidden><label for="icon-text">Text or Emoji icon</label><input id="icon-text" maxlength="24" placeholder="AI, ⌘, ☕" autocomplete="off"><p class="field-note">Up to eight characters. Plain text only.</p></div>
+                </div>
+                <div id="icon-panel-image" class="icon-panel" role="tabpanel" aria-labelledby="icon-tab-image" hidden>
+                <div id="image-source" class="library-tabs source-switch" role="group" aria-label="Image source"><button id="image-source-upload" type="button" aria-pressed="true">Upload file</button><button id="image-source-library" type="button" aria-pressed="false">Icon library</button></div>
+                <div id="image-icon-fields" hidden><label for="icon-image-file">Upload PNG, WebP, JPEG or SVG</label><input id="icon-image-file" type="file" accept="image/png,image/webp,image/jpeg,image/svg+xml,.png,.webp,.jpg,.jpeg,.svg"><p class="field-note">Up to 2 MiB and 2048 × 2048 pixels. Converted on this device to a small WebP; the original JPEG or SVG is not stored. In an SVG, currentColor is drawn in this key’s current icon color, so upload again after changing the color or style.</p><p id="icon-upload-message" class="field-note" role="status" aria-live="polite"></p></div>
+                <div id="library-icon-fields" hidden>
+                  <div class="library-tabs" role="group" aria-label="Icon library view"><button id="library-tab-mine" type="button" aria-pressed="true">My icons</button><button id="library-tab-online" type="button" aria-pressed="false">Search online</button></div>
+                  <div id="library-mine"><label for="library-filter">Filter My icons</label><input id="library-filter" type="search" placeholder="Filter by name or set" autocomplete="off"><div id="library-grid" class="library-grid" role="group" aria-label="My icons"></div><p id="library-empty" class="field-note" hidden></p></div>
+                  <div id="library-online" hidden><label for="library-query">Search online icons</label><input id="library-query" type="search" maxlength="64" placeholder="e.g. home, camera, github" autocomplete="off"><label for="library-set">Icon set</label><select id="library-set"></select><button id="library-search" class="quiet" type="button">Search</button><p class="field-note">Results open in a window. Your Mac searches Iconify for you, so it needs internet access. Only English search words and icon names leave the Mac: common Chinese words are converted on this device first. A green dot marks icons already saved in My icons.</p></div>
+                  <p id="library-message" class="field-note" role="status" aria-live="polite"></p>
+                  <div id="library-selected" class="library-selected" hidden>
+                    <div id="library-preview-frame" class="library-preview"><img id="library-preview" alt="" width="84" height="84" draggable="false" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAACAkQBADs="></div>
+                    <p class="library-meta"><strong id="library-selected-name"></strong><span id="library-selected-set"></span></p>
+                    <p id="library-brand-note" class="field-note" hidden>Brand logos are trademarks of their owners.</p>
+                    <label for="library-color">Icon color</label><div class="library-color-row"><input id="library-color" type="color" value="#141414"><button id="library-color-reset" class="quiet" type="button" disabled>Use key default</button></div>
+                    <p id="library-own-colors" class="field-note" hidden>This icon uses its own colors.</p>
+                    <p id="library-convert-note" class="field-note">The icon is converted to a small WebP image on this device when you use it, so change the color before choosing Use on this key.</p>
+                    <button id="library-use" class="solid" type="button" disabled>Use on this key</button>
+                    <button id="library-remove" class="text-button danger-text" type="button" disabled>Remove from My icons</button>
+                  </div>
+                </div>
+                </div>
+                <select id="icon" hidden aria-label="Key icon" aria-describedby="field-error"></select>
+            </section>
+            <p id="field-error" class="field-error" role="alert"></p>
+            </div>
+          </form>
+        </section>
+          <div class="edit-notice"><p id="pages-invalid-warning" class="layout-warning" role="status" hidden>Check the Pages size or keys per row before saving.</p><button id="pages-fix-invalid" class="text-button" type="button" hidden>Fix Pages settings</button><p id="layout-warning" class="layout-warning" role="status" hidden></p><button id="reload-layout" class="text-button" type="button" hidden>Discard draft &amp; load latest</button></div>
+          <p id="save-message" class="draft-message" role="status" aria-live="polite" data-dirty="false" data-tone="quiet">No unsaved changes.</p>
+          <div id="confirm-slot" class="confirm-slot"><div id="layout-confirm" class="layout-confirm" role="alertdialog" aria-modal="true" aria-label="Confirm change" hidden><p id="confirm-message"></p><div><button id="confirm-save" class="solid" type="button" hidden>Save</button><button id="confirm-yes" class="quiet" type="button">Confirm</button><button id="confirm-no" class="quiet" type="button">Keep editing</button></div></div></div>
+        </div>
+        <div id="edit-toolbar" class="edit-toolbar" data-docked="true" data-collapsed="false" hidden>
+          <div id="edit-float-row" class="edit-float-row" role="toolbar" aria-label="Edit mode controls">
+            <button id="edit-grip" class="edit-grip" type="button" title="Move toolbar (double-click to dock)" aria-label="Move toolbar"><span class="edit-grip-dots" aria-hidden="true"></span></button>
+            <button id="edit-settings" class="edit-float-button icon-only" type="button" title="Settings" aria-label="Settings"><span class="ui-icon" data-ui-icon="settings" aria-hidden="true"></span></button>
+            <button id="shelf-toggle" class="edit-float-button icon-only" type="button" title="Component library" aria-label="Component library" aria-pressed="false" aria-controls="shelf-panel"><span class="ui-icon" data-ui-icon="plus" aria-hidden="true"></span></button>
+            <button id="edit-back" class="edit-float-button edit-done" type="button" title="Done, back to Use mode" aria-label="Done, back to Use mode"><span class="edit-float-label">Done</span><span class="ui-icon edit-narrow-icon" data-ui-icon="check" aria-hidden="true"></span></button>
+            <button id="edit-undo" class="edit-float-button" type="button" title="Undo (Ctrl/Cmd+Z)" aria-label="Undo" disabled><span class="edit-float-label">Undo</span><span class="ui-icon edit-narrow-icon" data-ui-icon="undo" aria-hidden="true"></span></button>
+            <button id="desk-save" class="edit-float-button solid" type="button" title="Save (Ctrl/Cmd+S)" aria-label="Save" hidden disabled><span class="edit-float-label">Save</span><span class="ui-icon edit-narrow-icon" data-ui-icon="save" aria-hidden="true"></span><span class="unsaved-dot" aria-hidden="true"></span></button>
+            <span id="grid-size-scope" class="sr-only">All screens · all pages</span>
+            <select id="grid-size" class="edit-grid-size" aria-describedby="grid-size-scope" aria-label="Grid size — shared by the canvas and all pages on every device" title="Grid size — shared by this canvas and all pages on every device"><option value="compact">Compact</option><option value="standard">Standard</option><option value="large">Large</option></select>
+            <button id="edit-collapse" class="edit-float-button icon-only" type="button" title="Collapse toolbar" aria-label="Collapse toolbar" aria-expanded="true"><span class="ui-icon" data-ui-icon="chevron-right" aria-hidden="true"></span></button>
+          </div>
+          <button id="edit-chip" class="edit-chip" type="button" title="Show Edit toolbar" aria-label="Show Edit toolbar" aria-expanded="false" data-dirty="false" hidden><span class="ui-icon" data-ui-icon="pencil" aria-hidden="true"></span><span class="unsaved-dot" aria-hidden="true"></span></button>
+        </div>
+        <section id="shelf-panel" class="shelf-panel" hidden aria-label="Component library">
+          <div id="shelf-resize" class="shelf-resize" role="separator" aria-orientation="horizontal" aria-label="Resize library" aria-valuemin="120" aria-valuemax="600" aria-valuenow="244" tabindex="0" title="Drag to resize the library · double-click to reset"></div>
+          <div class="shelf-side">
+            <div id="shelf-types" class="shelf-types" role="group" aria-label="Component types"></div>
+            <button id="shelf-import" class="shelf-type shelf-import-button" type="button" aria-pressed="false"><strong>Import from file…</strong><span>A key saved earlier</span></button>
+            <input id="shelf-import-file" type="file" accept=".json,application/json" hidden>
+          </div>
+          <div class="shelf-main"><div id="shelf-app-toolbar" class="shelf-app-toolbar"><div class="shelf-app-controls"><input id="shelf-search" type="search" placeholder="Search Mac apps…" aria-label="Search Mac apps" autocomplete="off"><label for="shelf-app-sort">Sort</label><select id="shelf-app-sort" aria-label="Sort Mac apps"><option value="recent">Recent</option><option value="az">Name A–Z</option><option value="za">Name Z–A</option></select></div><p id="shelf-app-usage" class="field-note" role="status" aria-live="polite"></p></div><div id="shelf-previews" class="shelf-previews" role="group" aria-label="Sizes and forms"></div><p id="shelf-message" class="shelf-message" role="status" aria-live="polite"></p></div>
+        </section>
+        <div id="edit-menu-scrim" class="edit-menu-scrim" hidden></div>
+        <div id="edit-menu" class="edit-menu" role="menu" aria-label="Component menu" hidden></div>
+      </section>
+      <noscript>This lightweight client needs JavaScript enabled in your browser.</noscript>
+    </main>
+  </div>
+  <div id="move-toast" class="move-toast" role="group" aria-label="Key moved" hidden><span id="move-toast-text" aria-live="off"></span><button id="move-undo" class="quiet" type="button">Undo</button></div>
+  <div id="risk-confirm" class="risk-overlay" role="dialog" aria-modal="true" aria-labelledby="risk-title" aria-describedby="risk-summary" hidden><section class="risk-card"><h2 id="risk-title">Run this action?</h2><p id="risk-summary"></p><p>This confirmation expires in 30 seconds. Review the saved action before continuing.</p><div><button id="risk-cancel" class="quiet" type="button">Cancel</button><button id="risk-run" class="solid" type="button">Run once on Mac</button></div></section></div>
+  <dialog id="library-dialog" class="library-dialog" aria-labelledby="library-dialog-title">
+    <header class="library-dialog-head"><h2 id="library-dialog-title">Search results</h2><button id="library-dialog-close" class="quiet" type="button" aria-label="Close search results">Close</button></header>
+    <div class="library-dialog-body">
+      <div class="library-tabs" role="group" aria-label="Search scope"><button id="library-scope-curated" type="button" aria-pressed="true">Curated sets</button><button id="library-scope-all" type="button" aria-pressed="false">All Iconify sets</button></div>
+      <div id="library-dialog-sets" class="library-dialog-sets"><label for="library-dialog-set">Icon set</label><select id="library-dialog-set"></select></div>
+      <p id="library-status" class="library-status" role="status" aria-live="polite"></p>
+      <div id="library-suggest" class="library-suggest" hidden><button id="library-search-all" class="solid" type="button">Search all Iconify sets</button></div>
+      <div id="library-examples" class="library-examples" role="group" aria-label="Example English keywords" hidden></div>
+      <div id="library-results" class="library-results" role="group" aria-label="Search results"></div>
+      <p id="library-license-note" class="library-license-note" hidden>Licenses vary by icon set. Brand logos are trademarks of their owners.</p>
+    </div>
+  </dialog>
+  <div id="shelf-app-menu" class="edit-menu shelf-app-menu" role="menu" aria-label="App actions" hidden><button id="shelf-app-window-action" class="menu-item" type="button" role="menuitem">Activate window</button></div>
+  <dialog id="shelf-windows" class="app-dialog shelf-windows" aria-labelledby="shelf-window-title"><header class="app-dialog-head"><h2 id="shelf-window-title">Windows</h2><button id="shelf-window-close" class="icon-close" type="button" aria-label="Close window picker"><span class="x-mark" aria-hidden="true"></span></button></header><p id="shelf-window-note" role="status" aria-live="polite"></p><button id="shelf-window-retry" class="quiet" type="button">Retry</button><div id="shelf-window-list" class="shelf-window-list" role="group" aria-label="App windows"></div></dialog>
+  <dialog id="app-dialog" class="app-dialog" aria-labelledby="app-dialog-title">
+    <header class="app-dialog-head"><h2 id="app-dialog-title">Choose a Mac app</h2><button id="app-dialog-close" class="icon-close" type="button" aria-label="Close app picker"><span class="x-mark" aria-hidden="true"></span></button></header>
+    <div class="app-dialog-search"><input id="app-dialog-search" type="search" placeholder="Search Mac apps…" aria-label="Search Mac apps" autocomplete="off" spellcheck="false"></div>
+    <p id="app-dialog-status" class="app-dialog-status" role="status" aria-live="polite"></p>
+    <div id="app-dialog-grid" class="app-dialog-grid" role="group" aria-label="Installed Mac applications"></div>
+
+  </dialog>
+  <dialog id="first-theme-dialog" class="first-theme-dialog" aria-labelledby="first-theme-title" aria-describedby="first-theme-note">
+    <h2 id="first-theme-title">Choose a theme for this screen</h2>
+    <p id="first-theme-note" class="field-note">Each device keeps its own theme. A theme decides where Use | Edit, Settings and the connection sit. You can change it later in Settings.</p>
+    <div id="first-theme-list" class="first-theme-list" role="radiogroup" aria-labelledby="first-theme-title"></div>
+    <p id="first-theme-message" class="field-note" role="status" aria-live="polite"></p>
+    <div class="first-theme-actions"><button id="first-theme-skip" class="quiet" type="button">Not now</button><button id="first-theme-use" class="solid" type="button">Use this</button></div>
+  </dialog>
+  <dialog id="theme-dialog" class="theme-dialog" aria-labelledby="theme-dialog-title">
+    <header class="theme-dialog-head"><div><h2 id="theme-dialog-title">Theme</h2><p class="theme-dialog-sub">The definitions are shared · each device chooses its own theme</p></div><button id="theme-dialog-close" class="icon-close" type="button" aria-label="Close theme settings"><span class="x-mark" aria-hidden="true"></span></button></header>
+    <div class="theme-dialog-body">
+      <nav class="theme-list" aria-label="Themes">
+        <h3 class="theme-group">Built-in</h3><div id="theme-list-builtin" class="theme-rows"></div>
+        <h3 class="theme-group">My themes</h3><div id="theme-list-mine" class="theme-rows"></div><p id="theme-list-empty" class="theme-list-empty">No custom themes yet.</p>
+        <button id="theme-new" class="quiet theme-new" type="button">+ New theme from current</button><p id="theme-new-note" class="field-note"></p>
+      </nav>
+      <section class="theme-editor" aria-label="Theme editor">
+        <div id="theme-preview" class="theme-preview-row" role="img" aria-label="Preview of four sample keys in this theme"></div>
+        <div id="theme-readonly" class="theme-readonly">
+          <h3 id="theme-readonly-title"></h3><p id="theme-readonly-note" class="field-note"></p><p id="theme-readonly-layout" class="field-note">Built-in themes use their own system-component layout.</p>
+          <div id="theme-readonly-sketches" class="theme-readonly-sketches"></div>
+          <div class="theme-readonly-actions"><button id="theme-use" class="solid" type="button">Use this theme</button><button id="theme-copy" class="quiet" type="button">New theme from this</button></div>
+        </div>
+        <div id="theme-form" class="theme-form" hidden>
+          <div class="theme-tabs" role="group" aria-label="Theme settings"><button id="theme-tab-look" class="theme-tab" type="button" aria-pressed="true">Look</button><button id="theme-tab-layout" class="theme-tab" type="button" aria-pressed="false">Layout</button></div>
+          <div id="theme-look" class="theme-look">
+          <div class="theme-field"><label for="theme-name">Theme name</label><div class="theme-name-row"><input id="theme-name" type="text" maxlength="40" autocomplete="off" spellcheck="false"><span id="theme-based" class="theme-chip"></span></div></div>
+          <div class="theme-field"><span id="theme-accent-label" class="group-label">Accent color</span><div class="theme-accents"><div id="theme-accent" class="theme-accent-row" role="group" aria-labelledby="theme-accent-label"></div><label class="theme-custom-color"><span id="theme-accent-custom-button" class="theme-custom-tag">Custom</span><input id="theme-accent-custom" type="color" aria-label="Custom accent color"></label></div></div>
+          <div class="theme-two">
+            <div class="theme-field"><label for="theme-bg-hex">Background</label><div class="theme-color-row"><span id="theme-bg-color-chip" class="theme-color-chip" aria-hidden="true"></span><input id="theme-bg-hex" type="text" maxlength="7" autocomplete="off" spellcheck="false" aria-describedby="theme-contrast"><input id="theme-bg-color" type="color" aria-label="Pick the background color"></div></div>
+            <div class="theme-field"><label for="theme-key-hex">Key body</label><div class="theme-color-row"><span id="theme-key-color-chip" class="theme-color-chip" aria-hidden="true"></span><input id="theme-key-hex" type="text" maxlength="7" autocomplete="off" spellcheck="false" aria-describedby="theme-contrast"><input id="theme-key-color" type="color" aria-label="Pick the key body color"></div></div>
+          </div>
+          <div class="theme-two">
+            <div class="theme-field"><span id="theme-radius-label" class="group-label">Corner radius</span><div id="theme-radius" class="theme-choices" role="group" aria-labelledby="theme-radius-label"></div></div>
+            <div class="theme-field"><span id="theme-spacing-label" class="group-label">Key spacing</span><div id="theme-spacing" class="theme-choices" role="group" aria-labelledby="theme-spacing-label"></div></div>
+          </div>
+          <div class="theme-field"><label for="theme-font">Font</label><select id="theme-font"></select></div>
+          <p id="theme-contrast" class="theme-contrast" role="status" aria-live="polite"></p>
+          </div>
+          <div id="theme-layout" class="theme-layout" hidden>
+            <div class="layout-switch" role="group" aria-label="Window size"><button id="layout-wide" class="theme-tab" type="button" aria-pressed="true">Wide</button><button id="layout-narrow" class="theme-tab" type="button" aria-pressed="false">Narrow</button></div>
+            <p id="layout-note" class="field-note"></p>
+            <div id="layout-stage" class="layout-stage"></div>
+            <div class="layout-numbers">
+              <div class="theme-field"><label for="layout-header">Top bar height</label><input id="layout-header" type="number" min="0" max="160" step="1" inputmode="numeric"></div>
+              <div class="theme-field"><label for="layout-left">Content left</label><input id="layout-left" type="number" min="0" max="400" step="1" inputmode="numeric"></div>
+              <div class="theme-field"><label for="layout-right">Content right</label><input id="layout-right" type="number" min="0" max="400" step="1" inputmode="numeric"></div>
+              <div class="theme-field"><label for="layout-top">Content top</label><input id="layout-top" type="number" min="0" max="400" step="1" inputmode="numeric"></div>
+              <div class="theme-field"><label for="layout-bottom">Content bottom</label><input id="layout-bottom" type="number" min="0" max="400" step="1" inputmode="numeric"></div>
+            </div>
+            <div id="layout-forms" class="layout-forms"></div>
+            <p id="layout-problem" class="theme-contrast" role="status" aria-live="polite"></p>
+            <button id="layout-reset" class="quiet" type="button">Reset this layout</button>
+          </div>
+          <div id="theme-confirm" class="theme-confirm" role="alertdialog" aria-labelledby="theme-confirm-text" hidden><p id="theme-confirm-text">Delete this theme? If it is in use, the page goes back to its base theme. This cannot be undone.</p><div><button id="theme-confirm-no" class="quiet" type="button">Keep it</button><button id="theme-confirm-yes" class="solid danger" type="button">Delete theme</button></div></div>
+        </div>
+      </section>
+    </div>
+    <footer class="theme-dialog-foot"><button id="theme-delete" class="text-button theme-delete" type="button" hidden>Delete theme</button><p id="theme-message" class="theme-message" role="status" aria-live="polite"></p><button id="theme-cancel" class="quiet" type="button">Cancel</button><button id="theme-save" class="solid" type="button" hidden>Save and use</button></footer>
+  </dialog>
+  <dialog id="dock-dialog" class="theme-dialog dock-dialog" aria-labelledby="dock-dialog-title">
+    <header class="theme-dialog-head"><div><h2 id="dock-dialog-title">Mac Dock</h2><p class="theme-dialog-sub">This screen only · saved with its layout</p></div><button id="dock-dialog-close" class="icon-close" type="button" aria-label="Close Mac Dock settings"><span class="x-mark" aria-hidden="true"></span></button></header>
+    <div class="dock-dialog-body"><div id="dock-options" class="dock-options"></div><p id="dock-dialog-message" class="field-note" role="status" aria-live="polite"></p></div>
+  </dialog>
+  <dialog id="refresh-dialog" class="refresh-dialog" aria-labelledby="refresh-title" aria-describedby="refresh-description">
+    <h2 id="refresh-title">Refresh Keyln?</h2>
+    <p id="refresh-description">Load the latest interface from your Mac. Your saved layout and device pairing stay in place.</p>
+    <p id="refresh-draft-warning" hidden>You have unsaved layout changes. Refreshing discards this draft.</p>
+    <p id="refresh-action-warning" hidden>An action is running or its result is unknown. Refreshing does not cancel it. Keyln will only check its result; it will not send it again.</p>
+    <p id="refresh-offline-warning" hidden>This device is offline. Refreshing may show a connection error. Reconnect Wi-Fi first.</p>
+    <div><button id="refresh-cancel" class="quiet" type="button" autofocus>Cancel</button><button id="refresh-confirm" class="solid" type="button">Refresh now</button></div>
+  </dialog>
+</body>
+</html>

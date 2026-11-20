@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Keyln · Mac management</title>
+  <link rel="stylesheet" href="./admin.css">
+  <script type="module" src="./apps/web/admin.js"></script>
+</head>
+<body>
+  <main>
+    <header class="topbar"><a class="brand" href="/">k<span>Keyln</span></a><span class="badge">MAC HOST</span></header>
+    <div class="intro"><p class="eyebrow">YOUR PERSONAL CONTROL DESK</p><h1>Manage your Mac control desk.</h1><p>Connect devices, register scripts and choose which actions Surface can run.</p></div>
+    <p id="admin-message" role="status" aria-live="polite">Checking management session…</p>
+    <section id="admin-login" class="card" hidden>
+      <p class="eyebrow">THIS MAC ONLY</p><h2>Sign in to management</h2>
+      <p>Enter the code from the Keyln window: <strong>Mac management login code</strong>. The management code is separate from the Surface pairing code.</p>
+      <form id="admin-login-form">
+        <label for="admin-code">Management login code</label>
+        <div class="input-row"><input id="admin-code" name="code" inputmode="numeric" pattern="[0-9]{8}" minlength="8" maxlength="8" autocomplete="off" required placeholder="8 digits"><button class="primary" type="submit">Sign in</button></div>
+      </form>
+      <p class="hint">Codes last 2 minutes with 5 attempts. For a new code, type <code>admin</code> in the running Keyln window. Management sessions expire after 30 minutes or a Host restart.</p>
+    </section>
+    <div id="admin-dashboard" hidden>
+      <div class="session-bar"><span id="admin-session"></span><button id="admin-logout" type="button">Sign out</button></div>
+      <section class="card" aria-labelledby="backup-title"><p class="eyebrow">LAYOUT BACKUP</p><h2 id="backup-title">Layout backup and recovery</h2><p id="backup-state" class="hint"></p><p id="layout-recovery-reason" class="hint"></p><div class="actions"><button id="backup-export" type="button" disabled>Export previous saved layout</button><button id="backup-restore" type="button" disabled>Restore previous saved layout</button><button id="backup-refresh" type="button">Check status again</button></div><div id="backup-confirm" class="pending" hidden><p id="backup-review"></p><p>Restore keeps the current file and revokes all control devices. Pair again afterward. It does not register, approve or run scripts or keys.</p><label class="checkbox"><input id="backup-understood" type="checkbox">I understand that restore replaces the layout and revokes control devices</label><div class="actions"><button id="backup-confirm-yes" class="danger" type="button" disabled>Restore and revoke devices</button><button id="backup-confirm-no" type="button">Cancel</button></div></div><p id="backup-message" role="status" aria-live="polite" class="hint">Normal saves and imports keep the previous valid layout. Restore only the backup you have just reviewed.</p></section>
+      <div class="columns" id="pairing-management">
+        <section class="card">
+          <p class="eyebrow">01 / PAIR A DEVICE</p><h2>Connect a new Surface</h2>
+          <p>On Surface, open <strong id="control-address"></strong>, then enter the code generated below and a device name.</p>
+          <div class="actions"><button id="admin-invite" class="primary" type="button">Generate pairing code</button><button id="admin-close-pairing" type="button" hidden>Close pairing</button></div>
+          <div id="pair-code-area" class="code-area" hidden><span>Surface pairing code</span><output id="pair-code"></output><small id="pair-code-expiry"></small></div>
+          <p id="pair-window" class="hint"></p>
+          <div id="pending-request" class="pending" hidden>
+            <h3>A device wants to connect</h3><p id="pending-name"></p><p>Request ID <strong id="pending-id" class="mono"></strong></p>
+            <p id="pending-expiry" class="hint"></p>
+            <label id="pair-verify-label" class="checkbox"><input id="pair-verify" type="checkbox">I compared the request ID on Surface and it matches</label>
+            <button id="admin-approve" class="primary" type="button" disabled>Approve this device</button>
+            <p id="pending-approved" class="hint" hidden>Approved. Waiting for Surface to finish pairing. No additional command is needed.</p>
+          </div>
+        </section>
+        <section class="card">
+          <p class="eyebrow">02 / PAIRED DEVICES</p><h2>Authorized devices <span id="device-count" class="count">0 / 8</span></h2>
+          <p class="hint">Revoking disconnects the device and blocks further reads and actions. An action already started is not undone.</p>
+          <div id="admin-devices"></div>
+        </section>
+      </div>
+      <section class="card script-card" id="scripts-management" aria-labelledby="scripts-title">
+        <p class="eyebrow">03 / APPROVED SCRIPTS</p><h2 id="scripts-title">Local scripts <span id="script-count" class="count">0 / 32</span></h2>
+        <p class="hint">Save the registration, review its contents, then approve. Editing the registration or script invalidates approval. Surface can select only approved versions. Source and paths stay in this Mac management page.</p>
+        <div class="script-layout"><div><button id="script-new" type="button">Register a script</button><div id="script-list"></div></div>
+          <div><form id="script-form" class="script-form">
+            <fieldset id="script-fields"><legend id="script-form-title">Register a script</legend>
+              <label for="script-name">Name</label><input id="script-name" maxlength="40" required autocomplete="off">
+              <div class="script-pair"><div><label for="script-kind">Source</label><select id="script-kind"><option value="file">Local script file</option><option value="command">Registered command</option></select></div><div><label for="script-interpreter">Shell</label><select id="script-interpreter"><option value="/bin/zsh">zsh</option><option value="/bin/bash">bash</option><option value="/bin/sh">sh</option></select></div></div>
+              <label for="script-source" id="script-source-label">Absolute script path</label><textarea id="script-source" rows="4" required spellcheck="false" autocomplete="off" placeholder="/Users/your-name/Scripts/example.sh"></textarea>
+              <p class="hint">Files run from their directory; commands run from the user home. Shell does not load personal startup files. Parameters are passed as $1, $2 and so on.</p>
+              <label for="script-timeout">Time limit (seconds)</label><input id="script-timeout" type="number" min="0.1" max="60" step="0.1" value="10" required>
+              <h3 class="parameter-title">Allowed parameters</h3><p class="hint">Parameter names, rules and key values are shared with paired devices. Use non-sensitive values; do not store passwords or tokens.</p>
+              <div id="script-parameters"></div><button id="script-add-parameter" type="button">Add parameter</button>
+              <div class="actions"><button class="primary" type="submit">Save registration</button><button id="script-preview" type="button" disabled>Review and approve</button><button id="script-reset" type="button">Discard edits</button></div>
+            </fieldset>
+          </form>
+          <div id="script-review" class="script-review" hidden><h3>Review before approval</h3><p id="script-review-summary" class="hint"></p><pre id="script-source-preview"></pre><p id="script-rules-preview" class="hint"></p><label class="checkbox"><input id="script-reviewed" type="checkbox">I reviewed the script, parameter rules and time limit, and allow it to run as the current Mac user</label><button id="script-approve" class="primary" type="button" disabled>Approve this version</button></div>
+          <div id="script-confirm" class="pending" hidden><p id="script-confirm-message"></p><div class="actions"><button id="script-confirm-yes" class="danger" type="button">Confirm</button><button id="script-confirm-no" type="button">Cancel</button></div></div>
+          <p id="script-message" role="status" aria-live="polite" class="hint">Saving a registration does not run the script.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer>Keyln · Device management is available only on the Mac running Host.<a href="/">Back to control desk</a></footer>
+  </main>
+</body>
+</html>

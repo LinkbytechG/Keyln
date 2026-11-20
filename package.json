@@ -1,0 +1,42 @@
+{
+  "name": "keyln",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Turn a tablet or phone into a touch console for your Mac",
+  "license": "MIT",
+  "engines": {
+    "node": "^24.0.0 || ^26.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "tsc --noEmit",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "setup": "node scripts/setup.mjs",
+    "prestart": "node scripts/prepare-start.mjs",
+    "start": "node dist/apps/host/main.js",
+    "restore": "node dist/apps/host/restore.js",
+    "layout:migrate": "node dist/apps/host/migrate.js",
+    "doctor": "node scripts/keyboard-check.mjs",
+    "smoke:mac": "node tests/mac-smoke.mjs",
+    "keyboard:probe": "node scripts/keyboard-check.mjs --probe",
+    "keyboard:delivery": "node scripts/keyboard-delivery.mjs",
+    "service:install": "npm run build && node scripts/service.mjs install",
+    "service:start": "node scripts/service.mjs start",
+    "service:stop": "node scripts/service.mjs stop",
+    "service:restart": "node scripts/service.mjs restart",
+    "service:status": "node scripts/service.mjs status",
+    "service:admin": "node scripts/service.mjs admin",
+    "service:doctor": "node scripts/service.mjs doctor",
+    "service:uninstall": "node scripts/service.mjs uninstall",
+    "app:install": "npm run build && node scripts/app-install.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/ws": "8.18.2",
+    "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "ws": "8.22.0"
+  }
+}

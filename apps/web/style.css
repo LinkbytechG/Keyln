@@ -1,0 +1,1689 @@
+/* Theme tokens. [data-theme] sits on <html>; the theme picker previews carry it too, so every token is scoped to the attribute and not to :root.
+   Colors: --c-* key fill, --i-* ink on that fill, --s-* the fainter ink for the action line, --t-* the glyph color on the dark key body. */
+:root:not([data-theme]),[data-theme=braun]{
+  --font-ui:"Helvetica Neue",Helvetica,Arial,"Segoe UI",sans-serif;
+  --glyph-adv:.55;--label-adv:.58;
+  --radius-key:10px;--radius-ctl:8px;--radius-panel:10px;--header-h:52px;--tabs-h:56px;--tile-gap:12px;
+  --tile-align:left;--name-weight:650;--detail-weight:400;
+  --focus:#F26B1D;
+  --bg:#1A1917;--key:#2A2926;--surface:#2A2926;--surface-2:#3D3C38;--hair:#3C3A37;--line:#76746E;--text:#ECE7DC;--muted:#B8B4AB;--dim:#AEAAA2;--detail:#939088;
+  --accent:#F26B1D;--accent-ink:#1A1917;--accent-bg:#382418;--ok:#5E9B63;--ok-text:#8BB78F;--ok-bg:#283326;--warn:#E9B93A;--warn-halo:#E9B93A59;
+  --danger:#D9594B;--danger-text:#E7988F;--danger-bg:#442722;--danger-bg-2:#5F302A;--sel:#753B1A;--on-warn:#1A1917;--on-ok:#1A1917;--on-bad:#1A1917;--bar-bg:#191917;
+  --c-orange:#F26B1D;--i-orange:#1A1917;--s-orange:#3F2718;--t-orange:#F26B1D;
+  --c-yellow:#E9B93A;--i-yellow:#1A1917;--s-yellow:#5C4C22;--t-yellow:#E9B93A;
+  --c-green:#5E9B63;--i-green:#1A1917;--s-green:#21271F;--t-green:#5E9B63;
+  --c-blue:#4F6D8A;--i-blue:#F7F3EA;--s-blue:#EFECE5;--t-blue:#617C96;
+  --c-purple:#7A5C8E;--i-purple:#F7F3EA;--s-purple:#EDE7E3;--t-purple:#876C99;
+  --c-red:#B5483B;--i-red:#F7F3EA;--s-red:#F5EEE5;--t-red:#BC5A4F;
+  --c-gray:#8C877C;--i-gray:#1A1917;--s-gray:#21201D;--t-gray:#8C877C;
+}
+[data-theme=metro]{
+  --font-ui:"Bahnschrift","DIN Alternate","Helvetica Neue",Arial,"Segoe UI",sans-serif;
+  --glyph-adv:.52;--label-adv:.54;
+  --radius-key:0;--radius-ctl:2px;--radius-panel:0;--header-h:52px;--tabs-h:56px;--tile-gap:10px;
+  --tile-align:center;--name-weight:700;--detail-weight:500;
+  --focus:#FFFFFF;
+  --line-0:#E2231A;--line-1:#0075C2;--line-2:#00A040;--line-3:#F7943E;--line-4:#7E3C93;--line-5:#5EB6E4;
+  --line-ink-0:#FFFFFF;--line-ink-1:#FFFFFF;--line-ink-2:#1E2124;--line-ink-3:#1E2124;--line-ink-4:#FFFFFF;--line-ink-5:#1E2124;
+  --bg:#1E2124;--key:#2A2E33;--surface:#2A2E33;--surface-2:#3E4246;--hair:#404345;--line:#767878;--text:#F4F4F2;--muted:#BBBDBD;--dim:#AFB1B1;--detail:#959798;
+  --accent:#5EB6E4;--accent-ink:#1E2124;--accent-bg:#27363F;--ok:#00A040;--ok-text:#66C68C;--ok-bg:#183A2A;--warn:#F7B500;--warn-halo:#F7B50059;
+  --danger:#E2231A;--danger-text:#F29E9A;--danger-bg:#492122;--danger-bg-2:#652220;--sel:#396075;--on-warn:#1E2124;--on-ok:#1E2124;--on-bad:#FFFFFF;--bar-bg:#191C1F;
+  --c-orange:#F7943E;--i-orange:#1E2124;--s-orange:#503B2A;--t-orange:#F7943E;
+  --c-yellow:#FFD100;--i-yellow:#1E2124;--s-yellow:#685B18;--t-yellow:#FFD100;
+  --c-green:#00A040;--i-green:#1E2124;--s-green:#1D2425;--t-green:#00A040;
+  --c-blue:#0075C2;--i-blue:#FFFFFF;--s-blue:#F5F9FD;--t-blue:#1A83C8;
+  --c-purple:#7E3C93;--i-purple:#FFFFFF;--s-purple:#DCCAE2;--t-purple:#9E6DAE;
+  --c-red:#E2231A;--i-red:#FFFFFF;--s-red:#FFFDFD;--t-red:#E53931;
+  --c-gray:#8B939B;--i-gray:#1E2124;--s-gray:#282B2F;--t-gray:#8B939B;
+}
+[data-theme=midnight]{
+  --font-ui:"Segoe UI","Gill Sans","Gill Sans MT","Helvetica Neue",Arial,sans-serif;
+  --glyph-adv:.76;--label-adv:.6;
+  --radius-key:12px;--radius-ctl:10px;--radius-panel:12px;--header-h:52px;--tabs-h:76px;--tile-gap:12px;
+  --tile-align:center;--name-weight:650;--detail-weight:500;
+  --focus:#F1EFE8;
+  --line-0:#D7263D;--line-1:#2F5DD0;--line-2:#F2A900;--line-3:#2E9E5B;
+  --bg:#0E1A33;--key:#15244A;--surface:#15244A;--surface-2:#2B385A;--hair:#323C50;--line:#6B717D;--text:#F1EFE8;--muted:#ADB0B7;--dim:#A2A6AF;--detail:#878E9C;
+  --accent:#F2A900;--accent-ink:#0E1A33;--accent-bg:#2E2E2C;--ok:#2E9E5B;--ok-text:#69B989;--ok-bg:#14343B;--warn:#F2A900;--warn-halo:#F2A90059;
+  --danger:#D7263D;--danger-text:#EA8E9A;--danger-bg:#3A1D35;--danger-bg-2:#561E37;--sel:#6E561E;--on-warn:#0E1A33;--on-ok:#0E1A33;--on-bad:#FFFFFF;--bar-bg:#0D162C;
+  --c-orange:#E8742C;--i-orange:#0E1A33;--s-orange:#352A32;--t-orange:#E8742C;
+  --c-yellow:#F2A900;--i-yellow:#0E1A33;--s-yellow:#554623;--t-yellow:#F2A900;
+  --c-green:#2E9E5B;--i-green:#0E1A33;--s-green:#112536;--t-green:#2E9E5B;
+  --c-blue:#2F5DD0;--i-blue:#FFFFFF;--s-blue:#DCE3F7;--t-blue:#4E75D7;
+  --c-purple:#7B4FC2;--i-purple:#FFFFFF;--s-purple:#EBE5F6;--t-purple:#8861C8;
+  --c-red:#D7263D;--i-red:#FFFFFF;--s-red:#FDF4F5;--t-red:#D93147;
+  --c-gray:#8E98B0;--i-gray:#0E1A33;--s-gray:#242F48;--t-gray:#8E98B0;
+}
+[data-theme=standard]{
+  --font-ui:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;
+  --glyph-adv:.55;--label-adv:.56;
+  --radius-key:18px;--radius-ctl:12px;--radius-panel:18px;--header-h:52px;--tabs-h:56px;--tile-gap:12px;
+  --tile-align:center;--name-weight:600;--detail-weight:500;
+  --focus:#0A84FF;
+  --bg:#000000;--key:#1C1C1E;--surface:#1C1C1E;--surface-2:#333335;--hair:#292929;--line:#696969;--text:#FFFFFF;--muted:#A9A9A9;--dim:#A0A0A0;--detail:#848485;
+  --accent:#0A84FF;--accent-ink:#000000;--accent-bg:#011224;--ok:#30D158;--ok-text:#30D158;--ok-bg:#0A2A12;--warn:#0A84FF;--warn-halo:#0A84FF59;
+  --danger:#FF453A;--danger-text:#FF756D;--danger-bg:#380F0D;--danger-bg-2:#5C1915;--sel:#04376B;--on-warn:#000000;--on-ok:#000000;--on-bad:#000000;--bar-bg:#111112;
+  --c-orange:#FF9F0A;--i-orange:#000000;--s-orange:#633E04;--t-orange:#FF9F0A;
+  --c-yellow:#FFD60A;--i-yellow:#000000;--s-yellow:#6E5C04;--t-yellow:#FFD60A;
+  --c-green:#30D158;--i-green:#000000;--s-green:#135222;--t-green:#30D158;
+  --c-blue:#0A84FF;--i-blue:#000000;--s-blue:#021E3B;--t-blue:#0A84FF;
+  --c-purple:#BF5AF2;--i-purple:#000000;--s-purple:#2E163A;--t-purple:#BF5AF2;
+  --c-red:#FF453A;--i-red:#000000;--s-red:#451310;--t-red:#FF453A;
+  --c-gray:#8E8E93;--i-gray:#000000;--s-gray:#262628;--t-gray:#8E8E93;
+}
+[data-theme=classic]{
+  --font-ui:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --glyph-adv:.6;--label-adv:.56;
+  --font-mono:"Geist Mono","SFMono-Regular",Consolas,ui-monospace,monospace;
+  --radius-key:22px;--radius-ctl:10px;--radius-panel:12px;--header-h:52px;--tabs-h:54px;--tile-gap:14px;
+  --tile-align:left;--name-weight:600;--detail-weight:400;
+  --focus:#7CF2B4;
+  --bg:#0D0E10;--key:#1A1C21;--surface:#1A1C21;--surface-2:#2F3136;--hair:#313234;--line:#67686A;--text:#EEEFF1;--muted:#A6A7AA;--dim:#9B9DA0;--detail:#848589;
+  --accent:#7CF2B4;--accent-ink:#14251C;--accent-bg:#1D2E27;--ok:#7CF2B4;--ok-text:#7CF2B4;--ok-bg:#233C31;--warn:#FFD25A;--warn-halo:#FFD25A59;
+  --danger:#FF5C6C;--danger-text:#FF707E;--danger-bg:#421F24;--danger-bg-2:#642A31;--sel:#3C6E55;--on-warn:#141414;--on-ok:#141414;--on-bad:#141414;--bar-bg:#101114;
+  --c-orange:#FF9548;--i-orange:#141414;--s-orange:#5B3B24;--t-orange:#FF9548;
+  --c-yellow:#FFD25A;--i-yellow:#141414;--s-yellow:#6B5A2E;--t-yellow:#FFD25A;
+  --c-green:#7CF2B4;--i-green:#141414;--s-green:#3C6851;--t-green:#7CF2B4;
+  --c-blue:#5AA9FF;--i-blue:#141414;--s-blue:#273C53;--t-blue:#5AA9FF;
+  --c-purple:#B48CFF;--i-purple:#141414;--s-purple:#3C324F;--t-purple:#B48CFF;
+  --c-red:#FF5C6C;--i-red:#141414;--s-red:#452326;--t-red:#FF5C6C;
+  --c-gray:#C9CDD4;--i-gray:#141414;--s-gray:#535557;--t-gray:#C9CDD4;
+}
+[data-theme=widget]{
+  --font-ui:system-ui,-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --glyph-adv:.56;--label-adv:.58;
+  --radius-key:22px;--radius-ctl:14px;--radius-panel:22px;--header-h:60px;--tabs-h:44px;--tile-gap:12px;
+  --tile-align:left;--name-weight:650;--detail-weight:400;
+  --focus:#5B9CFF;
+  --bg:#101216;--key:#1B1E24;--surface:#1B1E24;--surface-2:#2A2E37;--hair:#2C3039;--line:#6B7280;--text:#F3F4F6;--muted:#B2B4B7;--dim:#9A9CA0;--detail:#84868A;
+  --accent:#5B9CFF;--accent-ink:#0B1220;--accent-bg:#14243D;--ok:#36C275;--ok-text:#6FDCA0;--ok-bg:#12301F;--warn:#F5B83D;--warn-halo:#F5B83D59;
+  --danger:#F26262;--danger-text:#FF9A98;--danger-bg:#3B1D21;--danger-bg-2:#55272B;--sel:#24467A;--on-warn:#101216;--on-ok:#0C1A12;--on-bad:#1A0B0B;--bar-bg:#0D0F12;
+  --c-orange:#FF9F43;--i-orange:#101216;--s-orange:#5C3F24;--t-orange:#FF9F43;
+  --c-yellow:#FFD24A;--i-yellow:#101216;--s-yellow:#6B5B2A;--t-yellow:#FFD24A;
+  --c-green:#4CCB7C;--i-green:#101216;--s-green:#234D37;--t-green:#4CCB7C;
+  --c-blue:#4F8CF5;--i-blue:#101216;--s-blue:#1A263A;--t-blue:#4F8CF5;
+  --c-purple:#9B80F5;--i-purple:#101216;--s-purple:#29263E;--t-purple:#9B80F5;
+  --c-red:#F2646A;--i-red:#101216;--s-red:#3B2226;--t-red:#F2646A;
+  --c-gray:#9BA3B2;--i-gray:#101216;--s-gray:#34383F;--t-gray:#9BA3B2;
+}
+:root{
+  color-scheme:dark;accent-color:var(--accent);
+  --font-mono:ui-monospace,"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  --pad-x:28px;--bottom-h:56px;--desk-pt:20px;--side-w:232px;
+  /* T79 (ADR-076): the height of every control in the settings surfaces (Edit card, quick menu and drawn menus, Theme window, gear menu, Edit toolbar, Library). Keys and the top bar stay at 44px (T79 ADR-076, extended by T80 ADR-077). */
+  --ctl-h:36px;
+  /* Lamps: a ground-colored housing (a thick border in --bg) with the state drawn in its middle (the content box). --lamp-d is the housing diameter. */
+  font-family:var(--font-ui);background:var(--bg);color:var(--text);font-synthesis:none;line-height:1.45;
+}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--text);min-height:100dvh}
+/* Browser surfaces take the theme too: selection, caret, scrollbars, links, numerals. */
+::selection{background:var(--sel);color:var(--text)}
+input,select,textarea{caret-color:var(--accent)}
+*{scrollbar-color:var(--line) transparent}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--line);border:3px solid transparent;border-radius:8px;background-clip:content-box}
+a{text-underline-offset:.2em;text-decoration-thickness:1px}
+kbd,#revision{font-variant-numeric:tabular-nums}
+.app-picker{min-width:0}
+.app-picker-binding{font-size:12px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere;margin-top:7px}
+*{box-sizing:border-box}
+body{margin:0}
+button,input,select{font:inherit;touch-action:manipulation}
+button{cursor:pointer;color:inherit}
+button:disabled{cursor:default}
+a{color:inherit}
+[hidden]{display:none!important}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+button,input,select{border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--bg)}
+button{min-height:44px}
+button:disabled{opacity:.45}
+input,select{color:var(--text);width:100%;min-width:0;min-height:44px;padding:11px 12px;font-size:14px}
+select{padding-right:26px}
+input::placeholder{color:var(--dim)}
+input:disabled,select:disabled{opacity:.55}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+label,legend{font-size:12px;color:var(--muted)}
+label{display:block;margin:20px 0 8px}
+p,h1,h2,h3{margin:0}
+h2{font-size:18px;font-weight:650;letter-spacing:-.3px}
+kbd,code{font-family:var(--font-mono);font-size:12px}
+code{color:var(--accent)}
+svg{display:block;width:100%;height:100%}
+.ui-icon{display:inline-flex;width:16px;height:16px;flex:none}
+.eyebrow{font:12px var(--font-mono);letter-spacing:1.5px;color:var(--dim)}
+.muted{font-size:12px;color:var(--muted)}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.pair-brand{display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);border-radius:9px;width:28px;height:28px;padding:6px}
+.connection-settings{position:relative}
+.connection-settings summary{list-style:none}
+.connection-settings summary::-webkit-details-marker{display:none}
+.settings-popover{position:absolute;top:46px;right:0;width:300px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:0 12px 40px #0008;z-index:20;font-size:12px}
+.settings-popover p{margin-top:8px;color:var(--muted);overflow-wrap:anywhere}
+.settings-popover strong{font-size:13px;font-weight:650}
+.settings-popover p:has(>.quiet){margin-top:6px}
+.settings-popover .quiet{width:100%;padding:4px 12px;font-size:13px;white-space:normal}
+.execution-diagnostics .quiet{margin-top:6px}
+.quiet,.solid{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 13px;font-size:13px;white-space:nowrap}
+.quiet{color:var(--muted);background:var(--bg)}
+.quiet:hover:enabled{background:var(--surface-2);color:var(--text)}
+.solid{color:var(--accent-ink);background:var(--accent);border-color:var(--accent);font-weight:650;justify-content:space-between}
+.solid:hover:enabled{filter:brightness(1.1)}
+.solid:active:enabled{transform:translateY(1px)}
+.text-button{background:none;border:0;color:var(--muted);font-size:12px;padding:8px 0;min-height:40px;text-align:left}
+.text-button:hover:enabled{color:var(--text)}
+.danger-text{color:var(--danger-text)}
+
+.editor{background:var(--surface);border-left:1px solid var(--line);padding:24px;min-width:0;position:sticky;top:0;max-height:calc(100dvh - 64px);overflow-y:auto;scrollbar-width:thin;min-height:calc(100dvh - 64px)}
+
+#revision{margin-left:auto;font:12px var(--font-mono);color:var(--dim)}
+.input-label{display:flex;align-items:center;justify-content:space-between}
+.input-label .muted{font:12px var(--font-mono);margin:12px 0 4px}
+.color-options{display:flex;align-items:center;justify-content:space-between;flex:1;gap:0;min-width:0}
+.color-swatch{position:relative;display:grid;place-items:center;width:var(--ctl-h);min-width:var(--ctl-h);min-height:var(--ctl-h);height:var(--ctl-h);padding:0;background:none;border:0;flex:1}
+.color-swatch:before{content:"";width:20px;height:20px;border-radius:50%;background:var(--key-color)}
+.color-swatch[aria-pressed=true]:after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:26px;height:26px;border:1.5px solid var(--text);border-radius:50%}
+.action-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.action-choice{display:flex;flex-direction:row;align-items:center;gap:6px;padding:0 6px;min-height:var(--ctl-h);border-radius:var(--radius-ctl);font-size:12px;font-weight:600;line-height:1.15;text-align:left;background:var(--bg);color:var(--muted)}
+.action-choice[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg);color:var(--text)}
+.action-choice[aria-pressed=true] .ui-icon{color:var(--accent)}
+.action-choice:disabled{opacity:.35}
+.action-choice .ui-icon{width:14px;height:14px}
+#clear-action{padding:4px 0;font-size:12px}
+.field-note{font-size:12px;color:var(--dim);line-height:1.7;margin-top:12px;overflow-wrap:anywhere}
+.modifier-fieldset{margin-top:12px}
+.modifier-fieldset legend{margin-bottom:4px}
+.modifier-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.modifier-grid label{display:flex;align-items:center;gap:6px;margin:0;padding:0 8px;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-ctl);font-size:13px;cursor:pointer}
+.modifier-grid input{width:15px;height:15px;min-height:15px;padding:0;margin:0;accent-color:var(--accent)}
+
+.form-message{font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 12px;overflow-wrap:anywhere}
+.form-message:empty{display:none}
+#save-message[data-dirty=true]:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--warn);margin-right:7px}
+#reload-layout{font-size:12px;min-height:30px;margin-top:6px}
+.layout-warning,.layout-confirm{border:1px solid var(--danger);border-radius:10px;padding:12px;background:var(--danger-bg);font-size:12px;color:var(--danger-text);overflow-wrap:anywhere}
+.layout-warning{margin-bottom:18px}
+.layout-confirm{margin-top:16px;position:relative;z-index:3}
+.layout-confirm p{margin-bottom:12px}
+.layout-confirm>div{display:flex;gap:8px}
+.field-error{font-size:12px;color:var(--danger-text);margin:10px 0;line-height:1.5}
+.field-error:empty{display:none}
+[aria-invalid=true]{outline:1px solid var(--danger);border-color:var(--danger)}
+.pair-panel{display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:920px;margin:8vh auto 40px;padding:40px;border:1px solid var(--line);border-radius:24px;background:var(--surface)}
+.pair-brand{width:44px;height:44px;padding:10px;border-radius:13px;margin-bottom:28px}
+.pair-intro h1{font-size:40px;font-weight:650;line-height:1.16;letter-spacing:-1.4px;margin-bottom:18px}
+.pair-intro p,.pair-intro li{font-size:12px;line-height:1.8;color:var(--muted)}
+.pair-intro ol{padding-left:16px;margin:20px 0}
+.pair-panel form{align-self:center}
+.pair-panel form h2{font-size:18px;margin-bottom:26px}
+.pair-panel .solid{width:100%;margin:24px 0 16px}
+.pair-panel #pair-code{font:18px var(--font-mono);letter-spacing:6px}
+.startup-help{max-width:900px;margin:20px auto;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:18px}
+.startup-help p{font-size:14px;line-height:1.8;color:var(--muted);margin-top:12px}
+@media(max-width:1400px){
+ .editor{padding:22px}
+
+ .color-options{flex-basis:100%;justify-content:flex-start;gap:7px}
+}
+@media(max-width:1120px){
+
+
+
+
+
+
+ .editor{padding:20px}
+
+}
+@media(max-width:960px){
+ .editor{grid-column:2;position:relative;max-height:none;min-height:0;border-top:1px solid var(--line);border-left:0;padding:24px}
+ .editor #config-form{display:grid;grid-template-columns:180px minmax(0,1fr);gap:0 24px}
+
+ .editor-fields{grid-column:2;grid-row:1 / span 3}
+ #editor-fields{grid-column:2;grid-row:1 / span 3}
+
+ .field-error{grid-column:1 / -1}
+ .color-options{flex-basis:auto;gap:0;justify-content:space-between}
+ .pair-panel{gap:36px;margin:5vh 24px;padding:28px}
+ .pair-intro h1{font-size:34px}
+}
+@media(max-width:600px){
+
+
+
+
+
+
+
+
+
+
+ .editor{grid-column:1;padding:20px}
+ .editor #config-form{display:block}
+
+ .color-options{flex-basis:100%;gap:7px;justify-content:flex-start}
+
+ .pair-panel{grid-template-columns:1fr;gap:28px;margin:24px 12px;padding:24px}
+ .pair-intro h1{font-size:32px}
+ .pair-intro ol{margin-bottom:8px}
+ .pair-panel form h2{margin-bottom:18px}
+ .startup-help{margin:20px 12px;padding:24px}
+}
+@media(prefers-reduced-motion:reduce){
+ *{transition:none!important;scroll-behavior:auto!important}
+}
+.script-output{margin-top: 10px; padding: 6px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: 0 10px 30px #0005; font-size: 13px; max-height: 50dvh; overflow: auto;}
+.script-output summary{cursor: pointer; min-height: 44px; align-content: center;}
+.script-output h4{margin: 12px 0 5px; font-size: 12px; color: var(--muted);}
+.script-output pre{max-height: 14rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font: 12px/1.5 ui-monospace, monospace;}
+.workflow-step{margin:10px 0; padding:10px; border:1px solid var(--line); border-radius:var(--radius-ctl);}
+.workflow-step h4{margin:0 0 6px;}
+.workflow-step-actions,.workflow-modifiers{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+.workflow-check{display:flex!important; align-items:center; gap:8px; margin:6px 0!important; font-size:13px; line-height:1.5;}
+.workflow-check input{width:20px!important; height:20px; min-height:20px; margin:0; flex:none; accent-color:var(--accent);}
+.risk-overlay{position:fixed; inset:0; z-index:100; background:#000b; display:grid; place-items:center; padding:20px; overflow:auto;}
+.risk-overlay[hidden]{display:none;}
+.risk-card{max-width:520px; padding:28px; border:1px solid var(--line); border-radius:20px; background:var(--surface); color:var(--text); box-shadow:0 20px 80px #0008;}
+.risk-card p{line-height:1.6; overflow-wrap:anywhere;}
+.risk-card>div{display:flex; flex-wrap:wrap; justify-content:flex-end; gap:12px; margin-top:24px;}
+.page-refresh{min-width:44px; min-height:44px; flex:none;}
+.refresh-dialog{width:min(520px,calc(100% - 32px)); max-height:calc(100dvh - 32px); margin:auto; padding:28px; border:1px solid var(--line); border-radius:20px; background:var(--surface); color:var(--text); box-shadow:0 20px 80px #0008; overflow:auto;}
+.refresh-dialog::backdrop{background:#000b;}
+.refresh-dialog p{margin-top:16px; line-height:1.6; overflow-wrap:anywhere;}
+.refresh-dialog>div{display:flex; flex-wrap:wrap; justify-content:flex-end; gap:12px; margin-top:24px;}
+.refresh-dialog button{min-height:44px;}
+@media(max-width:600px){
+ .page-refresh{font-size:12px; padding:8px; gap:6px;}
+}
+.layout-files{margin:24px auto; padding:24px; max-width:1100px; background:var(--surface); border:1px solid var(--line); border-radius:16px; color:var(--text);}
+.install-panel{max-width:860px;margin:24px auto;padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--surface);font-size:14px;line-height:1.7;overflow-wrap:anywhere}
+.install-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.install-panel p{margin:16px 0;color:var(--muted)}
+.install-panel ul{padding-left:22px}
+.install-panel li+li{margin-top:12px}
+.install-panel strong{color:var(--text)}
+#install-confirm{min-height:44px;margin-bottom:4px}
+.install-panel:focus-within{scroll-margin-top:16px}
+@media(max-width:900px){
+ .install-panel{margin:16px;padding:20px}
+}
+@media(display-mode:standalone){
+ .shell{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+}
+.layout-files p,.layout-files li{line-height:1.6; overflow-wrap:anywhere;}
+.layout-files-heading{display:flex; align-items:center; justify-content:space-between; gap:16px;}
+.layout-files-heading h2{margin:0;}
+.layout-file-actions{display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin:18px 0;}
+.layout-file-actions label{flex:1; min-width:220px;}
+.layout-file-actions input{display:block; margin-top:8px; max-width:100%; min-height:44px;}
+#layout-import-issues{max-height:240px; overflow:auto; padding-left:24px;}
+.design-details summary{cursor:pointer;min-height:var(--ctl-h);align-content:center;font-size:12px;color:var(--text)}
+
+.design-details{border-bottom:1px solid var(--line);margin-top:10px;padding-bottom:8px}
+.design-details label{margin-top:12px}
+.design-details .quiet{width:100%;margin-top:12px}
+.design-details .text-button{display:block}
+.icon-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px;margin:8px 0;max-height:230px;overflow:auto;padding:4px}
+.icon-option{display:grid;place-items:center;min-width:44px;min-height:44px;padding:10px;background:var(--bg);border-radius:10px}
+.icon-option>.ui-icon{width:22px;height:22px}
+.icon-option[aria-pressed=true]{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+#key-tint{padding:5px;width:100%;height:var(--ctl-h);cursor:pointer}
+#icon-image-file{padding:8px;font-size:12px}
+#design-message:not(:empty){padding:10px 12px;border:1px solid var(--danger);background:var(--danger-bg);color:var(--danger-text);border-radius:10px;line-height:1.6}
+#editor{scroll-padding-block:16px 170px}
+#editor .app-picker{scroll-margin-block:12px 170px}
+#editor #action-options{scroll-margin-block:16px 170px}
+#add-review button{min-height:44px}
+#editor .design-details summary{min-height:var(--ctl-h)}
+#add-review>div{flex-wrap:wrap}
+#key-appearance{margin-top:12px}
+#key-appearance>.color-options{justify-content:flex-start;gap:6px;flex-wrap:wrap}
+#key-appearance #icon-library{padding-top:6px}
+@media(min-width:601px) and (max-width:960px){
+ #editor #config-form{grid-template-columns:minmax(0,1fr)}
+ #editor #editor-fields{grid-column:1;grid-row:auto}
+}
+#add-key-hint{grid-column:1 / -1;margin:0 0 4px;line-height:1.5}
+#add-key-save:disabled{background:var(--surface-2);color:var(--muted);border-color:var(--line);opacity:.7;cursor:not-allowed}
+input::placeholder{color:var(--dim)}
+button:disabled:not(.control-tile),input:disabled,select:disabled{opacity:1;color:var(--dim);background:var(--surface-2);border-color:var(--line);cursor:not-allowed;box-shadow:none}
+.solid:disabled,#add-key-save:disabled{background:var(--surface-2);color:var(--dim);border-color:var(--line);opacity:1}
+.quiet,.text-button{font-size:13px}
+.text-button{min-height:44px}
+label,legend,.field-note,.form-message,.muted{font-size:12px}
+.eyebrow{font-size:12px}
+.settings-popover{max-width:calc(100vw - 32px)}
+
+#save-message[data-dirty=true]{color:var(--accent);font-weight:600}
+#save-message[data-dirty=true]:before{content:'● ';font-size:12px}
+.key-technical{margin-left:auto;position:relative;font-size:12px}
+.key-technical summary{min-height:var(--ctl-h);align-content:center;cursor:pointer;color:var(--muted)}
+.key-technical #revision{display:block;white-space:nowrap;padding:8px 0}
+
+.app-picker-current{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:10px;row-gap:4px;margin:10px 0;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.app-picker-current>small{grid-column:1 / -1;font-size:12px;color:var(--muted)}
+.app-picker-current>details{grid-column:1 / -1;min-width:0}
+.app-picker-current summary{cursor:pointer;min-height:var(--ctl-h);align-content:center;color:var(--muted);font-size:12px}
+.app-picker-current .app-picker-binding{font-size:12px;margin:0;color:var(--muted)}
+.app-picker .app-picker-icon{width:32px;height:32px;min-width:32px;aspect-ratio:1;background:transparent;border-radius:0;margin:0;padding:0}
+.app-picker .app-picker-icon>img{width:100%;height:100%;border-radius:0}
+@media(max-width:960px){
+ .editor #config-form{display:block}
+}
+@media(max-width:600px){
+ .settings-popover{right:0;width:min(300px,calc(100vw - 32px))}
+}
+.settings-popover a{display:inline-flex;align-items:center;min-height:var(--ctl-h)}
+#editor #clear-action,#editor #reload-layout,#editor .text-button{min-height:var(--ctl-h);min-width:var(--ctl-h);font-size:13px}
+.workflow-check,.modifier-grid label{min-height:var(--ctl-h)}
+
+.key-technical #revision{font-size:12px}
+#save-message[data-dirty=true]:before{content:'●';width:auto;height:auto;background:none;border-radius:0;margin-right:6px;color:var(--accent)}
+.app-picker .app-picker-icon{color:var(--muted)}
+
+#library-icon-fields{padding-top:6px;min-width:0}
+.library-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;padding:2px;margin:8px 0 4px;background:var(--surface-2);border:1px solid var(--line);border-radius:calc(var(--radius-ctl) + 2px)}
+.library-tabs button{min-height:var(--ctl-h);padding:0 10px;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:var(--radius-ctl);font-size:13px}
+.library-tabs button[aria-pressed=true]{background:var(--bg);border-color:var(--accent);color:var(--text)}
+#library-icon-fields .quiet,#library-icon-fields .solid{width:100%;margin-top:8px}
+.library-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:6px;margin:8px 0;max-height:260px;overflow:auto;padding:4px;min-width:0}
+.library-grid:empty{display:none}
+.library-grid[aria-busy=true]{opacity:.6}
+.library-icon{position:relative;display:grid;place-items:center;min-width:44px;min-height:52px;padding:8px;background:var(--bg);border-radius:10px}
+.library-icon img{width:28px;height:28px;display:block}
+.library-icon[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg)}
+.library-icon[data-saved=true]:after{content:"";position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+#library-message:not(:empty){margin-top:6px}
+#library-message[data-tone=error]{color:var(--danger-text)}
+#library-message[data-tone=ok]{color:var(--accent)}
+.library-selected{margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);min-width:0}
+.library-preview{display:grid;place-items:center;height:120px;border:1px solid var(--line);border-radius:12px;background:var(--library-preview-bg,var(--key))}
+.library-preview img{width:84px;height:84px;display:block}
+.library-meta{display:flex;flex-direction:column;gap:2px;margin-top:10px;font-size:13px;overflow-wrap:anywhere}
+.library-meta span{font-size:12px;color:var(--muted)}
+.library-color-row{display:grid;grid-template-columns:72px minmax(0,1fr);gap:6px;align-items:center}
+.library-color-row input{height:var(--ctl-h);padding:5px;cursor:pointer}
+.library-color-row .quiet{margin-top:0!important}
+#library-remove{width:100%;margin-top:6px}
+.library-dialog{width:min(760px,calc(100% - 32px));max-width:none;height:fit-content;min-height:min(420px,calc(100dvh - 32px));max-height:calc(100dvh - 32px);margin:auto;padding:0;border:1px solid var(--line);border-radius:20px;background:var(--surface);color:var(--text);box-shadow:0 20px 80px #0008;overflow:hidden}
+.library-dialog[open]{display:flex;flex-direction:column}
+.library-dialog::backdrop{background:#000b}
+.library-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 12px 8px 20px;flex:none}
+.library-dialog-head h2{min-width:0;font-size:17px;overflow-wrap:anywhere}
+#library-dialog-close{flex:none;min-width:44px;min-height:44px}
+.library-dialog-body{display:flex;flex-direction:column;flex:1 1 auto;min-height:0;min-width:0;padding:0 20px 16px}
+.library-dialog .library-tabs{margin:4px 0 0;flex:none}
+.library-dialog .library-tabs button{min-height:44px}
+.library-dialog-sets{flex:none}
+.library-dialog-sets label{margin:12px 0 6px}
+.library-status{flex:none;margin-top:12px;font-size:13px;line-height:1.5;color:var(--text);overflow-wrap:anywhere}
+.library-status:empty{display:none}
+.library-status[data-tone=error]{color:var(--danger-text)}
+.library-suggest,.library-examples{flex:none;margin-top:10px}
+.library-suggest .solid{width:100%;justify-content:center}
+.library-examples{display:flex;flex-wrap:wrap;gap:8px}
+.library-examples .quiet{min-height:44px;min-width:44px}
+.library-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px;align-content:start;flex:1 1 auto;min-height:0;margin-top:12px;padding:4px;overflow:auto;min-width:0}
+.library-results:empty{display:none}
+.library-results[aria-busy=true]{opacity:.6}
+.library-results .library-icon{min-height:92px;gap:3px;padding:8px 4px 6px;align-content:start;min-width:0}
+.library-results .library-icon img{width:36px;height:36px}
+.library-icon-set,.library-icon-license{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;line-height:1.3;color:var(--muted)}
+.library-icon-license{color:var(--dim);white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow-wrap:anywhere}
+.library-license-note{flex:none;margin-top:10px;font-size:12px;line-height:1.5;color:var(--muted)}
+.library-icon[data-own=true]{background:#E7E9EE}
+.library-icon[data-own=true] .library-icon-set{color:#2B2F38}
+.library-icon[data-own=true] .library-icon-license{color:#4A505C}
+.library-icon[data-own=true][aria-pressed=true]{border-color:var(--accent)}
+@media(max-width:600px){.library-dialog{width:calc(100% - 16px);height:calc(100dvh - 16px);max-height:calc(100dvh - 16px);border-radius:16px}.library-dialog-head{padding:8px 8px 4px 14px}.library-dialog-body{padding:0 12px 12px}}
+/* ---------- shell and system controls (placed by the theme zones, zones.ts) ---------- */
+.shell{min-height:100dvh;display:flex;flex-direction:column}
+.shell>main{flex:1 1 auto;min-width:0}
+
+/* The system controls are the same in Use and Edit mode: connection capsule (it refreshes, and reconnects first when the Mac is lost: T87), Use|Edit, gear. Only the left side (page tabs or the Keyln mark) changes with the mode. */
+
+.connection-tools{display:flex;align-items:center;gap:8px;flex:none}
+.connection{display:flex;align-items:center;gap:10px;min-height:36px;padding:0 16px 0 14px;border:1px solid var(--hair);border-radius:999px;background:transparent;color:var(--text);font-size:14px;white-space:nowrap}
+.connection::before{content:"";flex:none;--lamp-d:18px;box-sizing:border-box;width:var(--lamp-d);height:var(--lamp-d);border-radius:50%;border:calc(var(--lamp-d) * .21) solid var(--bg);background:var(--bg);box-shadow:inset 0 0 0 2px var(--dim),0 0 0 1px var(--hair)}
+.connection[data-phase=online]::before{background-clip:content-box;background-color:var(--ok);box-shadow:0 0 0 1px var(--hair)}
+.connection[data-phase=connecting]::before,.connection[data-phase=loading]::before{background-clip:content-box;background-color:var(--warn);box-shadow:0 0 0 1px var(--hair);animation:lamp-breathe 2.4s ease-in-out infinite}
+.connection[data-phase=offline]::before{background-clip:content-box;background-color:var(--danger);box-shadow:0 0 0 1px var(--hair)}
+.connection[data-phase=offline]{color:var(--danger-text)}
+/* T87 (ADR-082): the capsule is one button (lamp, words, a small refresh icon): refresh when connected or connecting, reconnect first when lost. In the top bar it fills its slot (36px tall in the wide bars, T97). */
+.connection-button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.connection-button .ui-icon{width:14px;height:14px;margin-left:2px;color:var(--muted)}
+@media(hover:hover){.connection-button:hover:enabled{background:var(--surface-2)}}
+.connection-button:active:enabled{background:var(--surface-2)}
+.connection-button:active:enabled .ui-icon{color:var(--text)}
+.connection-button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.connection-button:disabled{opacity:.5;cursor:default}
+.mode-button,.icon-button{min-height:44px;border:1px solid var(--hair);border-radius:var(--radius-ctl);background:var(--key);color:var(--text)}
+
+.icon-button:hover{background:var(--surface-2)}
+
+/* Paint the tray and inset plates independently of the two full-height touch targets. */
+.mode-switch{position:relative;isolation:isolate;display:flex;align-items:stretch;gap:0;flex:none;padding:0;border:0;border-radius:calc(var(--radius-ctl) + 3px);background:transparent}
+.mode-switch::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border:1px solid var(--line);border-radius:inherit;background:var(--surface)}
+.mode-button{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;flex:1 1 0;align-self:stretch;gap:7px;min-width:44px;padding:8px 16px;border:0;background:transparent;color:var(--muted);font-size:14px}
+.mode-button::before{content:"";position:absolute;inset:4px;z-index:-1;pointer-events:none;border:1px solid transparent;border-radius:max(0px,calc(var(--radius-ctl) - 1px));background:transparent}
+.mode-button:hover:enabled::before{background:var(--surface-2)}
+.mode-button[aria-pressed=true]{color:var(--text)}
+.mode-button[aria-pressed=true]::before{background:var(--surface-2);border-color:var(--line)}
+
+.icon-button{display:grid;place-items:center;min-width:44px;height:44px;padding:8px;cursor:pointer}
+.use-pages{display:flex;align-items:center;gap:6px;flex:1 1 auto;min-width:0;padding:0 4px;overflow-x:auto;scrollbar-width:none}
+.use-pages::-webkit-scrollbar{display:none}
+.use-page{display:block;flex:none;max-width:240px;min-height:32px;padding:0 20px;border:0;border-radius:var(--radius-ctl);background:transparent;color:var(--muted);font-size:15px;font-weight:600;line-height:32px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.use-page:hover:enabled:not([aria-pressed=true]){background:var(--surface-2);color:var(--text)}
+.use-page[aria-pressed=true]{background:var(--key);color:var(--text)}
+
+.shell[data-paired=false] .mode-switch,.shell[data-paired=false] .use-pages{display:none}
+/* Reconnect progress floats under the top bar so it never moves the keys. */
+.connection-recovery{position:fixed;z-index:6;top:calc(var(--header-h) + 8px);left:50%;transform:translateX(-50%);width:max-content;max-width:min(640px,calc(100vw - 32px));margin:0;padding:10px 18px;border:1px solid var(--line);border-radius:var(--radius-panel);background:var(--surface);color:var(--text);font-size:13px;text-align:center}
+.connection-settings{position:relative}
+.settings-popover{top:52px;width:348px;max-height:calc(100dvh - var(--header-h) - 12px);overflow-y:auto;background:var(--surface);border-color:var(--line);border-radius:var(--radius-panel)}
+.theme-section{padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid var(--hair)}
+/* T88 (ADR-083): Moving keys, a 36px two-choice control for this screen only. */
+.move-section{padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid var(--hair)}
+.move-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
+.move-choice{min-height:var(--ctl-h);padding:0 12px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--bg);color:var(--muted);font-size:13px;font-weight:600}
+.move-choice[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg);color:var(--text)}
+.move-choice:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.move-section .field-note{margin-top:6px;line-height:1.4}
+.theme-picker{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
+.theme-option{display:flex;flex-direction:column;align-items:stretch;gap:2px;min-height:44px;padding:5px 5px 7px;text-align:left;border:1px solid var(--hair);border-radius:var(--radius-ctl);background:var(--bg);color:var(--text)}
+.theme-option:hover:enabled{border-color:var(--line)}
+.theme-option[aria-pressed=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.theme-option:disabled{opacity:.55;background:var(--bg);color:var(--text);border-color:var(--hair)}
+.theme-option[aria-pressed=true]:disabled{border-color:var(--accent)}
+.theme-name{margin-top:4px;padding:0 3px;font-size:13px;font-weight:650;line-height:1.25}
+.theme-note-line{padding:0 3px;font-size:11.5px;line-height:1.25;color:var(--muted)}
+.settings-popover .theme-note{margin-top:8px}
+.theme-note:empty{display:none}
+.theme-preview{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;height:32px;padding:5px;overflow:hidden;border:1px solid var(--hair);border-radius:calc(var(--radius-ctl) - 2px);background:var(--bg)}
+.tp-chip{min-height:0;border-radius:calc(var(--radius-key) / 3);background:var(--fill)}
+.tp-state{position:absolute;display:block}
+[data-theme=braun].theme-preview .tp-state{top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 2px var(--bg)}
+[data-theme=metro].theme-preview .tp-state{left:5px;right:5px;bottom:5px;height:5px;background:var(--ok)}
+[data-theme=midnight].theme-preview .tp-state{left:9px;right:9px;bottom:8px;height:3px;border-radius:2px;background:var(--line-0);box-shadow:-3px 0 0 1px var(--text),3px 0 0 1px var(--text)}
+[data-theme=standard].theme-preview .tp-state{top:3px;right:3px;width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 2px var(--bg)}
+[data-theme=classic].theme-preview .tp-chip{position:relative;background:var(--key);border:1px solid var(--line)}
+[data-theme=classic].theme-preview .tp-chip::after{content:"";position:absolute;inset:22%;border-radius:24%;background:var(--fill)}
+[data-theme=classic].theme-preview .tp-state{display:none}
+/* ---------- desk: one square grid for Use and Edit ---------- */
+
+.grid-frame{min-width:0;max-width:100%;display:flex}
+/* T65: console.ts computes responsive pixel boxes and each container's square --cell; CSS owns the theme gap.
+   Before the first render, the grid shows a four-column loading skeleton. */
+.button-grid{
+  --gap:var(--tile-gap);--cell:120px;
+  display:grid;grid-template-columns:repeat(4,var(--cell));gap:var(--gap);justify-content:start;align-content:start;width:max-content;touch-action:pan-y;flex:none;
+}
+.button-grid[aria-busy=true]{opacity:.65}
+.skeleton-tile{border-radius:var(--radius-key);background:var(--key);opacity:.6}
+/* Rendered geometry only: --kx/--ky/--kw/--kh are pixels computed from current width and shared order. */
+.button-grid[data-coords=true]{display:block;margin:0;flex:none}
+.button-grid[data-coords=true]:not(.lift-layer){position:relative}
+.button-grid[data-coords=true]>.control-tile{
+  --pitch:calc(var(--cell) + var(--gap));position:absolute;
+  left:calc(var(--kx) * 1px);top:calc(var(--ky) * 1px);
+  width:calc(var(--kw) * 1px);height:calc(var(--kh) * 1px);
+}
+/* The theme supplies the viewport; page height never shrinks the cell basis. */
+.desk[data-editing=false]{display:block;padding:var(--desk-pt) var(--pad-x) 0}
+
+.desk[data-editing=false] .grid-frame{grid-column:1;grid-row:1;align-self:start}
+
+/* Edit mode: same square cells, sized to the column. */
+/* Narrow windows: the panels move below the keys and the page scrolls. */
+@media(max-width:899px){
+
+  .desk[data-editing=false] .grid-frame{overflow-x:auto;padding:4px;margin:-4px;max-width:calc(100% + 8px)}
+
+
+}
+@media(max-width:600px){
+  :root{--pad-x:12px;--desk-pt:12px}
+  .button-grid{--gap:8px}
+  .desk[data-editing=false] .button-grid{--gap:8px}
+}
+/* ---------- keys ---------- */
+/* Every key draws from --fill (key color), --ink (text and glyph on that fill), --ink-2 (the fainter action line) and --tone (glyph and ring on the dark key body). */
+.control-tile,.tp-chip{--fill:var(--c-blue);--ink:var(--i-blue);--ink-2:var(--s-blue);--tone:var(--t-blue)}
+[data-color=orange]{--key-color:var(--c-orange);--fill:var(--c-orange);--ink:var(--i-orange);--ink-2:var(--s-orange);--tone:var(--t-orange)}
+[data-color=yellow]{--key-color:var(--c-yellow);--fill:var(--c-yellow);--ink:var(--i-yellow);--ink-2:var(--s-yellow);--tone:var(--t-yellow)}
+[data-color=green]{--key-color:var(--c-green);--fill:var(--c-green);--ink:var(--i-green);--ink-2:var(--s-green);--tone:var(--t-green)}
+[data-color=blue]{--key-color:var(--c-blue);--fill:var(--c-blue);--ink:var(--i-blue);--ink-2:var(--s-blue);--tone:var(--t-blue)}
+[data-color=purple]{--key-color:var(--c-purple);--fill:var(--c-purple);--ink:var(--i-purple);--ink-2:var(--s-purple);--tone:var(--t-purple)}
+[data-color=red]{--key-color:var(--c-red);--fill:var(--c-red);--ink:var(--i-red);--ink-2:var(--s-red);--tone:var(--t-red)}
+[data-color=gray]{--key-color:var(--c-gray);--fill:var(--c-gray);--ink:var(--i-gray);--ink-2:var(--s-gray);--tone:var(--t-gray)}
+/* T43: no color. The key is never filled: it sits on the dark key body (data-fill=body) with neutral inks from the theme (--muted for the glyph and the
+   outline ring, --text on the Classic plate), so it reads in every theme and in custom themes. */
+[data-color=none]{--key-color:var(--muted);--fill:var(--surface-2);--ink:var(--text);--ink-2:var(--muted);--tone:var(--muted)}
+.color-swatch[data-color=none]:before{background:linear-gradient(to top right,transparent calc(50% - 1px),var(--muted) calc(50% - 1px),var(--muted) calc(50% + 1px),transparent calc(50% + 1px));box-shadow:inset 0 0 0 2px var(--muted)}
+.control-tile{
+  /* --span-c and --span-r (cells wide and high) are set by the page; the icon and the text follow the smaller side of the key. */
+  --span-c:1;--span-r:1;--span-min:min(var(--span-c),var(--span-r));
+  --u:calc(var(--cell) * var(--span-min) + var(--gap) * (var(--span-min) - 1));
+  --tw:calc(var(--cell) * var(--span-c) + var(--gap) * (var(--span-c) - 1));
+  --pad:clamp(5px,calc(var(--cell) * .07),18px);
+  --lamp-d:clamp(14px,calc(var(--cell) * .095),26px);--lamp-inset:max(4px,calc(var(--pad) * .6));--corner-clear:0px;
+  --icon-scale:.5;--icon-mult:1;--plate-r:22%;
+  /* The icon keeps clear of the corner that holds the lamp or badge; --icon-min stops the icon area from collapsing under a status bar. */
+  --icon-d:min(calc(var(--u) * var(--icon-scale) * var(--icon-mult)),calc(var(--u) - var(--corner-clear)));
+  --icon-min:calc(var(--u) * .25);
+  /* One label size on every key: 16px, and 12px once the cells are small (under 100px). A name is one line; one that does not fit ends in an ellipsis (T102). */
+  --fs:clamp(12px,calc((var(--cell) - 100px) * 100 + 16px),16px);
+  /* The action line is a smaller, quieter second size: 0.8 of the name (12.8px at 16px), never under 11px. */
+  --fs-detail:max(11px,calc(var(--fs) * .8));
+  position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(var(--icon-min),1fr) auto auto;
+  min-width:0;min-height:0;padding:var(--pad);overflow:hidden;border:0;border-radius:var(--radius-key);
+  background:var(--key);color:var(--text);text-align:var(--tile-align);
+  user-select:none;-webkit-tap-highlight-color:transparent;
+  transition:transform 90ms cubic-bezier(.16,1,.3,1),background-color 120ms linear;
+}
+.control-tile[data-fill=solid]{background:var(--fill);color:var(--ink)}
+.control-tile[data-icon-scale=small]{--icon-scale:.38}
+.control-tile[data-icon-scale=large]{--icon-scale:.62}
+.control-tile[data-icon-shape=circle]{--plate-r:50%}
+.control-tile[data-icon-shape=square]{--plate-r:4%}
+.control-tile[data-icon-style=outline]{box-shadow:inset 0 0 0 2px var(--tone)}
+.tile-top{display:contents}
+.tile-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+/* In a status bar the word can shrink and ends in an ellipsis instead of being cut off at the edge of a small key. */
+.tile-status .status-text{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.tile-lamp{display:none}
+.control-tile .tile-icon{
+  grid-row:1;grid-column:1;justify-self:center;align-self:center;display:grid;place-items:center;
+  height:var(--icon-d);max-height:100%;aspect-ratio:1;min-width:0;min-height:0;color:var(--tone);background:transparent;
+}
+.control-tile[data-fill=solid] .tile-icon{color:var(--ink)}
+.control-tile .tile-icon>img{display:block;width:100%;height:100%;object-fit:contain;border-radius:var(--plate-r);pointer-events:none}
+.control-tile .tile-icon[data-glyph=text]{
+  width:100%;aspect-ratio:auto;overflow:hidden;white-space:nowrap;font-family:var(--font-ui),"Apple Color Emoji","Segoe UI Emoji";font-weight:800;line-height:1;letter-spacing:-.02em;
+  /* Text stays within about 60% of the key width and clear of the corner mark (never under 30%); longer text shrinks. --glyph-adv is the theme font's average advance per character. */
+  font-size:min(var(--icon-d),calc(max(var(--tw) * .3,min(var(--tw) * .6,var(--tw) - var(--corner-clear))) / (max(1,var(--glyph-chars,1)) * var(--glyph-adv))));
+}
+.control-tile .tile-label{
+  grid-row:2;grid-column:1;min-width:0;margin-top:calc(var(--pad) * .5);
+  font-size:var(--fs);font-weight:var(--name-weight);line-height:1.2;letter-spacing:-.005em;
+  /* T102: a name is one line; a name wider than the key ends in an ellipsis (the whole name is in the key's tooltip and accessible name). */
+  display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+}
+/* The action line needs room: it shows on every key whose cell is 100px or more and is left out below that (the action type is shown when the key is edited). */
+.control-tile .tile-detail{
+  grid-row:3;grid-column:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+  margin-top:clamp(0px,calc((var(--cell) - 100px) * 100 + 2px),2px);
+  font-size:clamp(0px,calc((var(--cell) - 100px) * 100 + var(--fs-detail)),var(--fs-detail));font-weight:var(--detail-weight);line-height:1.3;color:var(--detail);
+}
+.control-tile[data-fill=solid] .tile-detail{color:var(--ink-2)}
+/* Layout choices of a key. */
+.control-tile[data-content-layout=icon-only]{--icon-mult:1.35}
+.control-tile[data-content-layout=icon-only] .tile-label,.control-tile[data-content-layout=icon-only] .tile-detail{display:none}
+.control-tile[data-content-layout=horizontal]{--icon-mult:.9;grid-template-columns:auto minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto auto minmax(0,1fr);column-gap:calc(var(--pad) * .9);text-align:left}
+.control-tile[data-content-layout=horizontal] .tile-icon{grid-column:1;grid-row:1 / span 4;justify-self:start}
+.control-tile[data-content-layout=horizontal] .tile-icon[data-glyph=text]{width:auto;aspect-ratio:1;font-size:min(var(--icon-d),calc(var(--icon-d) * 1.45 / max(1,var(--glyph-chars,1))))}
+.control-tile[data-content-layout=horizontal] .tile-label{grid-column:2;grid-row:2;margin-top:0}
+.control-tile[data-content-layout=horizontal] .tile-detail{grid-column:2;grid-row:3}
+/* Hover, press, focus. */
+@media(hover:hover){
+  .control-tile:hover:enabled{background:var(--surface-2)}
+  .control-tile[data-fill=solid]:hover:enabled{background:var(--fill);filter:brightness(1.07)}
+  /* --detail is tuned for the key body; the lighter hover surface gets the lighter --muted so the action line stays at 4.5:1 there too. */
+  .control-tile[data-fill=body]:hover:enabled .tile-detail{color:var(--muted)}
+}
+.control-tile:active:enabled,.control-tile[data-pressed=true]:enabled{transform:scale(.985)}
+.control-tile:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.control-tile:disabled{cursor:default;opacity:1}
+/* Unavailable keys. */
+.control-tile[data-state=offline],.control-tile[data-state=connecting]{opacity:.5}
+.control-tile[data-state=unconfigured] .tile-detail{color:var(--detail)}
+.control-tile[data-state=unconfigured][data-fill=solid] .tile-detail{color:var(--ink-2)}
+/* The selected key wears a light ring inside a dark one, so it reads on any key color. */
+.control-tile[data-editing=true]{cursor:pointer}
+/* The preview in the key editor: the same key, laid out as one row. */
+
+/* The title is a key name: 20px in every theme, wrapping at spaces only (never inside a word), at most two lines, an ellipsis after that. */
+/* ---------- page indicator ---------- */
+.page-dots{display:flex;flex-wrap:wrap;align-items:center;max-width:100%}
+.page-dot{position:relative;display:grid;place-items:center;flex:none;min-width:44px;min-height:44px;padding:0;border:0;background:transparent}
+.page-dot::before{content:"";display:block;width:12px;height:3px;border-radius:2px;background:var(--line)}
+.page-dot[aria-pressed=true]::before{width:30px;background:var(--text)}
+.page-dot[data-hidden=true]::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line)}
+.page-dot[data-hidden=true][aria-pressed=true]::before{background:var(--text)}
+/* ---------- theme skins: what each theme adds to the shared structure ---------- */
+@keyframes lamp-breathe{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes badge-spin{to{transform:rotate(360deg)}}
+/* Braun: each key has a small lamp in its corner that shows what its action is doing. */
+[data-theme=braun] .desk[data-editing=false] .control-tile{--corner-clear:calc(2 * (var(--lamp-inset) + var(--lamp-d) + 1px))}
+[data-theme=braun] :where(.desk[data-editing=false]) .control-tile:where(:not([data-state=unconfigured])) .tile-lamp{display:block;position:absolute;top:var(--lamp-inset);right:var(--lamp-inset);box-sizing:border-box;width:var(--lamp-d);height:var(--lamp-d);border-radius:50%;border:calc(var(--lamp-d) * .21) solid var(--bg);background:var(--bg);box-shadow:inset 0 0 0 2px var(--dim),0 0 0 1px var(--hair);pointer-events:none}
+[data-theme=braun] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running]) .tile-lamp{background-clip:content-box;background-color:var(--warn);box-shadow:0 0 0 1px var(--hair);animation:lamp-breathe 2.4s ease-in-out infinite}
+[data-theme=braun] .control-tile[data-state=succeeded] .tile-lamp{background-clip:content-box;background-color:var(--ok);box-shadow:0 0 0 1px var(--hair)}
+[data-theme=braun] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]) .tile-lamp{background-clip:content-box;background-color:var(--danger);box-shadow:0 0 0 1px var(--hair)}
+/* T99 notice: the action did something else on purpose (a Windows App session that is not connected shows the Connection Center). A steady amber lamp, not red. */
+[data-theme=braun] .control-tile[data-state=notice] .tile-lamp{background-clip:content-box;background-color:var(--warn);box-shadow:0 0 0 1px var(--hair)}
+/* Busy: another key is running. The lamp goes out and the key's content drops to about half strength until it is done. */
+[data-theme=braun] .control-tile[data-state=busy] .tile-lamp{box-shadow:0 0 0 1px var(--hair)}
+[data-theme]:not([data-theme=classic]) .desk[data-editing=false] .control-tile[data-state=busy] :is(.tile-icon,.tile-label,.tile-detail){opacity:.55}
+/* Metro: line-colored roundels on the page tabs of a Pages widget (the shown page sits on a band in its line colour), and a status bar along the foot of a key. */
+
+[data-theme=metro] .use-pages{gap:4px}
+[data-theme=metro] .use-page{--tab-c:var(--line-0);--tab-ink:var(--line-ink-0);padding:0 18px 0 8px;font-weight:700;letter-spacing:.01em}
+[data-theme=metro] .use-page:nth-child(6n+2){--tab-c:var(--line-1);--tab-ink:var(--line-ink-1)}
+[data-theme=metro] .use-page:nth-child(6n+3){--tab-c:var(--line-2);--tab-ink:var(--line-ink-2)}
+[data-theme=metro] .use-page:nth-child(6n+4){--tab-c:var(--line-3);--tab-ink:var(--line-ink-3)}
+[data-theme=metro] .use-page:nth-child(6n+5){--tab-c:var(--line-4);--tab-ink:var(--line-ink-4)}
+[data-theme=metro] .use-page:nth-child(6n+6){--tab-c:var(--line-5);--tab-ink:var(--line-ink-5)}
+[data-theme=metro] .use-page::before{content:attr(data-initial);display:inline-block;vertical-align:middle;width:22px;height:22px;margin:-2px 8px 0 0;border-radius:50%;background:var(--tab-c);color:var(--tab-ink);font-size:13px;font-weight:700;line-height:22px;text-align:center;letter-spacing:0}
+[data-theme=metro] .use-page[aria-pressed=true]{background:var(--surface-2)}
+/* Busy keys carry a thin standby stripe along the foot. */
+[data-theme=metro] .desk[data-editing=false] .control-tile[data-state=busy]{box-shadow:inset 0 -4px 0 var(--line)}
+[data-theme=metro] .page-dot::before{width:9px;height:9px;border-radius:50%;background:var(--line)}
+[data-theme=metro] .page-dot{--tab-c:var(--line-0)}
+[data-theme=metro] .page-dot:nth-child(6n+2){--tab-c:var(--line-1)}
+[data-theme=metro] .page-dot:nth-child(6n+3){--tab-c:var(--line-2)}
+[data-theme=metro] .page-dot:nth-child(6n+4){--tab-c:var(--line-3)}
+[data-theme=metro] .page-dot:nth-child(6n+5){--tab-c:var(--line-4)}
+[data-theme=metro] .page-dot:nth-child(6n+6){--tab-c:var(--line-5)}
+[data-theme=metro] .page-dot[aria-pressed=true]::before{width:30px;height:9px;border-radius:5px;background:var(--tab-c)}
+/* Metro's line colour band belongs to the page tabs of a Pages widget: the page that is shown sits on a band in its own line colour */
+[data-theme=metro] .pages-strip .use-page[aria-pressed=true]{box-shadow:inset 0 -4px 0 var(--tab-c)}
+/* The status bar is 26px tall and 18px when the cells are small. It stands where the action line is (that line is left out on small cells), the name stays, and the icon gives way: its minimum height drops so two lines of name and the bar fit a small key. */
+[data-theme=metro] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running],[data-state=succeeded],[data-state=failed],[data-state=rejected],[data-state=unknown],[data-state=notice]){--bar-h:clamp(18px,calc((var(--cell) - 100px) * 100 + 26px),26px);--icon-min:calc(var(--u) * .12);padding-bottom:calc(var(--bar-h) + clamp(2px,calc((var(--cell) - 100px) * 100 + var(--pad)),var(--pad)))}
+[data-theme=metro] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running],[data-state=succeeded],[data-state=failed],[data-state=rejected],[data-state=unknown],[data-state=notice]) .tile-status{
+  position:absolute;left:0;right:0;bottom:0;width:auto;height:var(--bar-h);clip:auto;overflow:hidden;display:flex;align-items:center;gap:clamp(0px,calc((var(--cell) - 100px) * 100 + 8px),8px);padding:0 var(--pad);
+  font-size:12px;font-weight:700;letter-spacing:clamp(.02em,calc((var(--cell) - 100px) * 100 + .14em),.14em);text-transform:uppercase;white-space:nowrap;background:var(--warn);color:var(--on-warn)}
+[data-theme=metro] .desk[data-editing=false] .control-tile[data-state=succeeded] .tile-status{background:var(--ok);color:var(--on-ok)}
+[data-theme=metro] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]) .tile-status{background:var(--danger);color:var(--on-bad)}
+[data-theme=metro] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running]) .tile-status::after{content:"";flex:none;margin-left:auto;width:clamp(0px,calc((var(--cell) - 100px) * 100 + 6px),6px);height:6px;background:currentColor;box-shadow:10px 0 0 currentColor,20px 0 0 currentColor}
+[data-theme=metro] .desk[data-editing=false] .control-tile[data-state=succeeded] .tile-status::after{content:"";flex:none;margin-left:auto;width:clamp(0px,calc((var(--cell) - 100px) * 100 + 6px),6px);height:11px;margin-right:4px;border:solid currentColor;border-width:0 clamp(0px,calc((var(--cell) - 100px) * 100 + 3px),3px) clamp(0px,calc((var(--cell) - 100px) * 100 + 3px),3px) 0;transform:rotate(40deg)}
+[data-theme=metro] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]) .tile-status::after{content:"";flex:none;margin-left:auto;width:clamp(0px,calc((var(--cell) - 100px) * 100 + 12px),12px);height:12px;background:linear-gradient(45deg,transparent 42%,currentColor 42% 58%,transparent 58%),linear-gradient(-45deg,transparent 42%,currentColor 42% 58%,transparent 58%)}
+[data-theme=metro] .desk[data-editing=false] .control-tile[data-state=notice] .tile-status::after{content:"!";flex:none;margin-left:auto;font-size:14px;letter-spacing:0}
+[data-theme=metro] .panel-title{text-transform:uppercase;letter-spacing:.12em;font-size:12px}
+/* Midnight: page tabs drawn as a station line, a service bar along the foot of a key. */
+[data-theme=midnight] .use-pages{gap:0;padding:0 8px}
+/* The station line fits the 32px Pages strip (T97): stations on a 3px line at the top, the page name below them, never on top of each other. */
+[data-theme=midnight] .pages-strip .use-page{position:relative;min-width:96px;max-width:200px;height:32px;min-height:32px;padding:17px 12px 0;border-radius:0;line-height:14px;text-align:center;font-size:13px;font-weight:600;
+  background:linear-gradient(var(--line-0),var(--line-0)) left 5px / 100% 3px no-repeat}
+[data-theme=midnight] .pages-strip .use-page:first-child{background-position:right 5px;background-size:50% 3px}
+[data-theme=midnight] .pages-strip .use-page:last-child{background-position:left 5px;background-size:50% 3px}
+[data-theme=midnight] .pages-strip .use-page:only-child{background-image:none}
+[data-theme=midnight] .pages-strip .use-page::before{content:"";position:absolute;left:50%;top:2px;box-sizing:border-box;width:10px;height:10px;margin-left:-5px;border-radius:50%;border:2.5px solid var(--text);background:var(--bg)}
+[data-theme=midnight] .pages-strip .use-page:hover:enabled:not([aria-pressed=true]){background-color:transparent;color:var(--text)}
+[data-theme=midnight] .pages-strip .use-page[aria-pressed=true]{color:var(--text);font-weight:700;background-color:transparent}
+[data-theme=midnight] .pages-strip .use-page[aria-pressed=true]::before{top:0;width:14px;height:14px;margin-left:-7px;border-width:3px;background:var(--line-0)}
+/* In Edit the "+" after the tabs is a plain button, not a station: the line stops at the last page. */
+[data-theme=midnight] .pages-strip .use-page:has(+ .add-page){background-position:left 5px;background-size:50% 3px}
+[data-theme=midnight] .pages-strip .use-page:first-child:has(+ .add-page){background-image:none}
+[data-theme=midnight] .pages-strip .use-page.add-page{min-width:44px;padding:0 12px;line-height:32px;font-size:18px;background-image:none}
+[data-theme=midnight] .pages-strip .use-page.add-page::before{content:none}
+[data-theme=midnight] .page-dots{padding:0 6px}
+[data-theme=midnight] .page-dot{min-width:48px;background:linear-gradient(var(--line-0),var(--line-0)) left center / 100% 2px no-repeat}
+[data-theme=midnight] .page-dot:first-child{background-position:right center;background-size:50% 2px}
+[data-theme=midnight] .page-dot:last-child{background-position:left center;background-size:50% 2px}
+[data-theme=midnight] .page-dot:only-child{background-image:none}
+[data-theme=midnight] .page-dot::before{box-sizing:border-box;width:12px;height:12px;border-radius:50%;border:2.5px solid var(--text);background:var(--bg)}
+[data-theme=midnight] .page-dot[aria-pressed=true]::before{width:20px;height:20px;border-width:3px;background:var(--line-0)}
+[data-theme=midnight] .control-tile[data-fill=body]:not([aria-pressed=true]){box-shadow:inset 0 0 0 1px var(--hair)}
+[data-theme=midnight] .control-tile[data-fill=body][data-icon-style=outline]{box-shadow:inset 0 0 0 2px var(--tone)}
+[data-theme=midnight] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running],[data-state=succeeded],[data-state=failed],[data-state=rejected],[data-state=unknown],[data-state=notice]){--bar-h:clamp(18px,calc((var(--cell) - 100px) * 100 + 28px),28px);--icon-min:calc(var(--u) * .12);padding-bottom:calc(var(--bar-h) + clamp(2px,calc((var(--cell) - 100px) * 100 + var(--pad)),var(--pad)))}
+[data-theme=midnight] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running],[data-state=succeeded],[data-state=failed],[data-state=rejected],[data-state=unknown],[data-state=notice]) .tile-status{
+  position:absolute;left:0;right:0;bottom:0;width:auto;height:var(--bar-h);clip:auto;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:clamp(0px,calc((var(--cell) - 100px) * 100 + 8px),8px);padding:0 var(--pad);
+  font-size:12px;font-weight:700;white-space:nowrap;background:var(--bar-bg);color:var(--warn)}
+[data-theme=midnight] .desk[data-editing=false] .control-tile[data-state=succeeded] .tile-status{color:var(--ok-text)}
+[data-theme=midnight] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]) .tile-status{color:var(--danger-text)}
+[data-theme=midnight] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running],[data-state=succeeded],[data-state=failed],[data-state=rejected],[data-state=unknown],[data-state=notice]) .tile-status::before{content:"";flex:none;width:clamp(0px,calc((var(--cell) - 100px) * 100 + 18px),18px);height:10px;background:radial-gradient(circle at 4px 5px,currentColor 0 3px,transparent 3.5px),linear-gradient(currentColor,currentColor) 4px 4px / 14px 2px no-repeat}
+[data-theme=midnight] .desk[data-editing=false] .control-tile[data-state=succeeded] .tile-status::before{background:radial-gradient(circle at 5px 5px,transparent 0 2px,currentColor 2.5px 4.5px,transparent 5px)}
+[data-theme=midnight] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running]){outline:3px dashed var(--warn);outline-offset:-3px}
+[data-theme=midnight] .desk[data-editing=false] .control-tile[data-state=succeeded]{outline:3px solid var(--ok);outline-offset:-3px}
+[data-theme=midnight] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]){outline:3px solid var(--danger);outline-offset:-3px}
+[data-theme=midnight] .desk[data-editing=false] .control-tile[data-state=notice]{outline:3px solid var(--warn);outline-offset:-3px}
+/* Busy keys are dotted instead of dashed. */
+[data-theme=midnight] .desk[data-editing=false] .control-tile[data-state=busy]{outline:3px dotted var(--line);outline-offset:-3px}
+/* On keys under 100px the long service-board word gives way to a short one (data-short). */
+[data-theme=midnight] .status-text[data-short]{font-size:clamp(0px,calc((var(--cell) - 100px) * 100 + 12px),12px)}
+[data-theme=midnight] .status-text[data-short]::after{content:attr(data-short);font-size:clamp(0px,calc((100px - var(--cell)) * 100),12px)}
+/* Standard: a ring around the key and a badge in its corner. */
+[data-theme=standard] .use-pages{gap:4px}
+[data-theme=standard] .use-page{border-radius:999px;padding:0 22px}
+[data-theme=standard] .use-page[aria-pressed=true]{background:var(--surface-2)}
+[data-theme=standard] .page-dot::before{width:8px;height:8px;border-radius:50%;background:var(--line)}
+[data-theme=standard] .page-dot[aria-pressed=true]::before{width:26px;height:8px;border-radius:5px;background:var(--text)}
+/* Busy keys lose some of their color. */
+[data-theme=standard] .desk[data-editing=false] .control-tile[data-state=busy]{filter:saturate(.4)}
+[data-theme=standard] .desk[data-editing=false] .control-tile{--badge:clamp(16px,calc(var(--cell) * .17),38px);--corner-clear:calc(2 * (max(4px,var(--pad) * .6) + var(--badge) + 1px))}
+[data-theme=standard] .desk[data-editing=false] .control-tile .tile-lamp{position:absolute;top:max(4px,calc(var(--pad) * .6));right:max(4px,calc(var(--pad) * .6));width:var(--badge);height:var(--badge);border-radius:50%;box-shadow:0 0 0 2px var(--bg);pointer-events:none}
+[data-theme=standard] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running]){outline:2px solid var(--warn);outline-offset:-2px}
+[data-theme=standard] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running]) .tile-lamp{display:block;background:var(--bg)}
+[data-theme=standard] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running]) .tile-lamp::before{content:"";position:absolute;inset:18%;box-sizing:border-box;border-radius:50%;border:3px solid var(--warn);border-top-color:transparent;animation:badge-spin 1s linear infinite}
+[data-theme=standard] .desk[data-editing=false] .control-tile[data-state=succeeded] .tile-lamp{display:block;background:var(--ok)}
+[data-theme=standard] .desk[data-editing=false] .control-tile[data-state=succeeded] .tile-lamp::before{content:"";position:absolute;left:34%;top:19%;width:28%;height:50%;border:solid var(--on-ok);border-width:0 3px 3px 0;transform:rotate(40deg)}
+[data-theme=standard] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]) .tile-lamp{display:block;background:var(--danger)}
+[data-theme=standard] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]) .tile-lamp::before{content:"";position:absolute;left:calc(50% - 1.5px);top:23%;width:3px;height:30%;border-radius:2px;background:var(--on-bad)}
+[data-theme=standard] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]) .tile-lamp::after{content:"";position:absolute;left:calc(50% - 2px);bottom:22%;width:4px;height:4px;border-radius:50%;background:var(--on-bad)}
+[data-theme=standard] .desk[data-editing=false] .control-tile[data-state=notice] .tile-lamp{display:block;background:var(--warn)}
+[data-theme=standard] .desk[data-editing=false] .control-tile[data-state=notice] .tile-lamp::before{content:"";position:absolute;left:calc(50% - 1.5px);top:23%;width:3px;height:30%;border-radius:2px;background:var(--on-warn)}
+[data-theme=standard] .desk[data-editing=false] .control-tile[data-state=notice] .tile-lamp::after{content:"";position:absolute;left:calc(50% - 2px);bottom:22%;width:4px;height:4px;border-radius:50%;background:var(--on-warn)}
+[data-theme=standard] .control-tile[data-fill=body]:not([aria-pressed=true]){box-shadow:inset 0 0 0 1px var(--hair)}
+[data-theme=standard] .control-tile[data-fill=body][data-icon-style=outline]{box-shadow:inset 0 0 0 2px var(--tone)}
+/* Classic: the original look, on the square keys. A dark key, a colored rounded plate behind the icon, a monospace action line, and the state shown by the key itself. */
+/* T97: the 32px track draws its outline inside (an inset ring, not a border) so the tabs can be the full 32px; the shown tab is a pill that fills the track's height. */
+[data-theme=classic] .use-pages{flex:0 1 auto;gap:2px;padding:0 2px;border-radius:16px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+[data-theme=classic] .use-page{padding:0 21px;border-radius:16px}
+[data-theme=classic] .use-page[aria-pressed=true]{background:var(--text);color:var(--bg)}
+[data-theme=classic] .page-dot::before{width:6px;height:6px;border-radius:8px;background:var(--line)}
+[data-theme=classic] .page-dot[aria-pressed=true]::before{width:22px;background:var(--text)}
+[data-theme=classic] .control-tile{border:1px solid var(--line);box-shadow:inset 0 1px 0 #FFFFFF14,0 4px 0 #00000099}
+[data-theme=classic] .control-tile[data-fill=solid]{background:var(--key);color:var(--text)}
+[data-theme=classic] .control-tile[data-fill=solid] .tile-detail{color:var(--detail)}
+[data-theme=classic] .control-tile .tile-detail{font-family:var(--font-mono);color:var(--detail)}
+@media(hover:hover){
+  [data-theme=classic] .control-tile[data-fill=solid]:hover:enabled{background:var(--key);filter:none}
+  [data-theme=classic] .control-tile:hover:enabled{border-color:var(--text)}
+}
+[data-theme=classic] .control-tile:active:enabled,[data-theme=classic] .control-tile[data-pressed=true]:enabled{transform:translateY(2px);box-shadow:inset 0 1px 0 #FFFFFF14,0 2px 0 #00000099;background:var(--surface-2)}
+[data-theme=classic] .control-tile:active:enabled .tile-detail,[data-theme=classic] .control-tile[data-pressed=true]:enabled .tile-detail{color:var(--muted)}
+[data-theme=classic] .control-tile .tile-icon{justify-self:start;background:var(--fill);color:var(--ink);border-radius:24%;overflow:hidden}
+[data-theme=classic] .control-tile[data-icon-shape=circle] .tile-icon{border-radius:50%}
+[data-theme=classic] .control-tile[data-icon-shape=square] .tile-icon{border-radius:5%}
+[data-theme=classic] .control-tile .tile-icon>svg{width:56%;height:56%}
+[data-theme=classic] .control-tile .tile-icon>img{width:86%;height:86%;border-radius:inherit}
+[data-theme=classic] .control-tile .tile-icon[data-glyph=text]{width:auto;aspect-ratio:1;font-size:calc(var(--icon-d) * .7 / max(1,var(--glyph-chars,1)))}
+[data-theme=classic] .control-tile[data-icon-style=outline] .tile-icon{background:transparent;color:var(--tone);box-shadow:inset 0 0 0 2px var(--tone)}
+[data-theme=classic] .control-tile[data-icon-style=outline]{box-shadow:inset 0 1px 0 #FFFFFF14,0 4px 0 #00000099}
+[data-theme=classic] .control-tile[data-icon-style=plain] .tile-icon{background:transparent;color:var(--tone)}
+[data-theme=classic] .control-tile[data-app-default=true] .tile-icon[data-glyph=app]{background:transparent;border-radius:0}
+[data-theme=classic] .control-tile[data-app-default=true] .tile-icon[data-glyph=app]>img{width:100%;height:100%;border-radius:0}
+[data-theme=classic] .control-tile[data-state=offline] .tile-icon,[data-theme=classic] .control-tile[data-state=connecting] .tile-icon,[data-theme=classic] .control-tile[data-state=busy] .tile-icon{filter:grayscale(1);opacity:.6}
+[data-theme=classic] .control-tile:is([data-state=offline],[data-state=connecting],[data-state=busy]){opacity:1;border-style:dashed}
+[data-theme=classic] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running]){border-color:var(--accent);background:var(--accent-bg)}
+[data-theme=classic] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running]) .tile-detail{color:var(--accent)}
+[data-theme=classic] .desk[data-editing=false] .control-tile[data-state=succeeded]{border-color:var(--ok);background:var(--ok-bg);box-shadow:inset 0 1px 0 #FFFFFF14,0 4px 0 #0009,0 0 28px var(--ok-bg)}
+[data-theme=classic] .desk[data-editing=false] .control-tile[data-state=succeeded] .tile-detail{color:var(--ok-text)}
+[data-theme=classic] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]){border-color:var(--danger);background:var(--danger-bg)}
+[data-theme=classic] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]) .tile-detail{color:var(--danger-text)}
+[data-theme=classic] .desk[data-editing=false] .control-tile[data-state=notice]{border-color:var(--warn)}
+[data-theme=classic] .desk[data-editing=false] .control-tile[data-state=notice] .tile-detail{color:var(--warn)}
+[data-theme=classic] .control-tile[data-content-layout=icon-only]:not([data-state=ready]) .tile-status{position:absolute;clip:auto;width:auto;height:auto;inset:auto 8px 10px;text-align:center;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Small windows. */
+@media(max-width:899px){
+  [data-theme=midnight] .pages-strip .use-page{min-width:84px}
+}
+/* Below 1000px Refresh and the Use|Edit switch show only their icons; the words stay for assistive technology. This keeps the group short enough that the page tabs keep room in Use mode and the Keyln mark in Edit mode. */
+@media(max-width:1000px){
+
+  .mode-button .ui-icon{width:18px;height:18px}
+  .page-refresh-label,.mode-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  .mode-button{gap:0;padding:0}
+}
+@media(max-width:600px){
+  /* Row 1 is the same in both modes: the Keyln mark (Edit only) on the left and the tools group on the right. The page tabs (Use only) take row 2. */
+
+
+
+
+
+
+  .use-pages{grid-area:2 / 1;width:auto;max-width:none;margin:0}
+  .mode-button{padding:0 12px;font-size:13px}
+  .connection{gap:8px;padding:0 12px 0 10px;font-size:13px}
+  /* Paired: the pill is just its lamp. Its name (and the hidden status text) still carry the words for assistive technology. */
+  .shell[data-paired=true] .connection-button{gap:0;width:44px;padding:0;justify-content:center}
+  .shell[data-paired=true] .connection-button :is(.connection-text,.ui-icon){display:none}
+  .settings-popover{right:-8px;width:min(348px,calc(100vw - 24px))}
+  .connection-recovery{top:12px}
+
+}
+@media(max-width:400px){
+  .connection-tools{gap:6px}
+
+}
+/* ---------- T36: page tab strip, page settings popover, key popup ---------- */
+/* The page tabs sit above the grid in Edit. The tab of the page being edited opens the page settings (a small chevron says so); the other tabs switch pages. The row scrolls sideways instead of wrapping. */
+
+.confirm-slot:not(:has(.layout-confirm:not([hidden]))){display:none}
+
+.icon-close{display:grid;place-items:center;flex:none;width:44px;min-width:44px;height:44px;padding:0;border:1px solid transparent;border-radius:var(--radius-ctl);background:transparent;color:var(--muted)}
+.icon-close:hover:enabled{background:var(--surface-2);color:var(--text)}
+.card-head .icon-close,.theme-dialog-head .icon-close{width:var(--ctl-h);min-width:var(--ctl-h);height:var(--ctl-h);min-height:var(--ctl-h)}
+.x-mark{position:relative;display:block;width:16px;height:16px}
+.x-mark::before,.x-mark::after{content:"";position:absolute;left:7px;top:0;width:2px;height:16px;border-radius:1px;background:currentColor}
+.x-mark::before{transform:rotate(45deg)}
+.x-mark::after{transform:rotate(-45deg)}
+
+.draft-message{max-width:280px;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+/* The key popup: one modal for Edit key and New key. The header and the footer stay; only the body scrolls. */
+.popup-body{flex:1 1 auto;min-height:0;min-width:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:0 20px 12px}
+.section-title{margin:16px 0 0;padding-top:12px;border-top:1px solid var(--hair);font-size:14px;font-weight:650}
+.group-label{display:block;margin:12px 0 4px;font-size:12px;color:var(--muted)}
+.sub-label{display:block;margin:8px 0 4px;font-size:12px;color:var(--muted)}
+.icon-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;padding:2px;background:var(--surface-2);border:1px solid var(--line);border-radius:calc(var(--radius-ctl) + 2px)}
+.icon-tabs [role=tab]{min-height:var(--ctl-h);padding:0 4px;border:1px solid transparent;border-radius:var(--radius-ctl);background:transparent;color:var(--muted);font-size:13px;line-height:1.15}
+.icon-tabs [role=tab][aria-selected=true]{background:var(--bg);border-color:var(--accent);color:var(--text)}
+.icon-panel{margin-top:8px;min-width:0}
+.source-switch{margin-top:4px}
+#key-color-group .color-options{justify-content:flex-start;flex-wrap:wrap;gap:6px}
+#key-color-group .color-swatch{flex:0 0 var(--ctl-h)}
+#key-color-group[data-emphasis=muted]{padding-left:12px;border-left:2px dashed var(--line)}
+#key-color-group[data-emphasis=muted] .color-swatch::before{width:14px;height:14px}
+#key-color-group[data-emphasis=muted] .color-swatch[aria-pressed=true]::after{width:22px;height:22px}
+.size-options{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.size-choice,.style-choice{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:var(--ctl-h);padding:0 6px;border-radius:var(--radius-ctl);background:var(--bg);color:var(--muted);font-size:12px;font-weight:600;line-height:1.15;text-align:center}
+.style-choice{justify-content:flex-start;padding:2px 6px;text-align:left}
+#risk-field[hidden]{display:none!important}
+.size-choice[aria-pressed=true],.style-choice[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg);color:var(--text)}
+.size-sample{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:2px;width:36px;height:18px}
+.size-sample i{display:block;border:1px solid var(--line);border-radius:2px;background:transparent}
+.size-sample b{display:block;grid-column:1 / span 1;grid-row:1 / span 1;border:1px solid var(--muted);border-radius:2px;background:var(--muted)}
+.size-sample b[data-columns="2"]{grid-column:1 / span 2}
+.size-sample b[data-columns="4"]{grid-column:1 / span 4}
+.size-sample b[data-rows="2"]{grid-row:1 / span 2}
+.size-sample i[data-custom=true]{border-style:dashed}
+
+.stepper-row{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:6px;align-items:center}
+.stepper-row input{text-align:center;font-variant-numeric:tabular-nums;padding:11px 4px}
+
+.style-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.style-sample{position:relative;flex:none;display:grid;place-items:center;align-content:center;gap:1px;width:20px;height:20px;border-radius:5px;background:var(--muted);color:var(--bg);--glyph:7px}
+.style-sample b{display:block;width:var(--glyph);height:var(--glyph);border-radius:1.5px;background:currentColor}
+.style-sample i{display:block;width:10px;height:1.5px;border-radius:1px;background:currentColor}
+.style-sample[data-sample=outline]{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--muted)}
+.style-sample[data-sample=plain]{background:transparent;color:var(--muted)}
+.style-sample[data-sample=circle]{border-radius:50%}
+.style-sample[data-sample=square]{border-radius:1px}
+.style-sample[data-sample=small]{--glyph:4px}
+.style-sample[data-sample=large]{--glyph:10px}
+.style-sample[data-sample=horizontal]{grid-auto-flow:column;gap:2px}
+.style-sample[data-sample=horizontal] b{--glyph:6px}
+.style-sample[data-sample=horizontal] i{width:6px}
+.style-sample[data-sample=icon-only]{--glyph:12px}
+.style-sample[data-sample=icon-only] i{display:none}
+#key-tint{margin-top:8px}
+#reset-key-style{min-height:var(--ctl-h)}
+@media(max-width:600px){
+  .popup-body{padding:0 12px 12px}
+
+
+  .size-options{gap:4px}
+}
+/* ---------- T37: the Mac application field and the App picker window ---------- */
+.app-picker{min-width:0}
+.app-field{display:flex;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px 6px 8px;border-radius:var(--radius-ctl);background:var(--bg);color:var(--text);text-align:left;font-size:13px}
+.app-field:hover:enabled{border-color:var(--accent)}
+.app-field::after{content:"";flex:none;width:7px;height:7px;margin:-3px 2px 0 auto;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg)}
+.app-field .tile-icon{display:grid;place-items:center;flex:none;width:24px;height:24px;color:var(--muted)}
+.app-field .tile-icon>img{display:block;width:100%;height:100%;object-fit:contain}
+.app-field-name{min-width:0;flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.app-field-name[data-empty=true]{font-weight:400;color:var(--muted)}
+.app-picker .app-picker-current{display:block;margin:4px 0 0;padding:0 4px;background:transparent;border:0}
+.app-dialog{width:min(960px,calc(100vw - 32px));max-width:none;height:80dvh;max-height:calc(100dvh - 32px);margin:auto;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius-panel);background:var(--surface);color:var(--text);box-shadow:0 20px 80px #0008}
+.app-dialog[open]{display:flex;flex-direction:column}
+.app-dialog::backdrop{background:#000b}
+.app-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex:none;padding:6px 8px 6px 20px}
+.app-dialog-head h2{min-width:0;font-size:17px}
+.app-dialog-search{flex:none;padding:0 20px}
+.app-dialog-status{flex:none;margin:10px 20px 0;font-size:13px;line-height:1.5;color:var(--muted)}
+.app-dialog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px;align-content:start;flex:1 1 auto;min-height:0;min-width:0;margin-top:10px;padding:4px 20px 20px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.app-section-label{grid-column:1 / -1;margin:10px 0 2px;padding-bottom:6px;border-bottom:1px solid var(--hair);font-size:12px;font-weight:600;color:var(--muted)}
+.app-section-label:first-child{margin-top:0}
+.app-tile{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;min-width:0;min-height:116px;padding:12px 6px 10px;border:1px solid transparent;border-radius:12px;background:transparent;color:var(--text);text-align:center}
+.app-tile:hover:enabled{background:var(--surface-2)}
+.app-tile[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg);box-shadow:inset 0 0 0 2px var(--accent)}
+.app-tile .tile-icon{display:grid;place-items:center;flex:none;width:64px;height:64px;color:var(--muted)}
+.app-tile .tile-icon>img{display:block;width:100%;height:100%;object-fit:contain}
+.app-tile-name{flex:none;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;max-width:100%;overflow:hidden;text-overflow:ellipsis;font-size:13px;line-height:1.3;overflow-wrap:anywhere}
+@media(max-width:600px){
+  .app-dialog{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;border:0;border-radius:0}
+  .app-dialog-head{padding-left:14px}
+  .app-dialog-search{padding:0 12px}
+  .app-dialog-status{margin:10px 12px 0}
+  .app-dialog-grid{padding:4px 12px calc(16px + env(safe-area-inset-bottom))}
+}
+/* ---------- T52: Add to this page ---------- */
+/* ---------- T39: lifting and moving a key in Use mode ---------- */
+.control-tile[data-lifted=true]{opacity:.4;outline:2px dashed var(--accent);outline-offset:-4px;transform:scale(.97)}
+.lift-layer{position:fixed;z-index:60;margin:0;padding:0;pointer-events:none;touch-action:none}
+.lift-layer .control-tile{transform:scale(1.06);box-shadow:0 16px 40px #000a;opacity:1}
+.use-page[data-drop-target=true]{outline:2px dashed var(--accent);outline-offset:-4px}
+.use-page[data-drop-refused=true]{outline-color:var(--danger);cursor:not-allowed}
+.move-toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));z-index:55;display:flex;align-items:center;gap:12px;max-width:calc(100vw - 24px);padding:6px 6px 6px 16px;border:1px solid var(--line);border-radius:var(--radius-panel);background:var(--surface);color:var(--text);box-shadow:0 12px 40px #0008;font-size:14px;transform:translateX(-50%)}
+.move-toast span{min-width:0;overflow-wrap:anywhere}
+.move-toast .quiet{flex:none;min-height:44px}
+/* T40: Windows treats press-and-hold as a right-click and may claim the touch for panning: no callout on keys, and no panning while one is lifted. */
+.button-grid .control-tile{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.button-grid[data-lifted=true],.button-grid[data-lifted=true] .control-tile{touch-action:none}
+/* ---------- T41: styled menus for the selects of Edit. The native select stays, hidden, as the source of truth. ---------- */
+.select-native{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;opacity:0;pointer-events:none;border:0!important}
+.select-button{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-width:0;min-height:44px;padding:11px 12px;font-size:14px;color:var(--text);background:var(--bg);text-align:left}
+.select-native[aria-invalid=true]+.select-button{border-color:var(--danger)}
+.select-button:disabled{opacity:1;color:var(--dim);background:var(--surface-2);cursor:not-allowed}
+:is(.settings-card,.theme-dialog) .select-button{min-height:var(--ctl-h);padding:7px 10px;font-size:13px}
+.select-value{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.select-chevron{flex:none;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-2px) rotate(45deg)}
+.select-button[aria-expanded=true] .select-chevron{transform:translateY(2px) rotate(-135deg)}
+.select-layer{position:fixed;inset:0;z-index:1000;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;overflow:visible;color:inherit}
+.select-layer[data-sheet=true]{background:#0007}
+.select-menu{position:absolute;overflow-y:auto;overscroll-behavior:contain;padding:4px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);box-shadow:0 12px 40px #0008;outline:0;scrollbar-width:thin}
+.select-layer[data-sheet=true] .select-menu{left:0;right:0;bottom:0;top:auto;width:auto;max-height:70vh;border-radius:14px 14px 0 0;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+.select-option{display:flex;align-items:center;gap:8px;min-height:var(--ctl-h);padding:6px 10px;border-radius:7px;font-size:13px;cursor:pointer;overflow-wrap:anywhere}
+.select-option[data-active=true],.select-option:hover{background:var(--surface-2)}
+.select-option[aria-selected=true]{color:var(--accent)}
+.select-option[aria-disabled=true]{color:var(--dim);cursor:not-allowed}
+.select-option[aria-disabled=true]:hover{background:transparent}
+.select-check{flex:none;width:16px;visibility:hidden;color:var(--accent)}
+.select-option[aria-selected=true] .select-check{visibility:visible}
+.select-heading{padding:6px 10px 2px;font-size:12px;color:var(--muted)}
+/* ---------- T42: the Theme window (gear > Theme) ---------- */
+.theme-open{margin-top:8px;width:100%}
+.theme-dialog{width:min(1000px,calc(100vw - 32px));max-width:none;height:min(780px,calc(100dvh - 32px));margin:auto;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius-panel);background:var(--surface);color:var(--text);box-shadow:0 20px 80px #0008}
+.theme-dialog[open]{display:flex;flex-direction:column}
+.theme-dialog::backdrop{background:#000b}
+.theme-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex:none;padding:8px 8px 8px 18px;border-bottom:1px solid var(--hair)}
+.theme-dialog-head h2{margin:0;font-size:16px}
+.theme-dialog-sub{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.theme-dialog-body{display:grid;grid-template-columns:280px minmax(0,1fr);flex:1 1 auto;min-height:0}
+.theme-list{display:flex;flex-direction:column;gap:4px;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:10px 10px;background:var(--bg);border-right:1px solid var(--hair);scrollbar-width:thin}
+.theme-group{margin:10px 6px 2px;font-size:11px;font-weight:650;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.theme-group:first-child{margin-top:0}
+.theme-rows{display:flex;flex-direction:column;gap:4px}
+.theme-row{display:flex;align-items:center;gap:10px;width:100%;min-height:40px;padding:4px 8px;border:1px solid transparent;border-radius:var(--radius-ctl);background:transparent;color:var(--text);text-align:left}
+.theme-row:hover:enabled{background:var(--surface)}
+.theme-row[aria-pressed=true]{background:var(--surface);border-color:var(--accent)}
+.theme-swatch{display:grid;grid-template-columns:1fr 1fr;flex:none;width:24px;height:24px;overflow:hidden;border-radius:5px;border:1px solid var(--line)}
+.theme-swatch-cell{display:block}
+.theme-row-text{display:flex;flex-direction:column;gap:1px;min-width:0;line-height:1.25}
+.theme-row-name{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.theme-row-note{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.theme-tag{flex:none;padding:1px 7px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:650}
+.theme-list-empty{margin:2px 6px;font-size:12px;color:var(--muted)}
+.theme-new{width:100%;margin-top:6px}
+.theme-editor{display:flex;flex-direction:column;gap:10px;min-width:0;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:12px 18px 14px;scrollbar-width:thin}
+.theme-preview-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--tile-gap);flex:none;padding:12px;border-radius:var(--radius-panel);background:var(--bg);color:var(--text);font-family:var(--font-ui);border:1px solid var(--hair)}
+.theme-sample{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:1px;min-height:76px;padding:10px;overflow:hidden;border-radius:var(--radius-key);background:var(--key);color:var(--text)}
+.theme-sample-icon{position:absolute;left:10px;top:10px;width:22px;height:22px;border-radius:50%;background:var(--t-blue)}
+.theme-sample-name{font-size:14px;font-weight:var(--name-weight);line-height:1.2}
+.theme-sample-detail{font-size:12px;color:var(--detail)}
+.theme-sample[data-fill=solid]{background:var(--c-orange);color:var(--i-orange)}
+.theme-sample[data-fill=solid] .theme-sample-icon{background:var(--i-orange)}
+.theme-sample[data-fill=solid] .theme-sample-detail{color:var(--s-orange)}
+.theme-sample[data-fill=solid2]{background:var(--c-green);color:var(--i-green)}
+.theme-sample[data-fill=solid2] .theme-sample-icon{background:var(--i-green)}
+.theme-sample[data-fill=solid2] .theme-sample-detail{color:var(--s-green)}
+.theme-sample-lamp{position:absolute;right:9px;top:9px;width:10px;height:10px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 3px var(--bg)}
+.theme-readonly{display:flex;flex-direction:column;gap:6px}
+.theme-readonly h3{margin:0;font-size:16px}
+.theme-readonly-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.theme-form{display:flex;flex-direction:column;gap:10px}
+.theme-field label,.theme-field .group-label{margin:0 0 4px}
+.theme-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.theme-name-row{display:flex;align-items:center;gap:8px}
+.theme-chip{flex:none;padding:6px 12px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:var(--muted);white-space:nowrap}
+.theme-accents{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.theme-accent-row{display:flex;flex-wrap:wrap;gap:6px}
+.theme-swatch-button{width:var(--ctl-h);min-width:var(--ctl-h);height:var(--ctl-h);padding:6px;border-radius:50%;border:2px solid transparent;background-clip:content-box}
+.theme-swatch-button[aria-pressed=true]{border-color:var(--text);box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--accent)}
+.theme-custom-color{display:flex;align-items:center;gap:8px;margin:0;font-size:12px;color:var(--muted)}
+.theme-custom-color input{width:var(--ctl-h);min-width:var(--ctl-h);padding:2px;cursor:pointer}
+.theme-custom-tag[data-active=true]{color:var(--accent);font-weight:650}
+.theme-color-row{display:flex;align-items:center;gap:6px}
+.theme-color-chip{flex:none;width:var(--ctl-h);height:var(--ctl-h);border-radius:var(--radius-ctl);border:1px solid var(--line)}
+.theme-color-row input[type=text]{font-family:var(--font-mono);text-transform:uppercase}
+.theme-color-row input[type=color]{flex:none;width:var(--ctl-h);min-width:var(--ctl-h);padding:2px;cursor:pointer}
+.theme-color-row input[aria-invalid=true]{border-color:var(--danger)}
+.theme-choices{display:flex;flex-wrap:wrap;gap:6px}
+.theme-choice{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:var(--ctl-h);padding:0 8px;border-radius:var(--radius-ctl);background:var(--bg);color:var(--muted);font-size:12px;font-weight:600;line-height:1.15}
+.theme-choice[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg);color:var(--text)}
+.theme-radius-sample{display:block;flex:none;width:14px;height:14px;border:2px solid var(--text);background:transparent}
+.theme-gap-sample{display:flex;flex:none;align-items:center;height:16px}
+.theme-gap-cell{display:block;width:6px;height:12px;background:var(--text);border-radius:2px}
+.theme-contrast{margin:0;padding:8px 12px;border-radius:var(--radius-ctl);font-size:13px;line-height:1.5;border:1px solid var(--line)}
+.theme-contrast[data-status=ok]{color:var(--ok-text);background:var(--ok-bg);border-color:var(--ok)}
+.theme-contrast[data-status=bad]{color:var(--danger-text);background:var(--danger-bg);border-color:var(--danger)}
+.theme-confirm{padding:12px;border:1px solid var(--danger);border-radius:var(--radius-ctl);background:var(--danger-bg)}
+.theme-confirm p{margin:0 0 8px;font-size:13px}
+.theme-confirm div{display:flex;flex-wrap:wrap;gap:6px}
+.theme-confirm .danger{background:var(--danger);border-color:var(--danger);color:var(--on-bad)}
+.theme-dialog-foot{display:flex;align-items:center;gap:8px;flex:none;padding:8px 12px 8px 18px;border-top:1px solid var(--hair)}
+.theme-delete{color:var(--danger-text);padding:8px 0}
+.theme-message{flex:1 1 auto;min-width:0;margin:0;font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.theme-message[data-status=bad]{color:var(--danger-text)}
+@media(max-width:600px){
+  .theme-dialog{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;border:0;border-radius:0}
+  .theme-dialog-body{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .theme-list{flex-direction:row;align-items:stretch;gap:6px;overflow-x:auto;overflow-y:hidden;padding:8px 10px;border-right:0;border-bottom:1px solid var(--hair)}
+  .theme-list .theme-group,.theme-list .field-note,.theme-list-empty{display:none}
+  .theme-rows{flex-direction:row;gap:6px}
+  .theme-row{width:auto;min-width:148px;flex:none}
+  .theme-new{width:auto;flex:none;margin:0}
+  .theme-editor{padding:12px 12px calc(14px + env(safe-area-inset-bottom))}
+  .theme-two{grid-template-columns:minmax(0,1fr)}
+  .theme-preview-row{padding:10px}
+  .theme-sample{min-height:76px;padding:8px}
+  .theme-dialog-foot{flex-wrap:wrap;padding:8px 12px calc(8px + env(safe-area-inset-bottom))}
+  .theme-message{flex-basis:100%;order:-1}
+}
+/* T58: console.ts marks a key data-small when its smaller side is under 80px, on any screen: the name is one 11px line with an ellipsis and the icon takes the freed height. */
+.control-tile[data-small=true]{--icon-scale:.58}
+.control-tile[data-small=true][data-icon-scale=small]{--icon-scale:.44}
+.control-tile[data-small=true][data-icon-scale=large]{--icon-scale:.66}
+.control-tile[data-small=true] .tile-label{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:11px;line-height:1.2;margin-top:2px}
+/* Where a lifted key would land (Use mode drag, T58). */
+.drop-ghost{position:absolute;box-sizing:border-box;pointer-events:none;z-index:1;border:2px dashed var(--accent);border-radius:var(--radius-key)}
+.drop-ghost[data-refused=true]{border-color:var(--danger)}
+.drop-ghost[hidden]{display:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+/* T50: widget forms (ADR-057). Only theme tokens, so every face and every custom theme draws them. A form that has no placeholder in the page lives in #extra-widgets
+   (data-extra) and is shown only while the canvas draws it; the stylesheet layout of Edit mode never shows one. Sizes come from the box the canvas gives (container units). */
+[data-extra]{display:none}
+
+.w-lamp{--lamp-d:min(18px,100cqmin);flex:none;box-sizing:border-box;width:var(--lamp-d);height:var(--lamp-d);border-radius:50%;border:calc(var(--lamp-d) * .21) solid var(--bg);background:var(--bg);box-shadow:inset 0 0 0 2px var(--dim),0 0 0 1px var(--hair)}
+.w-lamp[data-tone=ok]{background-clip:content-box;background-color:var(--ok);box-shadow:0 0 0 1px var(--hair)}
+.w-lamp[data-tone=busy]{background-clip:content-box;background-color:var(--warn);box-shadow:0 0 0 1px var(--hair);animation:lamp-breathe 2.4s ease-in-out infinite}
+.w-lamp[data-tone=bad]{background-clip:content-box;background-color:var(--danger);box-shadow:0 0 0 1px var(--hair)}
+.shell[data-canvas=true] .conn-dot{display:grid;place-items:center;container-type:size;-webkit-touch-callout:none;user-select:none}
+.shell[data-canvas=true] .conn-dot-button{display:grid;place-items:center;container-type:size;padding:0}
+.conn-bubble{position:absolute;top:calc(100% + 6px);right:0;z-index:7;max-width:min(260px,70vw);padding:6px 10px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--surface);color:var(--text);font-size:13px;white-space:nowrap;box-shadow:0 4px 16px #0008}
+.conn-bubble[hidden]{display:none}
+.shell[data-canvas=true] .mode-icon{display:grid;place-items:center}
+.mode-icon .ui-icon{width:20px;height:20px}
+.mode-icon .ui-icon[hidden]{display:none}
+.shell[data-canvas=true] .w-clock{display:grid;align-content:center;justify-items:start;container-type:size;overflow:hidden;color:var(--text);font-family:var(--font-ui);font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap}
+/* T98: the time stays the largest thing, but gives height to the date line so the date, weekday and week read at a glance; the date line's
+   width cap keeps "Sep 30  Wed  Week 52" inside the card in every theme's font. */
+.w-clock .clock-time{font-size:min(52cqh,29cqw);font-weight:700;line-height:1}
+.w-clock .clock-date{display:flex;align-items:baseline;gap:.7em;margin-top:6cqh;font-size:min(16cqh,7.8cqw);font-weight:500;line-height:1.2}
+.shell[data-canvas=true] .w-text{display:flex;align-items:center;container-type:size;overflow:hidden;font-family:var(--font-ui)}
+.w-text-body{min-width:0;overflow-wrap:anywhere}
+.w-text[data-form=title]{color:var(--text)}
+.w-text[data-form=title] .w-text-body{font-size:clamp(16px,60cqh,48px);font-weight:var(--name-weight);line-height:1.15}
+.w-text[data-form=note]{color:var(--muted)}
+.w-text[data-form=note] .w-text-body{font-size:clamp(11px,60cqh,16px);line-height:1.3}
+
+/* The floating area of Edit mode (T61, rebuilt in T63 and T64): the settings card, the notices and the save question at the foot of the window. Since T83 (ADR-078) the buttons are not part of it: they are the movable bar .edit-toolbar below. */
+.edit-float{position:fixed;right:calc(12px + env(safe-area-inset-right));z-index:60;display:flex;gap:8px;padding:6px;border:1px solid var(--line);border-radius:var(--radius-panel);background:color-mix(in srgb,var(--surface) 80%,transparent);color:var(--text);box-shadow:0 6px 24px color-mix(in srgb,var(--bg) 60%,transparent)}
+.edit-float[hidden]{display:none}
+.edit-float-button{display:grid;place-items:center;flex:none;width:var(--ctl-h);height:var(--ctl-h);min-width:var(--ctl-h);min-height:var(--ctl-h);padding:0;border:1px solid var(--line);border-radius:var(--radius-ctl);background:color-mix(in srgb,var(--surface-2) 70%,transparent);color:var(--text);cursor:pointer;touch-action:manipulation}
+.edit-float-button:hover{background:var(--surface-2)}
+.edit-float-button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.edit-float-button .ui-icon{width:16px;height:16px}
+/* ---------- T57: export and import of one component or one page ---------- */
+
+.key-technical #export-item{margin-left:10px}
+/* ---------- T56: the Widget face (ADR-061). Rounded cards on a quiet ground, content first. Tokens only; state is a thin ring round the component and a small corner dot. ---------- */
+[data-theme=widget].theme-preview .tp-chip{position:relative;background:var(--key);box-shadow:inset 0 0 0 1px var(--hair);border-radius:7px}
+[data-theme=widget].theme-preview .tp-chip::after{content:"";position:absolute;left:24%;top:24%;width:44%;height:44%;border-radius:50%;background:var(--fill)}
+[data-theme=widget].theme-preview .tp-state{top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 2px var(--bg)}
+[data-theme=widget] .use-pages{gap:4px}
+[data-theme=widget] .use-page{border-radius:999px;padding:0 18px;font-size:14px}
+[data-theme=widget] .use-page[aria-pressed=true]{background:var(--surface-2)}
+[data-theme=widget] .icon-button{border-radius:999px}
+[data-theme=widget] .page-dot::before{width:8px;height:8px;border-radius:50%;background:var(--line)}
+[data-theme=widget] .page-dot[aria-pressed=true]::before{width:22px;border-radius:5px;background:var(--text)}
+[data-theme=widget] .w-clock,[data-theme=widget] .w-text{background:var(--key);border:0;border-radius:var(--radius-panel);box-shadow:inset 0 0 0 1px var(--hair)}
+[data-theme=widget] .panel-title{font-size:12px;font-weight:600;letter-spacing:.02em}
+[data-theme=widget] .w-clock{padding-inline:min(16px,8%)}
+[data-theme=widget] .w-text{padding:0 16px}
+/* Keys: the name and the icon are larger and the action line is smaller and lighter; the icon sits top left like a widget's. */
+[data-theme=widget] .control-tile{--fs:clamp(13px,calc((var(--cell) - 100px) * 100 + 18px),18px);--fs-detail:max(11px,calc(var(--fs) * .7))}
+[data-theme=widget] .control-tile:not([data-icon-scale]){--icon-scale:.58}
+[data-theme=widget] .control-tile:not([data-content-layout=icon-only]) .tile-icon:not([data-glyph=text]){justify-self:start}
+[data-theme=widget] .control-tile[data-fill=body]:not([aria-pressed=true]){box-shadow:inset 0 0 0 1px var(--hair)}
+[data-theme=widget] .control-tile[data-fill=body][data-icon-style=outline]{box-shadow:inset 0 0 0 2px var(--tone)}
+[data-theme=widget] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running]){outline:2px solid var(--warn);outline-offset:2px}
+[data-theme=widget] .desk[data-editing=false] .control-tile[data-state=succeeded]{outline:2px solid var(--ok);outline-offset:2px}
+[data-theme=widget] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]){outline:2px solid var(--danger);outline-offset:2px}
+[data-theme=widget] .desk[data-editing=false] .control-tile[data-state=notice]{outline:2px solid var(--warn);outline-offset:2px}
+[data-theme=widget] .desk[data-editing=false] .control-tile[data-state]:focus-visible{outline-color:var(--focus)}
+[data-theme=widget] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running],[data-state=succeeded],[data-state=failed],[data-state=rejected],[data-state=unknown],[data-state=notice]) .tile-lamp{display:block;position:absolute;top:max(5px,calc(var(--pad) * .7));right:max(5px,calc(var(--pad) * .7));width:clamp(10px,calc(var(--cell) * .08),16px);height:clamp(10px,calc(var(--cell) * .08),16px);border-radius:50%;box-shadow:0 0 0 2px var(--bg);pointer-events:none}
+[data-theme=widget] .desk[data-editing=false] .control-tile:is([data-state=sending],[data-state=accepted],[data-state=running]) .tile-lamp{background:var(--warn);animation:lamp-breathe 2.4s ease-in-out infinite}
+[data-theme=widget] .desk[data-editing=false] .control-tile[data-state=succeeded] .tile-lamp{background:var(--ok)}
+[data-theme=widget] .desk[data-editing=false] .control-tile:is([data-state=failed],[data-state=rejected],[data-state=unknown]) .tile-lamp{background:var(--danger)}
+[data-theme=widget] .desk[data-editing=false] .control-tile[data-state=notice] .tile-lamp{background:var(--warn)}
+/* The item buttons of a group: a corner dot and an inner ring (the group's tile clips anything outside it). */
+/* ---------- T62 (ADR-064): the zones of the theme ---------- */
+/* zones.ts writes the rectangle of every system component, of the top bar and of the content area (#grid-frame) in px, from the zones of the theme the device
+   shows. The canvas inside the content area is drawn by console.ts at one scale and centred (margin:auto). While the shell says data-canvas=true (paired, desk showing)
+   the system layer is on; otherwise the plain flow of the pairing and recovery panels applies. */
+.shell[data-canvas=true]{display:block;position:relative;width:100%;height:100dvh;min-height:0;padding:0;overflow:hidden}
+.shell[data-canvas=true]>main,.shell[data-canvas=true] .desk{display:contents}
+.system-layer{position:fixed;inset:0;z-index:30;pointer-events:none}
+.system-layer[hidden]{display:none}
+.system-layer>*{pointer-events:auto}
+/* T97 (ADR-088): the bar and the canvas are one surface: the ground colour, no dividing line. */
+.system-bar{position:absolute;box-sizing:border-box;pointer-events:none;background:var(--bg)}
+.system-bar[hidden]{display:none}
+.system-layer>[data-zone-part]{position:absolute;box-sizing:border-box;margin:0;display:flex;align-items:center;justify-content:center}
+.system-layer>[hidden]{display:none!important}
+.system-layer>.connection-tools{justify-content:flex-start}
+.system-layer>.mode-switch{justify-content:center}
+.system-layer>details.connection-settings{display:block}
+.system-layer>details.connection-settings>summary{display:grid;place-items:center;width:100%;height:100%;min-width:0;min-height:0;padding:0}
+/* T97: the controls in the bar fill their slots exactly (capsule 200 x 36, switch 140 x 40, gear 40 x 40 in the wide bars) instead of keeping a 44px minimum. */
+.system-layer .connection-button{height:100%;min-height:0}
+.system-layer>.mode-switch .mode-button{min-height:0;padding:0 8px}
+.system-layer>details.connection-settings .settings-popover{top:calc(100% + 6px);right:0;max-height:calc(100dvh - 120px);overflow-y:auto}
+/* While the gear menu is open the whole layer rises above the Edit toolbar (60) and the library (55), but stays under the quick menu (71) and the save question (72). */
+.system-layer:has(>details.connection-settings[open]){z-index:70}
+.shell[data-canvas=true] .grid-frame{position:absolute;display:flex;box-sizing:border-box;padding:var(--frame-pad,4px);max-width:none;overflow:auto;overscroll-behavior:contain;scrollbar-width:none}
+.shell[data-canvas=true] .grid-frame::-webkit-scrollbar{display:none}
+/* Display widgets and full-width Pages use the same ephemeral pixel boxes as keys. */
+.button-grid[data-coords=true]>.canvas-widget,.button-grid[data-coords=true]>.pages-widget{
+  --pitch:calc(var(--cell) + var(--gap));position:absolute;box-sizing:border-box;
+  left:calc(var(--kx) * 1px);top:calc(var(--ky) * 1px);
+  width:calc(var(--kw) * 1px);height:calc(var(--kh) * 1px);
+}
+.canvas-widget{display:flex;min-width:0;min-height:0}
+.canvas-widget>*{flex:1 1 auto;width:100%;height:100%;min-width:0;min-height:0;box-sizing:border-box}
+
+/* T112: subscription readouts inherit every theme. Runtime data never changes the saved placement. */
+.w-subscription{container-type:size;display:flex;flex-direction:column;overflow:hidden;padding:clamp(8px,6.7%,16px);background:var(--key);color:var(--text);border-radius:var(--radius-key);font-family:var(--font-ui);font-variant-numeric:tabular-nums;line-height:1.3}
+.usage-head{display:flex;align-items:center;gap:8px;flex-shrink:0;min-height:20px;min-width:0}
+.usage-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex:none}
+.usage-icon .ui-icon{width:100%;height:100%}
+.usage-name{font-size:clamp(11px,7.5cqw,16px);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.usage-unit{margin-left:auto;font-size:clamp(9px,5.5cqw,12px);color:var(--muted);white-space:nowrap}
+.usage-windows{display:flex;flex:1 1 auto;flex-direction:column;min-height:0;overflow:auto;gap:10px;margin-top:14px;scrollbar-width:thin;scrollbar-color:var(--line) var(--key)}
+.usage-window{display:grid;grid-template-columns:minmax(0,1fr) auto;flex-shrink:0;align-items:baseline;column-gap:6px;min-width:0}
+.usage-window-name{color:var(--muted);font-size:clamp(9px,5.8cqw,12px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.usage-value{font-size:clamp(14px,13cqw,28px);font-weight:500;line-height:1.1;letter-spacing:-.025em;white-space:nowrap}
+.usage-left{font-size:clamp(9px,5.5cqw,12px);font-weight:400;letter-spacing:0;color:var(--muted)}
+.usage-track{grid-column:1/-1;height:5px;overflow:hidden;margin:7px 0 5px;border-radius:2px;background:var(--line)}
+.usage-fill{height:100%;background:var(--ok-text)}
+.usage-window[data-low=true] .usage-fill{background:var(--warn)}
+.w-subscription[data-stale=true] .usage-fill{background:var(--muted)}
+.usage-reset{grid-column:1/-1;font-size:clamp(9px,5.8cqw,12px);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.usage-foot{flex-shrink:0;margin-top:auto;padding-top:8px;font-size:clamp(9px,5.8cqw,12px);line-height:1.3;min-height:21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+.usage-foot[data-warning=true]{color:var(--warn)}
+.usage-message{margin-block:auto;min-height:0;overflow:auto}
+.usage-state-title{font-size:clamp(11px,7.5cqw,16px);font-weight:500;line-height:1.3;margin:12px 0 8px}
+.usage-state-detail{font-size:clamp(9px,6.2cqw,13px);color:var(--muted);line-height:1.35;margin:0}
+.w-subscription[data-compact=true]{padding:clamp(8px,5%,12px);padding-block:8px}
+.w-subscription[data-compact=true] .usage-head{gap:7px;min-height:18px}
+.w-subscription[data-compact=true] .usage-icon{width:18px;height:18px}
+.w-subscription[data-compact=true] .usage-name{font-size:clamp(10px,6.5cqw,14px)}
+/* Grid sizing also shrinks M's height. Keep both quota rows and the timestamp visible. */
+.w-subscription[data-compact=true] .usage-windows{margin-top:4px;gap:2px}
+.w-subscription[data-compact=true] :is(.usage-windows,.usage-message){scrollbar-width:none}
+.w-subscription[data-compact=true] :is(.usage-windows,.usage-message)::-webkit-scrollbar{display:none}
+.w-subscription[data-compact=true] .usage-window{grid-template-columns:18% minmax(8px,1fr) 18% 30%;gap:3%;align-items:center;min-height:16px}
+.w-subscription[data-compact=true] .usage-value{font-size:clamp(10px,6.5cqw,14px);text-align:right;letter-spacing:0}
+.w-subscription[data-compact=true] .usage-left{display:none}
+.w-subscription[data-compact=true] .usage-window-name{grid-column:1;grid-row:1}
+.w-subscription[data-compact=true] .usage-track{grid-column:2;grid-row:1;margin:0;height:4px}
+.w-subscription[data-compact=true] .usage-value{grid-column:3;grid-row:1}
+.w-subscription[data-compact=true] .usage-reset{grid-column:4;grid-row:1;text-align:right;font-size:clamp(9px,5.4cqw,12px)}
+.w-subscription[data-compact=true] .usage-foot{padding-top:2px;min-height:15px}
+.w-subscription[data-compact=true] .usage-state-title{font-size:clamp(10px,6.5cqw,14px);margin:8px 0 4px}
+.w-subscription[data-compact=true] .usage-state-detail{font-size:clamp(9px,5.5cqw,12px)}
+.w-subscription[data-compact=true] .usage-foot:empty{display:none}
+.shelf-widget-sample .w-subscription{width:100%;height:100%;box-sizing:border-box;pointer-events:none}
+/* A Pages widget: a strip with the names (or dots) of its pages, and the grid of the page that is showing. */
+.pages-widget{display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden}
+.pages-strip{flex:none;display:flex;align-items:center;gap:6px;height:32px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+.pages-strip::-webkit-scrollbar{display:none}
+.pages-strip .use-page{flex:none;min-height:32px;padding:0 12px;line-height:32px}
+.pages-strip.page-dots{justify-content:center}
+.pages-strip .page-dot{flex:none;min-height:32px}
+.pages-strip [data-drop-target=true]{outline:2px dashed var(--accent);outline-offset:2px}
+.pages-strip [data-drop-refused=true]{outline-color:var(--danger)}
+.pages-body{flex:1 1 auto;min-height:0;min-width:0;display:block;overflow:auto;scrollbar-gutter:stable;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) var(--surface)}
+.pages-body>.pages-surface{margin:0;flex:none}
+.edit-float-button{display:inline-flex;align-items:center;justify-content:center;width:auto;padding:0 12px;gap:8px;white-space:nowrap}
+.edit-float-label{font-size:13px;font-weight:600}
+
+/* ---------- T63 (ADR-064): Mac-style Edit. Only theme tokens. Ordinary components have no selection frame or resize handle: a component shows a "−" at its corner, wobbles a little
+   (a dashed line instead when motion is reduced), and a tap opens its settings card. ---------- */
+.shell{--shelf-h:244px;--edit-toolbar-h:50px}
+/* T86 (ADR-081): room the Library's resize handle takes above its top border (the handle is 44px: 36px above the border, 8px inside the panel's padding). */
+.shell{--shelf-grab:28px}
+/* The floating area keeps clear of the library and of the top bar (--zone-top is where the theme's content area starts, set by zones.ts): its foot sits above the library, and its height is what is left of the window, so the settings card (which scrolls inside) is always whole. */
+.edit-float{--float-bottom:calc(12px + var(--edit-toolbar-h) + 8px + env(safe-area-inset-bottom));flex-direction:column;align-items:stretch;gap:8px;padding:0;border:0;background:none;box-shadow:none;width:min(420px,calc(100vw - 24px));bottom:var(--float-bottom);max-height:calc(100dvh - var(--float-bottom) - 12px - var(--zone-top,0px));pointer-events:none}
+.edit-float>*{pointer-events:auto}
+/* T83 (ADR-078): the toolbar is one row that floats over the canvas and the Library. z-index 62: above the Library (55) and the card (60), below the raised gear layer (70), the quick menu (71) and the save question (72). Docked it is 12px from the right and bottom edge and rises above the open Library; once it is moved, edit-bar.ts sets right/bottom in px. */
+.edit-toolbar{position:fixed;right:calc(12px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));z-index:62;max-width:calc(100vw - 16px);color:var(--text)}
+.edit-toolbar[hidden]{display:none}
+.shell[data-shelf=true] .edit-toolbar[data-docked=true]{bottom:calc(12px + var(--shelf-grab) + var(--shelf-h) + env(safe-area-inset-bottom))}
+.edit-toolbar[data-dragging=true]{user-select:none;-webkit-user-select:none}
+.edit-toolbar[data-dragging=true] :is(.edit-grip,.edit-chip){cursor:grabbing}
+.edit-float-row{display:flex;align-items:center;gap:6px;max-width:100%;padding:6px;overflow-x:auto;scrollbar-width:none;white-space:nowrap;border:1px solid var(--line);border-radius:var(--radius-panel);background:color-mix(in srgb,var(--surface) 92%,transparent);box-shadow:0 6px 24px color-mix(in srgb,var(--bg) 60%,transparent)}
+.edit-float-row::-webkit-scrollbar{display:none}
+.edit-float-row[hidden]{display:none}
+/* the grip: two columns of three dots drawn with a gradient; 24px wide to look at, 36px wide to hit */
+.edit-grip{position:relative;display:grid;place-items:center;flex:none;width:24px;height:var(--ctl-h);min-width:0;padding:0;border:0;border-radius:var(--radius-ctl);background:none;color:var(--muted);cursor:grab;touch-action:none}
+.edit-grip::before{content:"";position:absolute;inset:0 -6px}
+.edit-grip:hover{color:var(--text)}
+.edit-grip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.edit-grip-dots{display:block;width:10px;height:18px;background:radial-gradient(circle at 2px 2px,currentColor 1.5px,transparent 1.7px) 0 0/6px 6px}
+.edit-float-button.icon-only{width:var(--ctl-h);padding:0}
+.edit-narrow-icon{display:none}
+/* the collapsed bar: a round 44px icon where the right end of the bar was */
+.edit-chip{position:relative;display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:1px solid var(--line);border-radius:50%;background:color-mix(in srgb,var(--surface) 92%,transparent);color:var(--text);box-shadow:0 6px 24px color-mix(in srgb,var(--bg) 60%,transparent);cursor:pointer;touch-action:none}
+.edit-chip[hidden]{display:none}
+.edit-chip:hover{background:var(--surface-2)}
+.edit-chip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.edit-chip .ui-icon{width:18px;height:18px}
+.edit-chip .unsaved-dot{display:none;top:6px;right:6px;width:8px;height:8px;background:var(--accent);box-shadow:0 0 0 2px var(--surface)}
+.edit-chip[data-dirty=true] .unsaved-dot{display:block}
+.edit-float-button.solid{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.edit-float-button:disabled{opacity:.5;cursor:default}
+.shell[data-shelf=true] .edit-float{--float-bottom:calc(12px + var(--edit-toolbar-h) + 8px + var(--shelf-grab) + var(--shelf-h) + env(safe-area-inset-bottom))}
+/* the unsaved mark: a dot on Save (Save is only there while the draft has changes) */
+.unsaved-dot{position:absolute;top:4px;right:4px;width:9px;height:9px;border-radius:50%;background:var(--accent-ink);box-shadow:0 0 0 2px var(--accent)}
+.edit-float-button{position:relative}
+/* what is said about a save, out of sight unless it is a result (fades) or a problem (stays) */
+.edit-float>.draft-message{align-self:flex-end;max-width:100%;margin:0;padding:6px 12px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--surface);color:var(--text);text-align:right;pointer-events:none}
+.edit-float>.draft-message[data-tone=quiet]{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);border:0;white-space:nowrap}
+.edit-float>.draft-message[data-tone=problem]{border-color:var(--danger);background:var(--danger-bg);color:var(--danger-text)}
+.edit-notice{display:grid;gap:4px;justify-items:end;padding:8px 10px;border:1px solid var(--danger);border-radius:var(--radius-panel);background:var(--danger-bg);color:var(--danger-text)}
+.edit-notice:not(:has(:not([hidden]))){display:none}
+.edit-notice .layout-warning{margin:0;padding:0;border:0;background:none;justify-self:stretch}
+.edit-notice .text-button{min-height:var(--ctl-h);color:inherit}
+/* the save question: a small dialog in the middle of the window, over a dimmed page */
+.edit-float .confirm-slot{position:fixed;inset:0;z-index:72;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,var(--bg) 60%,transparent)}
+.edit-float .confirm-slot .layout-confirm{margin:0;width:min(360px,100%);padding:18px;border:1px solid var(--line);border-radius:var(--radius-panel);background:var(--surface);color:var(--text);box-shadow:0 12px 40px color-mix(in srgb,var(--bg) 60%,transparent);font-size:14px}
+.edit-float .confirm-slot .layout-confirm>div{flex-wrap:wrap;justify-content:flex-end}
+.edit-float .confirm-slot .layout-confirm button{min-height:var(--ctl-h)}
+/* the settings card, above the buttons */
+.settings-card{display:flex;flex-direction:column;flex:1 1 auto;min-height:0;max-height:600px;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius-panel);background:var(--surface);color:var(--text);box-shadow:0 12px 40px color-mix(in srgb,var(--bg) 60%,transparent)}
+.settings-card[hidden]{display:none}
+.card-head{display:flex;align-items:center;gap:8px;flex:none;padding:4px 6px 4px 8px;border-bottom:1px solid var(--hair)}
+.card-head h2{flex:none;font-size:15px}
+.card-head h2:focus-visible{outline:none}
+.card-sub{flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:13px;color:var(--muted)}
+.card-size{flex:none;padding:8px 12px 0}
+.card-size[hidden]{display:none}
+.card-size .size-options{grid-template-columns:repeat(auto-fit,minmax(48px,1fr))}
+.card-size .size-choice{white-space:nowrap}
+.card-size .size-sample{display:none}
+.settings-card #config-form{display:flex;flex-direction:column;flex:1 1 auto;min-height:0}
+.settings-card .popup-body{padding:6px 12px 12px}
+.settings-card fieldset{min-width:0;margin:0;padding:0;border:0}
+.icon-host:empty{display:none}
+.more-settings{margin-top:10px;border-top:1px solid var(--hair);padding-top:6px}
+.more-settings>summary{min-height:var(--ctl-h);display:flex;align-items:center;cursor:pointer;font-weight:600;color:var(--muted)}
+.more-settings[hidden]{display:none}
+.form-options{display:flex;flex-wrap:wrap;gap:6px}
+.form-choice{min-height:var(--ctl-h);min-width:var(--ctl-h);padding:0 12px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--bg);color:var(--muted);font-size:13px;font-weight:600}
+.form-choice[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg);color:var(--text)}
+.steppers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:8px}
+.stepper-row{grid-template-columns:44px minmax(0,1fr) 44px}
+.stepper-row output{text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+.stepper-row button{min-width:44px;min-height:44px;padding:0;font-size:18px;line-height:1}
+.pages-list{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:6px}
+.pages-row{display:grid;grid-template-columns:minmax(0,1fr) var(--ctl-h) var(--ctl-h) auto;gap:6px;align-items:center}
+.pages-row-button{min-width:var(--ctl-h);min-height:var(--ctl-h);padding:0 8px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--bg);color:var(--text);font-size:13px}
+.pages-row-button:disabled{opacity:.4}
+/* "−", the only mark Edit puts on a component (a sibling of it, at its top-left corner; the visible disc is small, the tap area is 44px) */
+.button-grid[data-coords=true]>.edit-remove{--pitch:calc(var(--cell) + var(--gap));position:absolute;z-index:4;left:calc(var(--kx) * 1px);top:calc(var(--ky) * 1px);
+  width:44px;height:44px;margin:-14px 0 0 -14px;padding:0;border:0;background:none;display:grid;place-items:center;cursor:pointer;touch-action:manipulation}
+.edit-remove{border-radius:0}
+.edit-remove::before{content:"";width:22px;height:22px;border-radius:50%;background:var(--danger);box-shadow:0 0 0 2px var(--bg)}
+.edit-remove::after{content:"";position:absolute;width:10px;height:2px;border-radius:1px;background:var(--on-bad,var(--bg))}
+.edit-remove:focus-visible{outline:2px solid var(--focus);outline-offset:-4px;border-radius:0}
+/* a component in Edit: dashed edge says "editable", the pointer drags it */
+.control-tile[data-editing=true],.canvas-widget[data-editing=true],.pages-widget[data-editing=true]>.pages-strip{cursor:grab;touch-action:none}
+.canvas-widget[data-editing=true]{outline:1px dashed var(--line);outline-offset:-1px}
+/* T88 (ADR-083): a blank. In Use it is empty space that still takes its place; in Edit a faint dashed rounded square that is a drop target. */
+.canvas-widget[data-kind=blank]{pointer-events:none;visibility:hidden}
+.canvas-widget[data-kind=blank][data-editing=true]{pointer-events:auto;visibility:visible;box-sizing:border-box;border:1.5px dashed var(--line);border-radius:var(--radius-key);outline:0;opacity:.55;background:transparent}
+.canvas-widget[data-kind=blank][data-editing=true][data-lifted=true]{opacity:.25}
+.control-tile[data-drop-target=true],.canvas-widget[data-drop-target=true]{outline:2px dashed var(--accent);outline-offset:-4px;background-image:linear-gradient(color-mix(in srgb,var(--accent) 14%,transparent),color-mix(in srgb,var(--accent) 14%,transparent))}
+/* A blank under a held key shows the same dashed frame as a key, in Use (where the blank is otherwise invisible) as in Edit. */
+.canvas-widget[data-kind=blank][data-drop-target=true]{visibility:visible;opacity:1;border-color:var(--accent);border-radius:var(--radius-key)}
+.canvas-widget[data-editing=true]>*{pointer-events:none}
+.control-tile[data-editing=true]{outline:1px dashed var(--line);outline-offset:-3px}
+.control-tile[data-editing=true][aria-pressed=true]{outline:2px dashed var(--accent);outline-offset:-3px}
+.pages-widget[data-editing=true]{outline:1px dashed var(--muted);outline-offset:-1px;border-color:var(--hair)}
+.pages-widget[data-resizing=true]{outline-color:var(--accent)}
+.pages-widget[data-resizing=true] .pages-resize-handle{color:var(--accent)}
+.pages-widget[data-tiny=true]>.pages-strip,.pages-widget[data-editing=true][data-tiny=true]>.pages-strip{display:none}
+.pages-widget[data-compact=true]:not([data-resizing=true])>.pages-resize-handle:not([data-axis=xy]),.pages-widget[data-tiny=true]:not([data-resizing=true])>.pages-resize-handle{display:none}
+.pages-widget[data-editing=true][data-compact=true]:focus-visible{outline:2px solid var(--focus);outline-offset:0}
+.pages-resize-handle{position:absolute;display:flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:0;background:transparent;box-shadow:none;z-index:6;touch-action:none;user-select:none;color:var(--muted)}
+.pages-resize-handle:hover,.pages-resize-handle:focus-visible{background:var(--surface);color:var(--accent)}
+.pages-resize-handle:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.pages-resize-handle[data-axis=x]{right:0;top:calc(50% - 22px);cursor:ew-resize}
+.pages-resize-handle[data-axis=y]{bottom:0;left:calc(50% - 22px);cursor:ns-resize}
+.pages-resize-handle[data-axis=xy]{right:0;bottom:0;cursor:nwse-resize}
+.pages-resize-grip{display:block;pointer-events:none;width:3px;height:16px;border-radius:2px;background:currentColor}
+.pages-resize-handle[data-axis=y] .pages-resize-grip{width:16px;height:3px}
+.pages-resize-handle[data-axis=xy] .pages-resize-grip{width:14px;height:14px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;border-radius:0;background:none}
+.pages-size-live{position:absolute;right:8px;bottom:44px;padding:4px 8px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--surface);color:var(--text);font-size:12px;white-space:nowrap;pointer-events:none;z-index:7}
+.button-grid[data-resizing=true]{user-select:none}
+.button-grid[data-resizing=true] .control-tile,.button-grid[data-resizing=true] .canvas-widget,.button-grid[data-resizing=true] .pages-strip{pointer-events:none}
+@media(prefers-reduced-motion:no-preference){
+  .control-tile[data-editing=true],.canvas-widget[data-editing=true]{animation:edit-wobble .32s ease-in-out infinite alternate}
+  .control-tile[data-editing=true]:nth-child(2n),.canvas-widget[data-editing=true]:nth-child(2n){animation-direction:alternate-reverse}
+  .control-tile[data-lifted=true],.canvas-widget[data-lifted=true],.pages-widget[data-lifted=true]{animation:none}
+}
+@keyframes edit-wobble{from{transform:rotate(-.5deg)}to{transform:rotate(.5deg)}}
+.canvas-widget[data-lifted=true],.pages-widget[data-lifted=true]{opacity:.4}
+.pages-strip .add-page{min-width:44px;font-size:18px;font-weight:600;color:var(--muted)}
+.pages-strip .page-dot.add-page{min-width:44px}
+.pages-strip .page-dot.add-page::before{display:none}
+.shelf-drag{opacity:.9;transform:scale(1.06)}
+.shelf-drag .shelf-sample{pointer-events:none}
+/* the component library */
+.shelf-panel{position:fixed;left:0;right:0;bottom:0;z-index:55;height:var(--shelf-h);display:grid;grid-template-columns:248px minmax(0,1fr);gap:10px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--surface);color:var(--text);box-shadow:0 -10px 30px color-mix(in srgb,var(--bg) 60%,transparent)}
+.shelf-panel[hidden]{display:none}
+/* T86: the handle on the top border. It lies 36px above the border and 8px below it (the panel's padding), so it never covers the search field. */
+.shelf-resize{position:absolute;left:0;right:0;top:-36px;height:44px;z-index:1;cursor:ns-resize;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+.shelf-resize::before{content:"";position:absolute;left:50%;top:34px;width:44px;height:5px;margin-left:-22px;border-radius:3px;background:var(--muted);box-shadow:0 0 0 2px var(--surface)}
+.shelf-resize:hover::before{background:var(--text)}
+.shelf-resize:focus-visible{outline:none}
+.shelf-resize:focus-visible::before{outline:2px solid var(--focus);outline-offset:3px}
+.shelf-resize[data-dragging=true]::before{background:var(--accent)}
+/* While the handle is dragged, nothing under the finger reacts: not the Library's cards, not the canvas. */
+.shell[data-shelf-resizing=true]{user-select:none;-webkit-user-select:none;cursor:ns-resize}
+.shell[data-shelf-resizing=true] :is(.shelf-side,.shelf-main,.button-grid,.edit-toolbar,.edit-float){pointer-events:none}
+.shelf-side{display:flex;flex-direction:column;gap:4px;min-width:0;min-height:0;overflow-y:auto}
+.shelf-types{display:flex;flex-direction:column;gap:4px}
+.shelf-type{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-width:0;min-height:40px;padding:4px 10px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--bg);color:var(--text);font-size:13px;line-height:1.2;text-align:left}
+.shelf-type span{font-size:11px;color:var(--muted)}
+.shelf-type[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg)}
+.shelf-main{display:flex;flex-direction:column;gap:6px;min-width:0;min-height:0;overflow:auto}
+.shelf-previews{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+.shelf-card{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:96px;min-height:44px;padding:10px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--bg);color:var(--text);cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.shelf-card:focus-visible,.shelf-type:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.shelf-sample{display:grid;place-items:center;width:112px;height:76px}
+.shelf-box{display:grid;place-items:center;max-width:112px;max-height:76px;border:1.5px solid var(--accent);border-radius:var(--radius-key);background:var(--accent-bg);color:var(--accent)}
+.shelf-glyph{width:20px;height:20px;display:grid;place-items:center}
+/* T91: the drawing on a Pages preset card: the tab strip and the keys of one row-set, with the preset's own column count. */
+.shelf-pages{display:grid;grid-template-rows:6px minmax(0,1fr);gap:4px;box-sizing:border-box;width:100%;height:100%;padding:5px;border:1.5px solid var(--accent);border-radius:var(--radius-key);background:var(--accent-bg)}
+.shelf-pages[data-preset=info]{width:56%;justify-self:center}
+.shelf-pages-tab{width:40%;height:6px;border-radius:3px;background:var(--accent)}
+.shelf-pages-grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));grid-auto-rows:1fr;gap:2px}
+.shelf-pages-key{border-radius:2px;background:color-mix(in srgb,var(--accent) 55%,transparent)}
+.shelf-glyph svg{width:100%;height:100%}
+.shelf-caption{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.shelf-message{margin:0;min-height:1.4em;font-size:12px;color:var(--danger-text)}
+.shelf-import{display:grid;gap:8px;max-width:420px}
+.shelf-import :is(.solid,.quiet){min-height:var(--ctl-h);padding:0 12px;font-size:13px}
+.shelf-issues{margin:0;padding-left:18px;font-size:13px;color:var(--muted)}
+/* the quick menu */
+.edit-menu-scrim{position:fixed;inset:0;z-index:54;background:transparent}
+.edit-menu-scrim[hidden],.edit-menu[hidden]{display:none}
+.edit-menu{position:fixed;z-index:71;width:224px;display:grid;gap:2px;padding:4px;border:1px solid var(--line);border-radius:var(--radius-panel);background:var(--surface);color:var(--text);box-shadow:0 12px 40px color-mix(in srgb,var(--bg) 60%,transparent)}
+.menu-sizes{display:flex;flex-wrap:wrap;gap:4px;padding:2px 0 4px;border-bottom:1px solid var(--hair)}
+.menu-size{min-width:var(--ctl-h);min-height:var(--ctl-h);padding:0 8px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--bg);color:var(--muted);font-size:13px;font-weight:600}
+.menu-size[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg);color:var(--text)}
+.menu-item{min-height:var(--ctl-h);padding:0 10px;border:0;border-radius:var(--radius-ctl);background:transparent;color:var(--text);font-size:13px;text-align:left}
+.menu-item:hover:enabled,.menu-item:focus-visible{background:var(--surface-2)}
+.menu-item[data-danger=true]{color:var(--danger-text)}
+.menu-item:disabled{opacity:.4}
+@media(max-width:600px){
+  .shell{--shelf-h:min(52dvh,400px)}
+  .edit-float{width:calc(100vw - 16px);right:calc(8px + env(safe-area-inset-right))}
+  .shelf-panel{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:8px}
+  .shelf-side{flex-direction:row;flex-wrap:wrap;align-items:center;overflow:visible}
+  .shelf-side #shelf-search{flex:1 1 100%}
+  .shelf-types{flex-direction:row;overflow-x:auto;flex:1 1 100%}
+  .shelf-type{flex:none}
+  .pages-row{grid-template-columns:minmax(0,1fr) var(--ctl-h) var(--ctl-h)}
+  .pages-row .pages-row-button:last-child{grid-column:1 / -1}
+}
+/* the card steps to the other side when the component it is about is on the right */
+.edit-float[data-card-side=left]>.settings-card{position:fixed;left:calc(12px + env(safe-area-inset-left));bottom:var(--float-bottom);width:min(380px,calc(100vw - 24px));max-height:min(600px,calc(100dvh - var(--float-bottom) - 12px - var(--zone-top,0px)))}
+@media(max-width:600px){.edit-float[data-card-side=left]>.settings-card{left:8px;width:calc(100vw - 16px);bottom:auto;position:static}}
+/* T92 (ADR-085): the card moves by the grip of its header and collapses to the header bar; both last while the card is open. Narrow (a bottom sheet): no grip, collapse only. */
+.card-head .card-grip::before{inset:-4px -6px}
+.card-collapse{position:relative}
+.card-collapse::before{content:"";position:absolute;inset:-4px}
+.card-collapse .ui-icon{width:16px;height:16px;transform:rotate(90deg)}
+.settings-card[data-collapsed=true] .card-collapse .ui-icon{transform:rotate(-90deg)}
+/* #config-form also has `.settings-card #config-form{display:flex}`, which outranks a class-only selector, so it is named here. */
+.settings-card[data-collapsed=true]>:not(.card-head),.settings-card[data-collapsed=true]>#config-form{display:none}
+.settings-card[data-collapsed=true] .card-head{border-bottom:0}
+.settings-card[data-dragging=true]{user-select:none;-webkit-user-select:none}
+.settings-card[data-dragging=true] .card-grip{cursor:grabbing}
+@media(min-width:601px){.edit-float[data-card-side]>.settings-card[data-moved=true]{position:fixed;right:auto;bottom:auto}}
+@media(max-width:600px){.card-head .card-grip{display:none}}
+
+/* ---------- T64 (ADR-064): zone sketches, the first-theme question and the Layout page. Only theme tokens. ---------- */
+.theme-scope{margin-left:8px;font-size:12px;color:var(--muted)}
+.sketch{position:relative;width:100%;overflow:hidden;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--text)}
+.sketch-header{position:absolute;left:0;top:0;width:100%;background:var(--bar-bg,var(--surface))}
+.sketch-header[hidden]{display:none}
+.sketch-content{position:absolute;border:1px dashed var(--accent);background:var(--accent-bg)}
+.sketch-part{position:absolute;display:grid;place-items:center;min-width:14px;min-height:10px;margin:0;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:999px;background:var(--surface-2);color:var(--text);font:600 8px/1 var(--font-ui);white-space:nowrap}
+.sketch-part[data-part=mode-switch]{border-radius:var(--radius-ctl)}
+button.sketch-part{cursor:grab;touch-action:none}
+button.sketch-part:active{cursor:grabbing}
+button.sketch-part:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.sketch[data-problem=true]{border-color:var(--danger)}
+.sketch[data-problem=true] .sketch-content{border-color:var(--danger)}
+.theme-readonly-sketches{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-top:8px}
+.theme-sketch-box{display:flex;flex-direction:column;gap:6px}
+.theme-sketch-box[data-set=wide]{width:min(360px,100%)}
+.theme-sketch-box[data-set=narrow]{width:min(120px,100%)}
+.theme-sketch-caption{font-size:12px;color:var(--muted)}
+.theme-tabs,.layout-switch{display:flex;gap:6px}
+.theme-tab{min-height:var(--ctl-h);padding:0 14px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--bg);color:var(--muted);font-size:13px;font-weight:600}
+.theme-tab[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg);color:var(--text)}
+.theme-look{display:flex;flex-direction:column;gap:10px}
+.theme-look[hidden],.theme-layout[hidden]{display:none}
+.theme-layout{display:flex;flex-direction:column;gap:10px}
+.layout-stage{display:grid;place-items:center;padding:12px;border-radius:var(--radius-panel);background:var(--surface-2)}
+.layout-stage .sketch{width:min(100%,520px)}
+.layout-stage .sketch[data-set=narrow]{width:auto;height:min(380px,48dvh)}
+.layout-stage .sketch-part{font-size:9px}
+.layout-numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.layout-numbers input{width:100%;min-height:var(--ctl-h)}
+.layout-forms{display:grid;gap:10px}
+.layout-form-row{display:grid;gap:4px}
+.first-theme-dialog{width:min(760px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);margin:auto;padding:20px;overflow:auto;border:1px solid var(--line);border-radius:var(--radius-panel);background:var(--surface);color:var(--text);box-shadow:0 20px 80px color-mix(in srgb,var(--bg) 70%,transparent)}
+.first-theme-dialog::backdrop{background:color-mix(in srgb,var(--bg) 70%,transparent)}
+.first-theme-dialog h2{margin:0 0 6px;font-size:20px}
+.first-theme-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:14px 0 8px}
+.first-theme-card{display:flex;flex-direction:column;align-items:stretch;gap:4px;min-height:44px;padding:8px;text-align:left;border:1px solid var(--hair);border-radius:var(--radius-ctl);background:var(--bg);color:var(--text)}
+.first-theme-card[aria-checked=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.first-theme-picture{display:block;width:100%;background:var(--bg);color:var(--text)}
+.first-theme-picture .sketch[data-set=narrow]{width:34%;margin:0 auto}
+.first-theme-picture .sketch-part,.theme-sketch-box .sketch-part{font-size:0}
+.first-theme-note{font-size:12px;color:var(--muted)}
+.first-theme-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}
+.first-theme-actions button{min-height:44px}
+@media(max-width:600px){
+  .first-theme-dialog{width:100vw;max-height:100dvh;height:100dvh;border:0;border-radius:0}
+  .first-theme-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* T65: responsive ordered canvas; impossible narrow areas remain explicitly scrollable. */
+/* The shared Grid size shows only its value; the name and the scope are read by assistive technology (aria-label, #grid-size-scope). T80: a wider right padding clips "Standard" because the native arrow sits inside. */
+.edit-float-row .edit-grid-size{flex:none;width:100px;min-width:100px;min-height:var(--ctl-h);margin:0;padding:0 4px 0 10px;font-size:13px;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-ctl)}
+.edit-done{border-color:var(--text);font-weight:700}
+.pages-widget[data-editing=true]>.pages-strip{display:flex;overflow:hidden;gap:0;padding:0;border:0;border-radius:0;box-shadow:none;touch-action:auto}
+.pages-owner{display:flex;align-items:center;flex:none;height:32px;padding-right:10px;color:var(--muted);font-size:12px;font-weight:600;cursor:grab;touch-action:none}
+.pages-owner-label{min-width:44px;min-height:32px;padding:0 4px;border:0;background:none;color:inherit;font:inherit;cursor:grab;touch-action:none}
+.pages-remove{position:relative;display:grid;place-items:center;flex:none;width:44px;height:32px;margin:0;padding:0;border:0;background:none;cursor:pointer;touch-action:manipulation}
+.pages-tabs{touch-action:pan-x;display:flex;align-items:center;flex:1;min-width:0;height:32px;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:var(--line) var(--surface)}
+.pages-tabs>.use-page{flex:none}
+.widget-order{margin-bottom:12px}.order-buttons{display:flex;gap:6px;margin-top:4px}.order-buttons button{flex:1;min-height:var(--ctl-h);padding:0 8px;border-radius:var(--radius-ctl)}
+.button-grid .drop-ghost{border:0;border-radius:2px;background:var(--accent);box-shadow:none;pointer-events:none;z-index:5}
+.button-grid .drop-ghost[data-refused=true]{background:var(--danger)}
+.button-grid .drop-ghost[data-shape=cell]{box-sizing:border-box;border:2px dashed var(--accent);border-radius:var(--radius-key);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.button-grid .drop-ghost[data-shape=cell][data-refused=true]{border-color:var(--danger);background:transparent}
+.shell[data-canvas=true] .grid-frame{align-items:flex-start;scrollbar-width:thin;scrollbar-color:var(--line) var(--surface)}
+.shell[data-canvas=true] .grid-frame[data-custom-pages=true],.shell[data-canvas=true] .grid-frame[data-pages-resizable=true]{scrollbar-gutter:stable}
+
+/* Narrow windows keep the bar in one row. Up to 520px Undo and Save are icons (their names stay in aria-label and title), the select shrinks to 84px (12px text and a 6px left padding so "Compact" still fits beside the native arrow) and the gaps to 4px. */
+@media(max-width:520px){
+  .edit-float-row{gap:4px;padding:4px}
+  .edit-grip{width:20px}
+  .edit-float-row .edit-grid-size{width:84px;min-width:84px;padding:0 2px 0 6px;font-size:12px}
+  :is(#edit-undo,#desk-save){width:var(--ctl-h);padding:0}
+  :is(#edit-undo,#desk-save) .edit-float-label{display:none}
+  :is(#edit-undo,#desk-save) .edit-narrow-icon{display:inline-flex}
+}
+/* Below 420px Done is the check icon too and the bar is a little tighter: 20 grip + 5 x 36 + 84 select + 36 collapse + 7 x 4 gaps + 2 x 3 padding + 2 border = 356, inside the 359px that 375px leaves. */
+@media(max-width:420px){
+  .edit-float-row{padding:3px}
+  #edit-back{width:var(--ctl-h);padding:0}
+  #edit-back .edit-float-label{display:none}
+  #edit-back .edit-narrow-icon{display:inline-flex}
+}
+/* Keep at least two touch rows above the toolbar on short phones. */
+@media(max-width:600px) and (max-height:700px){
+  .shell{--shelf-h:44dvh}
+}
+
+/* Library navigation and source-backed targets retain theme controls and 44px hit areas. */
+.shelf-tabs{flex:0 0 100%;width:100%;min-width:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.shelf-tabs button{min-height:var(--ctl-h);flex:1 1 auto;padding:0 12px;font-size:13px;font-weight:600}
+.shelf-tabs [aria-selected=true],.shelf-tabs [aria-selected=true]:hover:enabled{border-color:var(--accent);background:var(--accent-bg);color:var(--text)}
+.shelf-target{min-height:88px;min-width:0;overflow-wrap:anywhere}
+.shelf-target-icon{display:block;width:40px;height:40px;margin:8px auto}
+.shelf-target-icon svg,.shelf-target-icon img{width:100%;height:100%;object-fit:contain}
+.shelf-window-tools{flex:0 0 100%;width:100%;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.shelf-window-tools button{min-height:44px;flex:0 0 auto}
+.shelf-window-tools strong{flex:1 1 120px;min-width:0;overflow-wrap:anywhere}
+.shelf-previews>strong,.shelf-previews>.shelf-empty{flex:0 0 100%;min-width:0}
+@media(max-width:600px){
+  .shelf-tabs,.shelf-window-tools{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin}
+  .shelf-tabs button{flex:0 0 auto;white-space:nowrap}
+  .shelf-window-tools strong{flex:0 0 auto;max-width:180px}
+}
+.execution-diagnostics{max-width:100%;overflow:auto;color:var(--text);border-top:1px solid var(--hair);font-size:13px}
+.execution-diagnostics summary{min-height:var(--ctl-h);display:flex;align-items:center;cursor:pointer}
+.execution-diagnostics pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:20vh;overflow:auto;font-size:12px}
+
+/* App Library: stable controls, a frameless icon grid, and an explicit window chooser. */
+.shelf-app-toolbar{flex:none;min-width:0}
+.shelf-app-toolbar[hidden]{display:none}
+.shelf-app-controls{display:flex;align-items:center;gap:8px;min-width:0}
+.shelf-app-controls input{min-width:0;flex:1 1 auto}
+.shelf-app-controls label{margin:0;font-size:12px;color:var(--muted)}
+.shelf-app-controls :is(input,select){min-height:var(--ctl-h);padding:7px 10px;font-size:13px}
+.shelf-app-controls select{max-width:150px}
+.shelf-app-toolbar .field-note{margin:2px 0 0;font-size:11px;line-height:1.4}
+.shelf-main:has(.shelf-app-toolbar:not([hidden])){overflow:hidden}
+.shelf-main:has(.shelf-app-toolbar:not([hidden])) .shelf-previews{min-height:0;overflow-y:auto;flex:1 1 auto;padding:3px}
+/* T84 (ADR-079): Library > App is a Launchpad grid. No frame, border or background; the icon with its name under it, in an even grid. */
+.shelf-main:has(.shelf-app-toolbar:not([hidden])) .shelf-previews{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:4px 2px;align-content:start}
+.shelf-main:has(.shelf-app-toolbar:not([hidden])) .shelf-previews>:is(.shelf-empty,.shelf-app-sentinel){grid-column:1 / -1}
+.shelf-app-sentinel{height:1px;pointer-events:none}
+.shelf-card.shelf-app-card{--app-icon:56px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;width:auto;min-width:0;max-width:none;height:auto;min-height:88px;max-height:none;padding:8px 4px 6px;border:0;border-radius:var(--radius-ctl);background:transparent;box-shadow:none;overflow:hidden;color:var(--text);transition:transform .12s ease,opacity .12s ease}
+.shelf-app-card .shelf-target-icon{flex:none;margin:0;width:var(--app-icon);height:var(--app-icon);color:var(--muted)}
+.shelf-app-card .shelf-caption{display:block;width:100%;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;font-size:12px;line-height:1.3;color:var(--text)}
+.shelf-app-card:active{transform:scale(.96);opacity:.8}
+.shelf-card.shelf-app-card:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+@media(hover:hover){.shelf-app-card:hover{background:var(--surface-2)}}
+@media(prefers-reduced-motion:reduce){.shelf-card.shelf-app-card{transition:none}.shelf-app-card:active{transform:none}}
+/* T85: a touch hold lifts the card (the list stops scrolling; move to drag, let go for the menu). */
+.shelf-card[data-held=true]{transform:scale(1.06);opacity:1;background:var(--surface-2);box-shadow:0 8px 20px color-mix(in srgb,var(--bg) 60%,transparent);outline:2px solid var(--focus);outline-offset:-2px;transition:transform .12s ease,box-shadow .12s ease}
+@media(prefers-reduced-motion:reduce){.shelf-card[data-held=true]{transform:none;transition:none}}
+.shelf-app-menu{z-index:90}
+.shelf-windows{max-width:min(600px,calc(100vw - 24px));padding:16px;max-height:85dvh}
+.shelf-windows::backdrop{background:color-mix(in srgb,var(--bg) 70%,transparent)}
+.shelf-windows .app-dialog-head{padding:0 0 10px}
+.shelf-windows>p{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.shelf-window-list{display:grid;gap:8px;overflow-y:auto;min-height:0;margin-top:10px}
+.shelf-window-card{min-height:60px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--key);color:var(--text);overflow-wrap:anywhere;text-align:left}
+.shelf-window-card:disabled{opacity:.5}
+/* T101: a window added since the list opened stays in the list, marked, and cannot be added twice. */
+.shelf-window-card[data-added=true]{opacity:1;border-color:var(--ok)}
+.shelf-window-card[data-added=true] .field-note{color:var(--ok-text)}
+@media(max-width:600px){.shelf-app-controls{gap:4px}.shelf-app-controls select{max-width:118px}.shelf-app-controls label{font-size:11px}.shelf-app-toolbar .field-note{max-height:2.8em;overflow:auto}}
+/* On phones, keep navigation in one scrollable touch row so App cards remain usable. */
+@media(max-width:600px){
+  .shelf-side{flex-wrap:nowrap;align-items:stretch;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:thin}
+  .shelf-types{flex:0 0 auto;overflow:visible}
+  .shelf-side .shelf-type{min-height:var(--ctl-h);justify-content:center;white-space:nowrap}
+  .shelf-side .shelf-type span{display:none}
+  .shelf-message:empty{display:none}
+}
+/* Short phones need room for a complete App card and the visible draft notice. */
+@media(max-width:600px) and (max-height:700px){
+  .shell:has(.shelf-app-toolbar:not([hidden])){--shelf-h:50dvh}
+}
+/* Library widget presets use the same rendering as placed widgets, scaled by their preset proportions. */
+.shelf-widget-card{max-width:100%;gap:8px;justify-content:center}
+.shelf-widget-sample{display:flex;flex:none;max-width:100%;overflow:hidden;pointer-events:none}
+.shelf-widget-sample>.page-refresh{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);border-radius:var(--radius-ctl)}
+.shelf-widget-sample>.page-refresh .ui-icon{width:20px;height:20px}
+.shelf-widget-card .shelf-caption{max-width:100%;overflow-wrap:anywhere}
+@media(max-width:600px){.shelf-widget-sample .page-refresh-label{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal}}
+#pages-settings .form-choice{min-width:var(--ctl-h)}
+#pages-settings label{margin:8px 0 4px}
+/* T91 (ADR-084): Keys per row, two compact rows (36px controls); the row for this screen's side is the one in full ink. */
+.pages-columns{margin-top:12px}
+.columns-row{display:grid;grid-template-columns:minmax(0,1fr) auto 72px;gap:6px;align-items:center;margin-top:6px}
+.columns-name{font-size:13px;color:var(--muted)}
+.columns-row[data-active=true] .columns-name{color:var(--text);font-weight:600}
+.columns-row .form-choice{min-width:56px}
+#pages-settings .columns-row input{min-height:var(--ctl-h);padding:6px 8px;text-align:center;margin:0}
+.columns-row input:disabled{opacity:.5}
+.pages-columns .field-note{margin-top:6px;line-height:1.4}
+.pages-columns .field-note:empty{display:none}
+#pages-percent-presets{margin-top:8px}
+/* ---------- T79 (ADR-076): compact settings controls. The Edit settings card, the quick menu and drawn menus, and the Theme window use 36px controls (--ctl-h); keys and the top bar stay at 44px. T80 (ADR-077) adds the gear menu, the Edit toolbar and the library shelf to the containers below. ---------- */
+/* The base for every control inside these containers (the Edit card, the Theme window, the gear menu, the Edit toolbar and the Library). :where() keeps it as weak as the global button/input rules, so a component class that sets its own size still decides. */
+:where(.settings-card,.theme-dialog,.settings-popover,.edit-float,.edit-toolbar,.shelf-panel) :is(button,input,select){min-height:var(--ctl-h)}
+:where(.settings-card,.theme-dialog,.settings-popover,.edit-float,.edit-toolbar,.shelf-panel) :is(input,select){padding:7px 10px;font-size:13px}
+:where(.settings-card,.theme-dialog) label{margin:12px 0 4px}
+.settings-card .field-note,.theme-dialog .field-note{line-height:1.45;margin-top:6px}
+:is(.settings-card,.theme-dialog) :is(.quiet,.solid){padding:0 12px}
+:is(.settings-card,.theme-dialog) .text-button{min-height:var(--ctl-h)}
+/* One look for the choice buttons: muted, a hairline, and the accent border and wash when chosen. */
+:is(.size-choice,.style-choice,.form-choice,.action-choice,.menu-size,.theme-choice,.theme-tab,.order-buttons button):hover:enabled:not([aria-pressed=true]){background:var(--surface-2);color:var(--text)}
+:is(.settings-card,.theme-dialog,.edit-menu,.settings-popover,.edit-float,.edit-toolbar,.shelf-panel) :is(button,input,select,summary):focus-visible{outline-offset:2px}
+
+/* ---------- T115 (ADR-099): the Mac Dock bar. A floating capsule in the strip zones.ts reserves at the foot of the content area (the page gives it left/top/width/height and the sizes below).
+   Colors, radius and shadow are the theme's own tokens, so the six themes and every custom theme (which inherits its base theme's tokens) draw it without a rule of their own. ---------- */
+.mac-dock{position:fixed;z-index:25;box-sizing:border-box;display:flex;justify-content:center;padding:0 var(--dock-side,0);align-items:flex-start;pointer-events:none;--dock-h:64px;--dock-icon:56px;--dock-gap:8px;--dock-pad:10px}
+.mac-dock[hidden]{display:none}
+/* T118 (ADR-102): where the capsule sits in the strip. The side gap is the padding (--dock-side, set by mac-dock.ts); the brief note follows the capsule's side. */
+.mac-dock[data-align=left]{justify-content:flex-start}
+.mac-dock[data-align=right]{justify-content:flex-end}
+.mac-dock-capsule{position:relative;box-sizing:border-box;flex:none;max-width:100%;height:var(--dock-h);display:flex;align-items:center;pointer-events:auto;border:1px solid var(--line);border-radius:min(var(--radius-panel),calc(var(--dock-h) / 2));background:var(--surface);box-shadow:0 8px 24px color-mix(in srgb,var(--bg) 70%,transparent);overflow:hidden}
+.mac-dock-capsule[hidden]{display:none}
+.mac-dock-track{flex:1 1 auto;min-width:0;height:100%;display:flex;align-items:center;gap:var(--dock-gap);padding:0 var(--dock-pad);overflow-x:auto;overflow-y:hidden;overscroll-behavior:contain;touch-action:pan-x;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.mac-dock-track::-webkit-scrollbar{display:none}
+.mac-dock-capsule[data-scroll=true] .mac-dock-track{-webkit-mask-image:linear-gradient(to right,transparent 0,black 14px,black calc(100% - 14px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,black 14px,black calc(100% - 14px),transparent 100%)}
+.mac-dock-item{position:relative;flex:none;box-sizing:border-box;width:var(--dock-icon);height:var(--dock-icon);min-height:0;padding:0;display:grid;place-items:center;border:0;border-radius:var(--radius-ctl);background:transparent;color:var(--text);touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.mac-dock-item:hover:enabled{background:var(--surface-2)}
+.mac-dock-item:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.mac-dock-item:disabled{background:transparent;border:0;opacity:1;cursor:default}
+.mac-dock-icon{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
+.mac-dock-icon[hidden],.mac-dock-glyph[hidden]{display:none}
+.mac-dock-glyph{display:grid;place-items:center;width:84%;height:84%;border-radius:var(--radius-ctl);background:var(--surface-2);color:var(--muted);font-size:calc(var(--dock-icon) * .4);font-weight:650;line-height:1}
+/* The frontmost app has a small dot under its icon (in the capsule's padding); a hidden app is dimmed. */
+.mac-dock-item[data-active=true]::after{content:"";position:absolute;left:50%;bottom:-3px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--text)}
+.mac-dock-item[data-hidden=true]{opacity:.45}
+.mac-dock-empty{padding:0 8px;font-size:12px;color:var(--muted);white-space:nowrap}
+/* A refusal or a failed activation shows briefly above the capsule. */
+.mac-dock-note{position:absolute;left:50%;bottom:calc(100% - 4px);transform:translateX(-50%);max-width:calc(100% - 16px);padding:8px 14px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--surface);color:var(--text);box-shadow:0 6px 18px color-mix(in srgb,var(--bg) 70%,transparent);font-size:12px;line-height:1.4;text-align:center;pointer-events:none}
+.mac-dock-note[hidden]{display:none}
+.mac-dock[data-align=left] .mac-dock-note{left:var(--dock-side,0);transform:none}
+.mac-dock[data-align=right] .mac-dock-note{left:auto;right:var(--dock-side,0);transform:none}
+/* Edit mode keeps the strip (the canvas does not reflow) but the Dock is dimmed and not interactive; a lost connection greys the list. */
+.mac-dock[data-editing=true] .mac-dock-capsule{opacity:.4;pointer-events:none}
+.mac-dock[data-stale=true] .mac-dock-capsule{filter:grayscale(1);opacity:.5;pointer-events:none}
+/* An unknown result locks the keys until it is cleared in Settings, and the Dock with them (a brief busy lock only disables it, without dimming on every key press). */
+.mac-dock[data-locked=unknown] .mac-dock-capsule{opacity:.4;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.mac-dock-capsule{transition:opacity .15s}}
+
+/* ---------- T117 (ADR-101): the Mac Dock settings window (gear > Mac Dock > Dock settings). It reuses the Theme window's frame; each row is a label, a description and a switch. ---------- */
+/* A modal dialog is pinned to the top and bottom of the window, so `height:auto` would stretch it to the full height; fit-content keeps it as tall as its rows. */
+.theme-dialog.dock-dialog{width:min(520px,calc(100vw - 32px));height:fit-content;max-height:calc(100dvh - 32px)}
+.dock-dialog-body{padding:6px 18px 14px;overflow-y:auto}
+.dock-options{display:flex;flex-direction:column}
+.dock-option{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--hair)}
+.dock-option:last-child{border-bottom:0}
+.dock-option-choice{flex-direction:column;align-items:stretch;gap:8px}
+.dock-choices{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:0}
+.dock-option-text{min-width:0}
+.dock-option-label{display:block;font-size:14px;font-weight:600}
+.dock-option-text .field-note{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.dock-switch{position:relative;flex:none;width:48px;min-width:48px;height:var(--ctl-h);min-height:var(--ctl-h);padding:0;border:0;background:transparent;cursor:pointer}
+.dock-switch::before{content:"";position:absolute;left:0;top:50%;width:48px;height:28px;margin-top:-14px;box-sizing:border-box;border:1px solid var(--line);border-radius:14px;background:var(--bg)}
+.dock-switch::after{content:"";position:absolute;left:4px;top:50%;width:20px;height:20px;margin-top:-10px;border-radius:50%;background:var(--muted)}
+.dock-switch[aria-checked=true]::before{border-color:var(--accent);background:var(--accent-bg)}
+.dock-switch[aria-checked=true]::after{left:24px;background:var(--accent)}
+.dock-switch:disabled{opacity:.5;cursor:default}
+.dock-switch:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){.dock-switch::after{transition:left .12s}}

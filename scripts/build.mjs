@@ -44,8 +44,9 @@ run('/usr/bin/xcrun', ['swiftc', '-O', '-module-cache-path', resolve('dist/swift
 writeFileSync('dist/Keyln.app/Contents/Info.plist', plist);
 rmSync('dist/AppIcon.iconset', { recursive: true, force: true });
 mkdirSync('dist/AppIcon.iconset');
-for (const [name, size] of [['16x16', 16], ['16x16@2x', 32], ['32x32', 32], ['32x32@2x', 64], ['128x128', 128], ['128x128@2x', 256], ['256x256', 256], ['256x256@2x', 512], ['512x512', 512]]) {
-  run('/usr/bin/sips', ['-z', String(size), String(size), 'apps/web/icons/keyln-512.png', '--out', `dist/AppIcon.iconset/icon_${name}.png`]);
+// AppIcon.png (1024, transparent, on Apple's icon grid) is rendered from apps/web/icons/keyln.svg by scripts/generate-app-icons.mjs.
+for (const [name, size] of [['16x16', 16], ['16x16@2x', 32], ['32x32', 32], ['32x32@2x', 64], ['128x128', 128], ['128x128@2x', 256], ['256x256', 256], ['256x256@2x', 512], ['512x512', 512], ['512x512@2x', 1024]]) {
+  run('/usr/bin/sips', ['-z', String(size), String(size), 'native/macos-menubar/AppIcon.png', '--out', `dist/AppIcon.iconset/icon_${name}.png`]);
 }
 run('/usr/bin/iconutil', ['-c', 'icns', 'dist/AppIcon.iconset', '-o', 'dist/Keyln.app/Contents/Resources/AppIcon.icns']);
 rmSync('dist/AppIcon.iconset', { recursive: true, force: true });

@@ -17,7 +17,26 @@ Nothing leaves your network. There is no cloud service, account or database: the
 - **Installable web app**: install it as a PWA on the device. It is online-first; there is no offline mode.
 - **Runs at login**: a per-user background service, plus a menu bar app for status, start/stop, management login and a QR code of the address.
 
-## Requirements
+## Install as an app
+
+If you have a self-contained `Keyln.app` (built with `npm run app:build`, or downloaded), you do not need npm or a terminal:
+
+1. Drag `Keyln.app` into `/Applications` or `~/Applications`. Keep the name `Keyln.app`, and do not run it from a disk image.
+2. Double-click it. A first copy downloaded from the internet may be blocked once: open System Settings → Privacy & Security and choose **Open Anyway**.
+3. Follow the setup window. Choose your Mac's address, and Keyln creates its own certificates, installs its background service from this app (starts at login) and starts it.
+4. The last step lists what is left: **Export Device Certificate…** (a public `keyln-root.cer` plus its SHA-256 fingerprint to compare on the device), pairing (**Mac Management**, **Show QR Code…**) and Accessibility (open the settings page, then drag `node` into the list and turn it on; the window can show the file in Finder).
+
+The same actions stay in the menu bar: **Setup Guide…**, **Export Device Certificate…** and **Change Address…** (devices keep trusting the certificate but must open the new address and pair again). If you later move `Keyln.app`, the menu offers **Repair Service Location…** to point the background service at the new place. The app only ever installs the copy it is running from.
+
+### Moving to another Mac
+
+1. On the old Mac, export your layout from the management page.
+2. On the new Mac, install the app as above, finish setup and pair your devices again.
+3. Import the layout. Apps are matched by bundle ID, and the import preview lists anything that is missing. Scripts must be approved again.
+
+Pairings, certificate keys and script approvals are never exported.
+
+## Requirements (developer install)
 
 - A Mac with macOS 13 or later, signed in as a normal user (no `sudo`).
 - Node.js 24 LTS (see `.node-version`) or 26, installed with Homebrew or another installer.
@@ -25,7 +44,7 @@ Nothing leaves your network. There is no cloud service, account or database: the
 - OpenSSL (`openssl version`).
 - A control device with a modern browser (Edge, Chrome or Safari) on the **same private network** as the Mac.
 
-## Install
+## Developer install
 
 ### 1. Build
 

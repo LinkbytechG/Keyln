@@ -1,9 +1,11 @@
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
-import { join, isAbsolute } from "node:path";
+import { join, isAbsolute, basename } from "node:path";
+import { fileURLToPath } from "node:url";
 import { execFileSync, spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { atomicBytes, atomicJSON, privateDir } from "./store.js";
-import { appBundlePaths, appRuntimeOwned, hostAlive, owned, present, readService, serviceNodePath, servicePlist, startService, stopService, restoreServiceStartup, serviceStartupState,
+import { readHostSettings } from "./setup.js";
+import { appBundlePaths, appRuntimeOwned, hostAlive, owned, present, readService, readServiceLenient, serviceNodePath, servicePlist, startService, stopService, restoreServiceStartup, serviceStartupState,
   type ManifestV2, type ServicePaths, type ServiceStartupState } from "./service.js";
 
 // T123 (ADR-107): install the self-contained Keyln.app and point the LaunchAgent at the Node and runtime inside it. The old <data>/runtime is never touched.
@@ -91,11 +93,79 @@ export interface AppInstallLifecycle {
   verify?(app: string): unknown; // tests only; the default is the full codesign and Node-team check
 }
 export const appLifecycle = (ready: (data: string) => Promise<void>, quit: (installed: string) => void): AppInstallLifecycle => ({ state: serviceStartupState, start: startService, stop: stopService, ready, restore: restoreServiceStartup, quit });
-// Same transaction shape as installService: the old files and startup state come back if anything fails.
-export async function installApp(paths: ServicePaths, source: string, targetDir: string, control: AppInstallLifecycle) {
+// T124 (ADR-108): the app this runtime lives in, and whether it may become the login service where it is.
+export type AppProblem = "translocated" | "volume" | "not-bundled" | "renamed";
+const SELF_RUNTIME = /^(.*\.app)\/Contents\/Resources\/runtime\/dist\/apps\/host\/[^/]+\.js$/;
+export function classifyAppPath(app: string): AppProblem | null {
+  if (app.includes("/AppTranslocation/")) return "translocated";
+  if (app.startsWith("/Volumes/")) return "volume";
+  if (!isAbsolute(app) || !app.endsWith(".app")) return "not-bundled";
+  if (basename(app) !== "Keyln.app") return "renamed";
+  return null;
+}
+/** Pure: derive the containing .app from a module URL (file URL or path) such as .../Keyln.app/Contents/Resources/runtime/dist/apps/host/service-entry.js. */
+export function selfApp(moduleUrl: string): { app: string | null; problem: AppProblem | null } {
+  let path = moduleUrl;
+  if (moduleUrl.startsWith("file:")) path = fileURLToPath(moduleUrl);
+  const match = SELF_RUNTIME.exec(path);
+  if (!match) return { app: null, problem: "not-bundled" };
+  return { app: match[1]!, problem: classifyAppPath(match[1]!) };
+}
+export function assertAdoptablePath(app: string) {
+  const problem = classifyAppPath(app);
+  if (problem === "translocated") throw new Error("Keyln is running from a temporary location. Move Keyln to your Applications folder, then open it again.");
+  if (problem === "volume") throw new Error("Keyln is running from a disk image or another volume. Move Keyln to your Applications folder, then open it again.");
+  if (problem === "renamed") throw new Error("The app must be named Keyln.app. Rename it, then open it again.");
+  if (problem) throw new Error("Keyln is not running from an app bundle.");
+}
+// Adopt the app where it is: nothing is copied. The same commit, rollback and finish as the copying install, minus the app swap.
+export function stageAppAdopt(paths: ServicePaths, app: string, verify: (app: string) => unknown = verifyBundle): AppInstall {
+  if (process.platform !== "darwin" || process.getuid?.() === 0) throw new Error("Install as the signed-in Mac user, without sudo.");
+  assertAdoptablePath(app);
+  owned(paths.data, "directory"); if (present(paths.logs)) owned(paths.logs, "directory");
+  if (!readHostSettings(paths.data)) throw new Error("Set up the address and certificates first.");
+  const previous = present(paths.manifest) ? readServiceLenient(paths) : undefined;
+  if (present(paths.plist) && !previous) throw new Error("An unrecognized LaunchAgent exists. It was preserved.");
+  for (const file of ["host.json", "tls/server.key", "tls/server.pem", "tls/rootCA.pem"]) owned(join(paths.data, file), "file");
+  privateDir(paths.data); privateDir(paths.logs);
+  const agents = join(paths.plist, ".."); mkdirSync(agents, { mode: 0o700, recursive: true }); owned(agents, "directory");
+  verify(app);
+  const bundle = appBundlePaths(app), candidate = paths.plist + "." + randomUUID() + ".tmp";
+  const oldManifest = previous ? readFileSync(paths.manifest) : undefined, oldPlist = present(paths.plist) ? readFileSync(paths.plist) : undefined;
+  const manifest: ManifestV2 = { schemaVersion: 2, label: paths.label, uid: process.getuid!(), node: bundle.node, data: paths.data, runtime: bundle.runtime, logs: paths.logs, plist: paths.plist, app, installedAt: new Date().toISOString() };
+  const cleanup = () => { rmSync(candidate, { force: true }); };
+  try {
+    writeFileSync(candidate, servicePlist(paths, bundle.node, bundle.runtime), { flag: "wx", mode: 0o600 });
+    execFileSync("/usr/bin/plutil", ["-lint", candidate], { stdio: "pipe", timeout: 4000 });
+  } catch (error) { try { cleanup(); } catch (cleanupError) { throw new Error(`App staging failed: ${String(error)}. Temporary files could not be removed: ${String(cleanupError)}`); } throw error; }
+  let plistWritten = false, manifestWritten = false, finished = false;
+  return { manifest, app,
+    commit() {
+      if (finished || plistWritten) throw new Error("This installation has already been committed.");
+      if (hostAlive(paths.data)) throw new Error("A Host is running. Stop it before installing; no process was terminated.");
+      renameSync(candidate, paths.plist); plistWritten = true;
+      atomicJSON(paths.manifest, manifest); manifestWritten = true;
+    },
+    rollback() {
+      if (finished) throw new Error("The installation has already finished.");
+      const errors: string[] = [], attempt = (work: () => void) => { try { work(); } catch (error) { errors.push(String(error)); } };
+      if (manifestWritten) attempt(() => { if (oldManifest) atomicBytes(paths.manifest, oldManifest); else rmSync(paths.manifest); manifestWritten = false; });
+      if (plistWritten) attempt(() => { if (oldPlist) atomicBytes(paths.plist, oldPlist); else rmSync(paths.plist); plistWritten = false; });
+      if (!errors.length) attempt(cleanup);
+      if (errors.length) throw new Error("App installation rollback could not finish; preserve the remaining staging files. " + errors.join("; "));
+    },
+    finish() {
+      if (finished || !plistWritten || !manifestWritten) throw new Error("There is no committed installation to finish.");
+      finished = true;
+      try { cleanup(); } catch { console.warn("Keyln updated; temporary installation files could not all be removed."); }
+    },
+  };
+}
+// Same transaction shape as installService: the old files and startup state come back if anything fails. Shared by the copying install and the in-place adopt.
+async function transact(paths: ServicePaths, control: AppInstallLifecycle, stage: () => AppInstall) {
   const previous = existsSync(paths.manifest), state = control.state(paths);
   if (!previous && state.loaded) throw new Error("An unrecognized Keyln login job is loaded. It was preserved.");
-  const installation = stageAppService(paths, source, targetDir, control.quit, control.verify);
+  const installation = stage();
   let stopAttempted = false, startAttempted = false;
   try {
     if (previous) { stopAttempted = true; await control.stop(paths); }
@@ -111,4 +181,11 @@ export async function installApp(paths: ServicePaths, source: string, targetDir:
     throw new Error(`Installation failed; previous files and startup state were preserved or restored. ${String(error)}`);
   }
   return installation.manifest;
+}
+export const installApp = (paths: ServicePaths, source: string, targetDir: string, control: AppInstallLifecycle) =>
+  transact(paths, control, () => stageAppService(paths, source, targetDir, control.quit, control.verify));
+// T124: install the app that is running, where it is. The login service is stopped first, even when its old manifest is broken (a moved app).
+export async function adoptApp(paths: ServicePaths, app: string, control: AppInstallLifecycle) {
+  assertAdoptablePath(app); // before anything else, including any launchctl query
+  return transact(paths, control, () => stageAppAdopt(paths, app, control.verify));
 }

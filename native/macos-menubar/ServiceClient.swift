@@ -46,8 +46,32 @@ final class ServiceClient {
 
     var logsPath: String { dataDir + "/logs" }
 
+    /// T124: the Node and runtime inside this very app, or nil in a development build without a bundled runtime.
+    func bundled() -> (node: String, entry: String)? {
+        let root = Bundle.main.bundlePath
+        let node = root + "/Contents/Helpers/node"
+        let entry = root + "/Contents/Resources/runtime/dist/apps/host/service-entry.js"
+        let manager = FileManager.default
+        guard manager.isExecutableFile(atPath: node), manager.fileExists(atPath: entry) else { return nil }
+        return (node, entry)
+    }
+
+    var hasBundledRuntime: Bool { bundled() != nil }
+    /// True when some runtime can answer the first-run commands.
+    var canRunSetupCommands: Bool { bundled() != nil || locate() != nil }
+
     func run(_ arguments: [String], timeout: TimeInterval) -> CommandResult {
         guard let place = locate() else { return CommandResult(status: 127, stdout: "", stderr: "Keyln is not installed. Run npm run service:install", timedOut: false) }
+        return execute(place, arguments, timeout: timeout)
+    }
+
+    /// Runs with the runtime bundled in this app; falls back to the installed service's runtime in a development build.
+    func runSelf(_ arguments: [String], timeout: TimeInterval) -> CommandResult {
+        guard let place = bundled() ?? locate() else { return CommandResult(status: 127, stdout: "", stderr: "This build has no bundled runtime.", timedOut: false) }
+        return execute(place, arguments, timeout: timeout)
+    }
+
+    private func execute(_ place: (node: String, entry: String), _ arguments: [String], timeout: TimeInterval) -> CommandResult {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: place.node)
         process.arguments = [place.entry] + arguments
@@ -112,5 +136,52 @@ final class ServiceClient {
             }
         }
         return result
+    }
+}
+
+struct AddressCandidate {
+    let interface: String
+    let address: String
+    var title: String { address == "127.0.0.1" ? "This Mac only (127.0.0.1)" : "\(interface) — \(address)" }
+}
+
+/// Answer of `setup-info` (T124).
+struct SetupInfo {
+    var configured = false
+    var address: String?
+    var port: Int?
+    var origin: String?
+    var candidates: [AddressCandidate] = []
+    var caFingerprint: String?
+    var selfApp: String?
+    var selfAppProblem: String?
+    var manifestApp: String?
+    var manifestMatchesSelf = false
+    var layout: String?
+    var running = false
+}
+
+extension ServiceClient {
+    func setupInfo() -> (info: SetupInfo?, error: String?) {
+        let result = runSelf(["setup-info"], timeout: 20)
+        guard result.status == 0, let object = try? JSONSerialization.jsonObject(with: Data(result.stdout.utf8)) as? [String: Any] else {
+            return (nil, result.timedOut ? "The setup check timed out." : (result.stderr.isEmpty ? "The setup check failed." : result.stderr))
+        }
+        var info = SetupInfo()
+        info.configured = object["configured"] as? Bool ?? false
+        info.address = object["address"] as? String
+        info.port = object["port"] as? Int
+        info.origin = object["origin"] as? String
+        info.caFingerprint = object["caFingerprint"] as? String
+        info.selfApp = object["selfApp"] as? String
+        info.selfAppProblem = object["selfAppProblem"] as? String
+        info.manifestApp = object["manifestApp"] as? String
+        info.manifestMatchesSelf = object["manifestMatchesSelf"] as? Bool ?? false
+        info.layout = object["layout"] as? String
+        info.running = object["running"] as? Bool ?? false
+        for entry in object["candidates"] as? [[String: Any]] ?? [] {
+            if let name = entry["interface"] as? String, let address = entry["address"] as? String { info.candidates.append(AddressCandidate(interface: name, address: address)) }
+        }
+        return (info, nil)
     }
 }

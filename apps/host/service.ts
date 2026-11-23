@@ -63,6 +63,13 @@ export function readService(paths:ServicePaths):Manifest {
   }else throw mismatch();
   owned(paths.plist,"file");return value;
 }
+// T124: the manifest of an installation that may be broken (for example its app was moved). It must still be ours; nothing about the app itself is checked.
+export function readServiceLenient(paths:ServicePaths):Manifest {
+  owned(paths.manifest,"file");const value=JSON.parse(readFileSync(paths.manifest,"utf8")) as Manifest;
+  if(!value||typeof value!=="object"||value.label!==paths.label||value.uid!==process.getuid?.()||value.data!==paths.data||value.logs!==paths.logs||value.plist!==paths.plist||(value.schemaVersion!==1&&value.schemaVersion!==2)||(value.schemaVersion===2&&(typeof value.app!=="string"||!isAbsolute(value.app))))
+    throw new Error("The Keyln service manifest does not match this user and installation.");
+  return value;
+}
 export function hostAlive(data:string):boolean {
   const path=join(data,"host.lock");if(!present(path))return false;
   owned(path,"file");const pid=Number(readFileSync(path,"utf8"));if(!Number.isSafeInteger(pid)||pid<=0)throw new Error("Inspect the invalid Host lock before managing startup.");
@@ -185,8 +192,8 @@ export async function startService(paths:ServicePaths) {
   if(hostAlive(paths.data))throw new Error("A manual or different Host is running. Stop that Host first; no process was terminated.");
   launchctl(["enable",target(paths)]);launchctl(["bootstrap",`gui/${process.getuid!()}`,paths.plist]);
 }
-export async function stopService(paths:ServicePaths) {
-  readService(paths);launchctl(["disable",target(paths)]);
+export async function stopService(paths:ServicePaths,strict=true) {
+  if(strict)readService(paths);else readServiceLenient(paths);launchctl(["disable",target(paths)]);
   if(loadedService(paths).loaded)launchctl(["bootout",target(paths)]);
   const deadline=Date.now()+16000;while(hostAlive(paths.data)&&Date.now()<deadline)await delay(100);
   if(hostAlive(paths.data))throw new Error("The Host has not stopped. No unrelated process was signalled; inspect service status.");

@@ -1,6 +1,6 @@
 import { spawn, type ChildProcess } from "node:child_process";
-import { fileURLToPath } from "node:url";
 import { exact, record, parseDockApps, type DockApp, type RunningApps as RunningAppsReply } from "../../packages/contracts/index.js";
+import { helperPath } from "./helper-path.js";
 
 // T115 (ADR-099): the Mac apps the Dock bar shows. A long-running native observer prints full, ordered snapshots; this service validates them strictly and keeps the latest.
 // It runs only while at least one layout shows the Dock (wanted(true)). Read-only: it never launches, activates or changes anything.
@@ -40,7 +40,7 @@ export class RunningApps {
     if (this.stopping || !this.wantedNow || this.child) return;
     this.status = "starting";
     let child: ChildProcess;
-    try { child = this.options.child?.() ?? spawn(fileURLToPath(new URL("../../keyln-helper", import.meta.url)), ["observe-running-apps"], { stdio: ["ignore", "pipe", "pipe"] }); }
+    try { child = this.options.child?.() ?? spawn(helperPath(import.meta.url), ["observe-running-apps"], { stdio: ["ignore", "pipe", "pipe"] }); }
     catch { this.failed(); return; }
     this.child = child;
     const serial = ++this.serial, log = this.options.log ?? (() => {});

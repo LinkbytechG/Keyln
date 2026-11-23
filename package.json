@@ -29,7 +29,9 @@
     "service:admin": "node scripts/service.mjs admin",
     "service:doctor": "node scripts/service.mjs doctor",
     "service:uninstall": "node scripts/service.mjs uninstall",
-    "app:install": "npm run build && node scripts/app-install.mjs"
+    "node:fetch": "node scripts/node-runtime.mjs",
+    "app:build": "node scripts/app-build.mjs",
+    "app:install": "npm run build && node scripts/app-build.mjs && node scripts/app-install.mjs"
   },
   "devDependencies": {
     "@types/node": "24.19.2",

@@ -1,5 +1,5 @@
 import { chmodSync, copyFileSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, renameSync, rmSync, writeFileSync } from "node:fs";
-import { join, isAbsolute } from "node:path";
+import { join, isAbsolute, basename } from "node:path";
 import { homedir, networkInterfaces } from "node:os";
 import { execFileSync } from "node:child_process";
 import { randomUUID, X509Certificate } from "node:crypto";
@@ -8,17 +8,21 @@ import { atomicBytes, atomicJSON, defaultDataDir, privateDir } from "./store.js"
 
 export const SERVICE_LABEL = "local.keyln.host";
 export interface ServicePaths { label:string;data:string;runtime:string;logs:string;plist:string;manifest:string }
-interface Manifest {schemaVersion:1;label:string;uid:number;node:string;data:string;runtime:string;logs:string;plist:string;installedAt:string}
+interface ManifestV1 {schemaVersion:1;label:string;uid:number;node:string;data:string;runtime:string;logs:string;plist:string;installedAt:string}
+// T123: schema 2 is the self-contained Keyln.app: node and runtime live inside the sealed bundle, and the LaunchAgent points there.
+export interface ManifestV2 extends Omit<ManifestV1,"schemaVersion"> {schemaVersion:2;app:string}
+export type Manifest=ManifestV1|ManifestV2;
+export function appBundlePaths(app:string) {return {app,node:join(app,"Contents/Helpers/node"),helper:join(app,"Contents/Helpers/keyln-helper"),runtime:join(app,"Contents/Resources/runtime")};}
 export function servicePaths(data=defaultDataDir(),label=SERVICE_LABEL,agentDir=join(homedir(),"Library/LaunchAgents")):ServicePaths {
   if (!isAbsolute(data) || !isAbsolute(agentDir) || !/^local\.keyln\.host(?:\.test\.[a-f0-9]{8})?$/.test(label)) throw new Error("Invalid Keyln service paths or label.");
   return {label,data,runtime:join(data,"runtime"),logs:join(data,"logs"),plist:join(agentDir,label+".plist"),manifest:join(data,"service.json")};
 }
-function present(path:string) {try {lstatSync(path);return true;} catch(error) {if((error as NodeJS.ErrnoException).code==="ENOENT")return false;throw error;}}
-function owned(path:string,kind:"file"|"directory") {
+export function present(path:string) {try {lstatSync(path);return true;} catch(error) {if((error as NodeJS.ErrnoException).code==="ENOENT")return false;throw error;}}
+export function owned(path:string,kind:"file"|"directory") {
   const stat=lstatSync(path);
   if(stat.uid!==process.getuid?.()||stat.isSymbolicLink()||(kind==="file"?!stat.isFile():!stat.isDirectory())||(stat.mode&0o022)!==0)throw new Error(`The Keyln ${kind} must be owned by this user and must not be a link or writable by others: ${path}`);
 }
-function runtimeOwned(path:string,label:string) {
+export function runtimeOwned(path:string,label:string) {
   owned(path,"directory");const marker=JSON.parse(readFileSync(join(path,".keyln-runtime.json"),"utf8"));
   if(marker.schemaVersion!==1||marker.label!==label||marker.uid!==process.getuid?.())throw new Error("An existing runtime is not owned by this Keyln installation. It was preserved.");
 }
@@ -39,22 +43,37 @@ export function serviceNodePath(value:string):string {
   // Validate the current target, but keep the configured entry so Homebrew can update its link.
   return value;
 }
+export function appRuntimeOwned(path:string) {
+  owned(path,"directory");const marker=JSON.parse(readFileSync(join(path,".keyln-runtime.json"),"utf8"));
+  if(marker.schemaVersion!==2||marker.kind!=="keyln-app-runtime")throw new Error("The Keyln app runtime is not a recognized sealed runtime.");
+}
+// Accepts both layouts: schema 1 (runtime copied into the data folder, any trusted Node) and schema 2 (Keyln.app).
 export function readService(paths:ServicePaths):Manifest {
   owned(paths.manifest,"file");const value=JSON.parse(readFileSync(paths.manifest,"utf8")) as Manifest;
-  if(value.schemaVersion!==1||value.label!==paths.label||value.uid!==process.getuid?.()||value.data!==paths.data||value.runtime!==paths.runtime||value.logs!==paths.logs||value.plist!==paths.plist||!isAbsolute(value.node))throw new Error("The Keyln service manifest does not match this user and installation.");
-  runtimeOwned(paths.runtime,paths.label);owned(paths.plist,"file");return value;
+  const mismatch=()=>new Error("The Keyln service manifest does not match this user and installation.");
+  if(!value||typeof value!=="object"||value.label!==paths.label||value.uid!==process.getuid?.()||value.data!==paths.data||value.logs!==paths.logs||value.plist!==paths.plist||typeof value.node!=="string"||!isAbsolute(value.node))throw mismatch();
+  if(value.schemaVersion===1){
+    if(value.runtime!==paths.runtime)throw mismatch();
+    runtimeOwned(paths.runtime,paths.label);
+  }else if(value.schemaVersion===2){
+    if(typeof value.app!=="string"||!isAbsolute(value.app)||basename(value.app)!=="Keyln.app")throw mismatch();
+    const bundle=appBundlePaths(value.app);
+    if(value.node!==bundle.node||value.runtime!==bundle.runtime)throw mismatch();
+    appRuntimeOwned(bundle.runtime);
+  }else throw mismatch();
+  owned(paths.plist,"file");return value;
 }
 export function hostAlive(data:string):boolean {
   const path=join(data,"host.lock");if(!present(path))return false;
   owned(path,"file");const pid=Number(readFileSync(path,"utf8"));if(!Number.isSafeInteger(pid)||pid<=0)throw new Error("Inspect the invalid Host lock before managing startup.");
   try{process.kill(pid,0);return true;}catch(error){if((error as NodeJS.ErrnoException).code==="ESRCH")return false;throw error;}
 }
-export function servicePlist(paths:ServicePaths,node:string):string {
+export function servicePlist(paths:ServicePaths,node:string,runtime=paths.runtime):string {
   const xml=(value:string)=>value.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&apos;");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0"><dict>
 <key>Label</key><string>${xml(paths.label)}</string>
-<key>ProgramArguments</key><array><string>${xml(node)}</string><string>${xml(join(paths.runtime,"dist/apps/host/service-runner.js"))}</string></array>
-<key>WorkingDirectory</key><string>${xml(paths.runtime)}</string>
+<key>ProgramArguments</key><array><string>${xml(node)}</string><string>${xml(join(runtime,"dist/apps/host/service-runner.js"))}</string></array>
+<key>WorkingDirectory</key><string>${xml(runtime)}</string>
 <key>EnvironmentVariables</key><dict><key>KEYLN_DATA_DIR</key><string>${xml(paths.data)}</string><key>HOME</key><string>${xml(homedir())}</string><key>PATH</key><string>/usr/bin:/bin:/usr/sbin:/sbin</string></dict>
 <key>LimitLoadToSessionType</key><string>Aqua</string><key>ProcessType</key><string>Interactive</string>
 <key>RunAtLoad</key><true/><key>KeepAlive</key><dict><key>SuccessfulExit</key><false/></dict>
@@ -68,7 +87,7 @@ function copyTree(source:string,target:string) {
   else if(stat.isFile()){copyFileSync(source,target);chmodSync(target,0o600);}else throw new Error("Only ordinary build files can be installed.");
 }
 export interface ServiceInstall {
-  manifest: Manifest;
+  manifest: ManifestV1;
   commit(): void;
   rollback(): void;
   finish(): void;
@@ -79,6 +98,7 @@ export function stageService(paths:ServicePaths,source:string,node=process.execP
   owned(paths.data,"directory");if(present(paths.logs))owned(paths.logs,"directory");
   const executable=serviceNodePath(node),previous=present(paths.manifest)?readService(paths):undefined;
   if(present(paths.runtime)&&!previous)throw new Error("An unrecognized runtime exists. It was preserved.");
+  if(present(paths.runtime))runtimeOwned(paths.runtime,paths.label);
   if(present(paths.plist)&&!previous)throw new Error("An unrecognized LaunchAgent exists. It was preserved.");
   for(const file of ["host.json","tls/server.key","tls/server.pem","tls/rootCA.pem"])owned(join(paths.data,file),"file");
   privateDir(paths.data);privateDir(paths.logs);
@@ -88,7 +108,7 @@ export function stageService(paths:ServicePaths,source:string,node=process.execP
   const oldManifest=previous?readFileSync(paths.manifest):undefined,oldPlist=previous?readFileSync(paths.plist):undefined;
   const staged=mkdtempSync(join(paths.data,"runtime-stage-")),held=join(paths.data,"runtime-rollback-"+randomUUID());
   const candidate=paths.plist+"."+randomUUID()+".tmp";
-  const manifest:Manifest={schemaVersion:1,label:paths.label,uid:process.getuid!(),node:executable,data:paths.data,runtime:paths.runtime,logs:paths.logs,plist:paths.plist,installedAt:new Date().toISOString()};
+  const manifest:ManifestV1={schemaVersion:1,label:paths.label,uid:process.getuid!(),node:executable,data:paths.data,runtime:paths.runtime,logs:paths.logs,plist:paths.plist,installedAt:new Date().toISOString()};
   const cleanup=()=>{rmSync(staged,{recursive:true,force:true});rmSync(candidate,{force:true});};
   try {
     mkdirSync(join(staged,"dist"),{mode:0o700});copyTree(join(source,"dist/apps"),join(staged,"dist/apps"));copyTree(join(source,"dist/packages"),join(staged,"dist/packages"));
@@ -106,7 +126,7 @@ export function stageService(paths:ServicePaths,source:string,node=process.execP
     commit() {
       if(finished||newMoved)throw new Error("This installation has already been committed.");
       if(hostAlive(paths.data))throw new Error("A Host is running. Stop it before installing; no process was terminated.");
-      if(previous){renameSync(paths.runtime,held);oldMoved=true;}
+      if(present(paths.runtime)){renameSync(paths.runtime,held);oldMoved=true;}
       renameSync(staged,paths.runtime);newMoved=true;
       renameSync(candidate,paths.plist);plistWritten=true;
       atomicJSON(paths.manifest,manifest);manifestWritten=true;
@@ -172,10 +192,13 @@ export async function stopService(paths:ServicePaths) {
   if(hostAlive(paths.data))throw new Error("The Host has not stopped. No unrelated process was signalled; inspect service status.");
 }
 export async function uninstallService(paths:ServicePaths) {
+  const app=readService(paths).schemaVersion===2;
   await stopService(paths);const backup=paths.runtime+".previous";
+  // An app installation keeps its runtime inside Keyln.app, which is left alone; only an earlier data-folder runtime of ours is removed so the legacy installer can run again.
   if(present(backup)){runtimeOwned(backup,paths.label);rmSync(backup,{recursive:true});}
-  runtimeOwned(paths.runtime,paths.label);rmSync(paths.runtime,{recursive:true});rmSync(paths.plist);rmSync(paths.manifest);
-  // Data, scripts, logs and certificates are deliberately retained.
+  if(!app||present(paths.runtime)){runtimeOwned(paths.runtime,paths.label);rmSync(paths.runtime,{recursive:true});}
+  rmSync(paths.plist);rmSync(paths.manifest);
+  // Data, scripts, logs, certificates and Keyln.app are deliberately retained.
 }
 export function certificateStatus(data:string) {
   const settings=JSON.parse(readFileSync(join(data,"host.json"),"utf8")),certificate=new X509Certificate(readFileSync(join(data,"tls/server.pem"))),ca=new X509Certificate(readFileSync(join(data,"tls/rootCA.pem")));

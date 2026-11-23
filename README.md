@@ -78,6 +78,16 @@ npm run app:install
 
 `service:install` copies the built runtime into the data folder and registers a per-user LaunchAgent (`local.keyln.host`) that starts at login. `app:install` puts a menu bar app in `~/Applications/Keyln.app`.
 
+**Self-contained app (no Homebrew Node needed at run time):** `Keyln.app` can carry its own official Node, the Host runtime and the native helper, so macOS permissions stay attached to one stable, signed Node binary.
+
+```sh
+npm run node:fetch     # download the pinned official Node (SHA-256 checked) into .cache/node; add -- --from <tarball> to use a local copy
+npm run app:build      # assemble dist/Keyln.app with Node, helper and runtime inside, then verify the signatures
+npm run app:install    # build, install to ~/Applications and point the login service at the app
+```
+
+`app:install` replaces the previous app (kept as a hidden backup) and rewrites the LaunchAgent to run the Node inside the app; the old runtime in the data folder is left in place. To go back to the Homebrew-style service, run `npm run service:install -- --node /opt/homebrew/bin/node`. Node security updates now arrive by bumping the pinned version and rebuilding.
+
 If you prefer to run Keyln by hand instead, use `npm start` (or double-click `Start-Keyln.command`) and keep that terminal open.
 
 ### 5. Grant keyboard permission
@@ -85,10 +95,12 @@ If you prefer to run Keyln by hand instead, use `npm start` (or double-click `St
 Opening apps needs no extra permission. Keyboard shortcuts and window control need **Accessibility**:
 
 1. Run `npm run service:doctor`. It shows whether `accessibilityTrusted` and `eventPostingAllowed` are true for the background service.
-2. If not, open System Settings → Privacy & Security → Accessibility. Click **+**, press ⌘⇧G and add the **Node binary the service uses** (shown by `npm run service:status`; with Homebrew it is under `/opt/homebrew/Cellar/node/<version>/bin/node`) and `~/Library/Application Support/Keyln/runtime/dist/keyln-helper`. Turn both on.
-3. Run `npm run service:restart`, then `npm run service:doctor` again.
+2. If not, open System Settings → Privacy & Security → Accessibility and add the **Node binary the service uses** (shown as `node` by `npm run service:status`), then turn it on:
+   - **Self-contained app** (`layout: "app"`): add `~/Applications/Keyln.app/Contents/Helpers/node`. The file picker may add the whole app instead, so the reliable way is Finder → right-click `Keyln.app` → **Show Package Contents** → `Contents/Helpers`, and drag `node` into the list.
+   - **Homebrew-style service** (`layout: "legacy"`): click **+**, press ⌘⇧G and add the Node under `/opt/homebrew/Cellar/node/<version>/bin/node` and `~/Library/Application Support/Keyln/runtime/dist/keyln-helper`. Turn both on.
+3. Run `npm run service:doctor` again (if it is still false, run `npm run service:restart` first).
 
-macOS ties this permission to the exact binary. **After Node is upgraded** (for example by `brew upgrade`), remove the old entry and add the new path again.
+The bundled Node is signed by the Node.js Foundation, and macOS keeps the permission across app rebuilds and pinned Node updates. Homebrew's Node is not, so **after a Homebrew Node upgrade** remove the old entry and add the new path again.
 
 ### 6. Pair a device
 
@@ -120,7 +132,9 @@ Scripts are registered and approved **on the Mac** in the management page. The d
 | `npm run service:admin` | Print a short-lived Mac management login code |
 | `npm run service:install` | Build and install or update the background service |
 | `npm run service:uninstall` | Remove the service; keeps your data, certificates and pairings |
-| `npm run app:install` | Build and install the menu bar app |
+| `npm run node:fetch` | Download and verify the pinned official Node into `.cache/node` |
+| `npm run app:build` | Assemble the self-contained `dist/Keyln.app` (run after `npm run build`) |
+| `npm run app:install` | Build and install the self-contained app and switch the login service to it |
 | `npm run restore` | Offline restore of the last valid layout (stop the Host first; revokes all devices) |
 
 The `.command` files in the repository do the same from Finder: Start, Stop, Restart, Manage (login code) and Install-Keyln-Login.

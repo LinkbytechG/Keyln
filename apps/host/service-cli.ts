@@ -36,7 +36,7 @@ export async function installService(paths:ServicePaths,source:string,node:strin
 
 export function serviceStatus(paths:ServicePaths) {
   const installed=existsSync(paths.manifest),manifest=installed?readService(paths):undefined;
-  return {installed,...loadedService(paths),uid:process.getuid?.(),runtime:manifest?.runtime,node:manifest?.node,nodeAvailable:manifest?existsSync(manifest.node):undefined,logs:paths.logs,certificate:certificateStatus(paths.data)};
+  return {installed,...loadedService(paths),uid:process.getuid?.(),runtime:manifest?.runtime,node:manifest?.node,app:manifest?.schemaVersion===2?manifest.app:undefined,layout:manifest?(manifest.schemaVersion===2?"app":"legacy"):undefined,nodeAvailable:manifest?existsSync(manifest.node):undefined,logs:paths.logs,certificate:certificateStatus(paths.data)};
 }
 export async function serviceCommand(args:string[],label=SERVICE_LABEL) {
   if(process.platform!=="darwin"||process.getuid?.()===0)throw new Error("Use the signed-in Mac user, without sudo.");
@@ -44,7 +44,8 @@ export async function serviceCommand(args:string[],label=SERVICE_LABEL) {
   if(command==="install") {
     if(rest.length!==0&&(rest.length!==2||rest[0]!=="--node"||!rest[1]))throw new Error("Usage: npm run service:install -- [--node /absolute/path/to/node]");
     const previous=existsSync(paths.manifest)?readService(paths):undefined;
-    const node=serviceNodePath(rest[1]??previous?.node??process.execPath);
+    // An app installation never lends its bundled Node to the legacy path; falling back to the Homebrew-era Node needs --node or the current one.
+    const node=serviceNodePath(rest[1]??(previous?.schemaVersion===1?previous.node:undefined)??process.execPath);
     await installService(paths,fileURLToPath(new URL("../../../",import.meta.url)),node);
     console.log("Keyln login startup installed for this user. Runtime: "+paths.runtime+"\nLogs: "+paths.logs+"\nRun npm run service:admin for a private management code; service:doctor checks the actual background launch context.");return;
   }
@@ -60,10 +61,10 @@ export async function serviceCommand(args:string[],label=SERVICE_LABEL) {
   if(command==="start"){await startService(paths);await ready(paths.data);console.log("Keyln user service is running.");return;}
   if(command==="stop"){await stopService(paths);console.log("Keyln user service stopped and disabled until service:start. Saved data retained.");return;}
   if(command==="restart"){await stopService(paths);await startService(paths);await ready(paths.data);console.log("Keyln user service restarted. Previous actions were not resumed.");return;}
-  if(command==="uninstall"){await uninstallService(paths);console.log("Keyln login startup and runtime removed. Data, scripts, certificates and logs retained.");return;}
+  if(command==="uninstall"){await uninstallService(paths);console.log("Keyln login startup removed (runtime too, unless it lives inside Keyln.app). Data, scripts, certificates, logs and Keyln.app retained.");return;}
   throw new Error("Use install, start, stop, restart, status, admin, doctor or uninstall.");
 }
-async function ready(data:string) {
+export async function ready(data:string) {
   const end=Date.now()+12000;
   while(Date.now()<end){try{await requestLocalManagement(data,"doctor");return;}catch{await delay(200);}}
   throw new Error("The service did not become ready. Inspect service:status, private logs and macOS Login Items; no action was retried.");

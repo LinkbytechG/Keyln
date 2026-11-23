@@ -1,10 +1,10 @@
 import { execFile } from "node:child_process";
-import { fileURLToPath } from "node:url";
 import { appId, Fault, label, parseAction, parseWindows, type WindowInfo, type WindowAction, type AppInfo, type BasicAction } from "../../packages/contracts/index.js";
 import type { ActionResult, Adapter } from "./scheduler.js";
 import { appIconIds, MAX_APP_ICON_BYTES, MAX_ICON_REPLY_BYTES, validateAppIcon } from "./app-icons.js";
+import { helperPath } from "./helper-path.js";
 
-const helper = fileURLToPath(new URL("../../keyln-helper", import.meta.url));
+const helper = helperPath(import.meta.url);
 function invoke(args: string[], signal?: AbortSignal, maxBuffer = 512 * 1024): Promise<unknown> {
   return new Promise((resolve, reject) => {
     execFile(helper, args, { signal, timeout: 10_000, killSignal: "SIGKILL", maxBuffer }, (error, stdout) => {

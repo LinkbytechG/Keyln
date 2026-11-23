@@ -1,10 +1,10 @@
 import { spawn, type ChildProcess } from "node:child_process";
 import { existsSync, lstatSync, readFileSync, renameSync } from "node:fs";
 import { join } from "node:path";
-import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
 import { appId, exact, record, type AppInfo, type AppRecent } from "../../packages/contracts/index.js";
 import { atomicJSON, privateDir } from "./store.js";
+import { helperPath } from "./helper-path.js";
 
 const MAX_ENTRIES = 2048, MAX_FILE = 1048576, MAX_LINE = 1024;
 interface Entry { appId: string; at: number; order: number }
@@ -73,7 +73,7 @@ export class AppUsage {
     if (this.stopping) return;
     this.status = "starting";
     let child: ChildProcess;
-    try { child = this.options.child?.() ?? spawn(fileURLToPath(new URL("../../keyln-helper", import.meta.url)), ["observe-app-activation"], { stdio: ["ignore", "pipe", "pipe"] }); }
+    try { child = this.options.child?.() ?? spawn(helperPath(import.meta.url), ["observe-app-activation"], { stdio: ["ignore", "pipe", "pipe"] }); }
     catch { this.failed(); return; }
     this.child = child;
     let readyAt: number | undefined;

@@ -21,3 +21,4 @@ devices.json
 scripts.json
 /tls/
 
+.cache/

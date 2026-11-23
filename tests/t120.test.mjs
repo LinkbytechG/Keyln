@@ -54,7 +54,7 @@ test('the build produces a signed agent app bundle with the expected Info.plist 
 });
 
 test('app:install copies the bundle into the chosen directory and a second run replaces it cleanly',t=>{
- const target=directory(t),run=()=>execFileSync(process.execPath,['scripts/app-install.mjs','--target',target,'--no-open'],{encoding:'utf8',stdio:'pipe'});
+ const target=directory(t),run=()=>execFileSync(process.execPath,['scripts/app-install.mjs','--target',target,'--no-open','--app-only'],{encoding:'utf8',stdio:'pipe'});
  run();const installed=join(target,'Keyln.app');assert.ok(existsSync(join(installed,'Contents/MacOS/Keyln')));execFileSync('/usr/bin/codesign',['--verify','--strict',installed],{stdio:'pipe'});
  writeFileSync(join(installed,'stale-marker'),'x');run();
  assert.equal(existsSync(join(installed,'stale-marker')),false);execFileSync('/usr/bin/codesign',['--verify','--strict',installed],{stdio:'pipe'});

@@ -98,12 +98,14 @@ final class SetupWindowController: NSObject, NSWindowDelegate {
     private var primary: NSButton?
     private var accessibilityLabel: NSTextField?
     private var certificateLabel: NSTextField?
+    private var movedNote = false
     private let queue = DispatchQueue(label: "local.keyln.menubar.setup")
 
     var isVisible: Bool { window?.isVisible ?? false }
 
-    func show(_ step: SetupStep, info: SetupInfo, actions: SetupActions) {
+    func show(_ step: SetupStep, info: SetupInfo, actions: SetupActions, moved: Bool = false) {
         self.step = step
+        self.movedNote = moved
         self.info = info
         self.actions = actions
         let window = self.window ?? makeWindow(title: "Set Up Keyln")
@@ -193,19 +195,19 @@ final class SetupWindowController: NSObject, NSWindowDelegate {
             DispatchQueue.main.async {
                 guard installed.status == 0 else { self?.fail(Self.reason(installed)); return }
                 actions.changed()
-                self?.refreshInfoThenShowNext()
+                self?.refreshInfoThenShowNext(moved: true)
             }
         }
     }
 
-    private func refreshInfoThenShowNext() {
+    private func refreshInfoThenShowNext(moved: Bool = false) {
         guard let actions = actions else { return }
         queue.async { [weak self] in
             let fresh = actions.client.setupInfo().info
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 if let fresh = fresh { self.info = fresh }
-                self.show(.next, info: self.info, actions: actions)
+                self.show(.next, info: self.info, actions: actions, moved: moved)
             }
         }
     }
@@ -237,7 +239,7 @@ final class SetupWindowController: NSObject, NSWindowDelegate {
             text("3. Allow Keyln to send keys", bold: true),
             accessibility,
             row([settings, finder]),
-            text("Drag node into the list and turn it on.", secondary: true),
+            text(movedNote ? "The service now runs from a different location, so the old Accessibility entry no longer applies. Drag this copy’s node into the list again and turn it on." : "Drag node into the list and turn it on.", secondary: true),
             row([done]),
         ], spacing: 10)
     }

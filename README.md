@@ -19,14 +19,26 @@ Nothing leaves your network. There is no cloud service, account or database: the
 
 ## Install as an app
 
-If you have a self-contained `Keyln.app` (built with `npm run app:build`, or downloaded), you do not need npm or a terminal:
+### Download
 
-1. Drag `Keyln.app` into `/Applications` or `~/Applications`. Keep the name `Keyln.app`, and do not run it from a disk image.
-2. Double-click it. A first copy downloaded from the internet may be blocked once: open System Settings → Privacy & Security and choose **Open Anyway**.
+1. Download `Keyln-<version>.zip` from the project's GitHub Releases page. Optionally check it against the `Keyln-<version>.zip.sha256` file beside it: `shasum -a 256 Keyln-<version>.zip` must print the same hash.
+2. Unzip it and drag `Keyln.app` into `/Applications` or `~/Applications`.
+3. Double-click it. Keyln is not notarized, so macOS will say it cannot be opened: open System Settings → Privacy & Security and choose **Open Anyway** (on recent macOS, right-click → Open no longer bypasses this).
+
+### Set up
+
+With a self-contained `Keyln.app` (downloaded, or built with `npm run app:build`) you do not need npm or a terminal:
+
+1. Put `Keyln.app` in `/Applications` or `~/Applications`. Keep the name `Keyln.app`, and do not run it from a disk image.
+2. Double-click it. A copy downloaded from the internet may be blocked once; see **Open Anyway** above.
 3. Follow the setup window. Choose your Mac's address, and Keyln creates its own certificates, installs its background service from this app (starts at login) and starts it.
 4. The last step lists what is left: **Export Device Certificate…** (a public `keyln-root.cer` plus its SHA-256 fingerprint to compare on the device), pairing (**Mac Management**, **Show QR Code…**) and Accessibility (open the settings page, then drag `node` into the list and turn it on; the window can show the file in Finder).
 
 The same actions stay in the menu bar: **Setup Guide…**, **Export Device Certificate…** and **Change Address…** (devices keep trusting the certificate but must open the new address and pair again). If you later move `Keyln.app`, the menu offers **Repair Service Location…** to point the background service at the new place. The app only ever installs the copy it is running from.
+
+### Updating
+
+Choose **Quit Keyln Menu** in the menu bar first (the background service keeps running). Replace `Keyln.app` in the same folder with the new one, open it, confirm **Open Anyway** again if macOS asks, and accept the restart prompt (**Restart Service**) when Keyln says the background service is still running the older version. Accessibility stays granted as long as the app is in the same place. If you move the app, or use a different copy through **Use This App** or **Repair Service Location…**, add that copy's `node` to Accessibility again.
 
 ### Moving to another Mac
 
@@ -154,6 +166,7 @@ Scripts are registered and approved **on the Mac** in the management page. The d
 | `npm run node:fetch` | Download and verify the pinned official Node into `.cache/node` |
 | `npm run app:build` | Assemble the self-contained `dist/Keyln.app` (run after `npm run build`) |
 | `npm run app:install` | Build and install the self-contained app and switch the login service to it |
+| `npm run app:release` | Build the app and package it as `dist/release/Keyln-<version>.zip` with a `.sha256` file, then unpack and check the zip (needs a clean git tree, or `-- --allow-dirty`). It does not upload or tag anything |
 | `npm run restore` | Offline restore of the last valid layout (stop the Host first; revokes all devices) |
 
 The `.command` files in the repository do the same from Finder: Start, Stop, Restart, Manage (login code) and Install-Keyln-Login.

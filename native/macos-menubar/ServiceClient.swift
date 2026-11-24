@@ -12,6 +12,7 @@ struct ServiceStatus {
     var running = false
     var origin: String?
     var logs: String?
+    var hostVersion: String?       // T125: nil when not running, "unknown" for a Host that predates version reporting
     var accessibilityTrusted: Bool?
     var eventPostingAllowed: Bool?
     var permissionsKnown = false   // doctor ran and answered
@@ -126,6 +127,7 @@ final class ServiceClient {
         result.running = object["running"] as? Bool ?? false
         result.origin = object["origin"] as? String
         result.logs = object["logs"] as? String
+        result.hostVersion = object["hostVersion"] as? String
         if doctor && result.running {
             if let permissions = object["permissions"] as? [String: Any] {
                 result.permissionsKnown = true
@@ -159,6 +161,7 @@ struct SetupInfo {
     var manifestMatchesSelf = false
     var layout: String?
     var running = false
+    var appVersion: String?
 }
 
 extension ServiceClient {
@@ -179,6 +182,7 @@ extension ServiceClient {
         info.manifestMatchesSelf = object["manifestMatchesSelf"] as? Bool ?? false
         info.layout = object["layout"] as? String
         info.running = object["running"] as? Bool ?? false
+        info.appVersion = object["appVersion"] as? String
         for entry in object["candidates"] as? [[String: Any]] ?? [] {
             if let name = entry["interface"] as? String, let address = entry["address"] as? String { info.candidates.append(AddressCandidate(interface: name, address: address)) }
         }

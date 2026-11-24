@@ -21,6 +21,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private let stopItem = NSMenuItem(title: "Stop", action: #selector(stopService), keyEquivalent: "")
     private let logsItem = NSMenuItem(title: "Show Logs", action: #selector(showLogs), keyEquivalent: "")
     private let loginItem = NSMenuItem(title: "Open at Login", action: #selector(toggleLogin), keyEquivalent: "")
+    private let versionLine = NSMenuItem(title: "", action: nil, keyEquivalent: "")
     private let quitItem = NSMenuItem(title: "Quit Keyln Menu", action: #selector(quit), keyEquivalent: "")
 
     private let queue = DispatchQueue(label: "local.keyln.menubar.status")
@@ -37,17 +38,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var setupInfo: SetupInfo?
     private var repairNeeded = false
     private var offeredRepair = false
+    private var offeredRestart = false
+    private let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         menu.autoenablesItems = false
         menu.delegate = self
-        for entry in [statusLine, originLine, permissionLine] { entry.isEnabled = false }
+        for entry in [statusLine, originLine, permissionLine, versionLine] { entry.isEnabled = false }
+        versionLine.title = "Version " + (appVersion ?? "unknown")
         for entry in [openItem, qrItem, adminItem, guideItem, exportItem, changeItem, repairItem, startItem, restartItem, stopItem, logsItem, loginItem, quitItem] { entry.target = self }
         for entry in [
             statusLine, originLine, permissionLine, openItem, qrItem, adminItem, NSMenuItem.separator(),
             startItem, restartItem, stopItem, NSMenuItem.separator(),
             guideItem, exportItem, changeItem, repairItem, NSMenuItem.separator(),
-            logsItem, loginItem, NSMenuItem.separator(), quitItem,
+            logsItem, loginItem, NSMenuItem.separator(), versionLine, quitItem,
         ] { menu.addItem(entry) }
         item.menu = menu
         registerLoginOnFirstLaunch()
@@ -91,6 +95,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         current = next
         render()
+        offerRestartIfStale()
+    }
+
+    /// T125 (ADR-109): a newer copy of this app replaced the one the background service still runs. Ask once per launch; never restart on our own.
+    private func offerRestartIfStale() {
+        guard !offeredRestart, !busy, client.hasBundledRuntime, let mine = appVersion, current.failure == nil, current.running,
+              let service = current.hostVersion, service != mine, setupInfo?.manifestMatchesSelf == true else { return }
+        offeredRestart = true
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            NSApp.activate(ignoringOtherApps: true)
+            let box = NSAlert()
+            box.messageText = "Keyln was updated"
+            let running = service == "unknown" ? "an older version" : "version \(service)"
+            box.informativeText = "The background service is still running \(running). Restart it to use version \(mine)?"
+            box.addButton(withTitle: "Restart Service")
+            box.addButton(withTitle: "Later")
+            if box.runModal() == .alertFirstButtonReturn { self.perform("restart") }
+        }
     }
 
     private func permissionsMissing(_ status: ServiceStatus) -> Bool {
@@ -194,6 +217,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 guard let info = answer.info else { return }
                 self.setupInfo = info
                 self.decideFirstRun(info)
+                self.offerRestartIfStale()
             }
         }
     }

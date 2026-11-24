@@ -1,7 +1,8 @@
 import { existsSync } from "node:fs";
 import { SERVICE_LABEL, servicePaths, loadedService, readService, certificateStatus, type ServicePaths } from "./service.js";
 import { serviceCommand, serviceStatus } from "./service-cli.js";
-import { requestLocalManagement } from "./local-management.js";
+import { hostVersionOf, requestLocalManagement } from "./local-management.js";
+import { readVersion } from "./version.js";
 import { changeAddress, exportCertificate, installSelf, setupCommand, setupInfo } from "./first-run.js";
 
 // T120: the only commands the menu bar app may run. install and uninstall are deliberately absent.
@@ -22,6 +23,9 @@ async function menuStatus(paths: ServicePaths, doctor: boolean) {
     base = { installed, loaded: job.loaded, pid: job.pid, state: job.state, origin, nodeAvailable };
   }
   const status: Record<string, unknown> = { installed: base.installed, loaded: base.loaded, running: base.pid !== null, pid: base.pid, state: base.state, origin: base.origin, logs: paths.logs, nodeAvailable: base.nodeAvailable };
+  // T125: an older Host does not know the command and drops the connection; that reads as "unknown", never as an error.
+  status.hostVersion = null;
+  if (base.pid !== null) status.hostVersion = await hostVersionOf(paths.data);
   if (doctor && base.pid !== null) {
     try {
       const result = await requestLocalManagement(paths.data, "doctor");
@@ -58,7 +62,7 @@ async function main(args: string[]) {
   }
   if (command === "setup-info" || command === "install-self") {
     if (rest.length) throw new Error("This command does not take arguments.");
-    if (command === "setup-info") console.log(JSON.stringify(setupInfo(paths, import.meta.url)));
+    if (command === "setup-info") console.log(JSON.stringify({ ...setupInfo(paths, import.meta.url), appVersion: readVersion() }));
     else { await installSelf(paths, import.meta.url); console.log(JSON.stringify({ installed: true })); }
     return;
   }

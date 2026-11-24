@@ -31,7 +31,8 @@
     "service:uninstall": "node scripts/service.mjs uninstall",
     "node:fetch": "node scripts/node-runtime.mjs",
     "app:build": "node scripts/app-build.mjs",
-    "app:install": "npm run build && node scripts/app-build.mjs && node scripts/app-install.mjs"
+    "app:install": "npm run build && node scripts/app-build.mjs && node scripts/app-install.mjs",
+    "app:release": "npm run build && node scripts/app-build.mjs && node scripts/app-release.mjs"
   },
   "devDependencies": {
     "@types/node": "24.19.2",

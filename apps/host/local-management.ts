@@ -6,7 +6,7 @@ import { privateDir } from "./store.js";
 import type { LocalAdmin } from "./admin.js";
 
 export const managementPath = (dir: string) => join(dir, "management.sock");
-export async function localManagement(dir: string, admin: LocalAdmin, origin: string, doctor: () => Promise<unknown>) {
+export async function localManagement(dir: string, admin: LocalAdmin, origin: string, doctor: () => Promise<unknown>, version = "unknown") {
   privateDir(dir);
   const path = managementPath(dir);
   if (Buffer.byteLength(path) > 103) throw new Error("The local management socket path is too long. Use a shorter private data directory.");
@@ -30,6 +30,7 @@ export async function localManagement(dir: string, admin: LocalAdmin, origin: st
         const input = exact(JSON.parse(new TextDecoder("utf-8", {fatal:true}).decode(bytes)), ["command"]);
         if (input.command === "admin") socket.end(JSON.stringify({ origin, code: admin.invite(), expiresInSeconds: 120 }) + "\n");
         else if (input.command === "doctor") socket.end(JSON.stringify({ origin, pid: process.pid, uid: process.getuid?.(), diagnostics: await doctor() }) + "\n");
+        else if (input.command === "version") socket.end(JSON.stringify({ version, pid: process.pid }) + "\n");
         else throw new Error("Unsupported local management command.");
       })().catch(() => socket.destroy());
     });
@@ -44,15 +45,21 @@ export async function localManagement(dir: string, admin: LocalAdmin, origin: st
   };
 }
 
-export async function requestLocalManagement(dir: string, command: "admin" | "doctor"): Promise<Record<string, unknown>> {
+export async function requestLocalManagement(dir: string, command: "admin" | "doctor" | "version", timeoutMs = 5000): Promise<Record<string, unknown>> {
   const path = managementPath(dir), stat = lstatSync(path);
   if (!stat.isSocket() || stat.uid !== process.getuid?.() || (stat.mode & 0o077) !== 0) throw new Error("The local management socket is not private to this user.");
   return await new Promise((resolve, reject) => {
     const socket = connect(path); let bytes = Buffer.alloc(0);
-    socket.setTimeout(5000, () => socket.destroy(new Error("Local management timed out.")));
+    socket.setTimeout(timeoutMs, () => socket.destroy(new Error("Local management timed out.")));
     socket.on("connect", () => socket.write(JSON.stringify({command}) + "\n"));
     socket.on("data", chunk => {if (bytes.length + chunk.length > 8192) socket.destroy(new Error("Invalid local management response.")); else bytes = Buffer.concat([bytes, chunk]);});
     socket.on("error", reject);
     socket.on("end", () => {try {resolve(JSON.parse(bytes.toString("utf8")));} catch {reject(new Error("No valid local management response. Start the current Host first."));}});
   });
+}
+
+/** T125: the running Host's version, or "unknown" when it is older than version reporting, does not answer in time or answers oddly. Never throws. */
+export async function hostVersionOf(dir: string, timeoutMs = 1500): Promise<string> {
+  try { const answer = await requestLocalManagement(dir, "version", timeoutMs); return typeof answer.version === "string" && answer.version ? answer.version : "unknown"; }
+  catch { return "unknown"; }
 }

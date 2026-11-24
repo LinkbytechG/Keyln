@@ -7,6 +7,7 @@ function run(command, args) {
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
+const version = JSON.parse(readFileSync('package.json', 'utf8')).version;
 run(resolve('node_modules/.bin/tsc'), []);
 // T64: a module that was deleted from the source must not stay in dist (tsc only writes, it never removes). Every compiled file there has a .ts source of the same name.
 function prune(dir) {
@@ -18,6 +19,8 @@ function prune(dir) {
   }
 }
 for (const dir of ['dist/apps', 'dist/packages']) if (existsSync(dir)) prune(dir);
+// T125: the Host reads its version from here (apps/host/version.ts). dist/apps is copied whole into both service layouts.
+writeFileSync('dist/apps/host/version.json', JSON.stringify({ version }) + '\n');
 mkdirSync('dist/apps/web', { recursive: true });
 for (const name of ['index.html', 'style.css', 'admin.html', 'admin.css', 'check.html', 'check.css', 'manifest.webmanifest']) copyFileSync(`apps/web/${name}`, `dist/apps/web/${name}`);
 cpSync('apps/web/icons', 'dist/apps/web/icons', {recursive:true});
@@ -27,7 +30,6 @@ run('/usr/bin/xcrun', ['swiftc', '-O', '-module-cache-path', resolve('dist/swift
 run('/usr/bin/codesign', ['--force', '--sign', '-', '--identifier', 'local.keyln.helper', 'dist/keyln-helper']);
 
 // T120: the menu bar app shell. Plain swiftc, a generated Info.plist and an ad-hoc signature; no Xcode project.
-const version = JSON.parse(readFileSync('package.json', 'utf8')).version;
 const xml = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 const info = {
   CFBundleIdentifier: 'local.keyln.menubar', CFBundleName: 'Keyln', CFBundleDisplayName: 'Keyln', CFBundleExecutable: 'Keyln',

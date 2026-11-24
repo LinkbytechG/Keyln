@@ -1,4 +1,4 @@
-import { chmodSync, copyFileSync, cpSync, existsSync, mkdirSync, mkdtempSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, copyFileSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, isAbsolute, join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { NODE_TEAM, NODE_VERSION, checkSignedNode, requireCachedNode } from './node-runtime.mjs';
@@ -35,7 +35,7 @@ try {
   cpSync('dist/apps', join(runtime, 'dist/apps'), { recursive: true }); cpSync('dist/packages', join(runtime, 'dist/packages'), { recursive: true });
   cpSync('node_modules/ws', join(runtime, 'node_modules/ws'), { recursive: true });
   writeFileSync(join(runtime, 'package.json'), JSON.stringify({ private: true, type: 'module' }) + '\n');
-  writeFileSync(join(runtime, '.keyln-runtime.json'), JSON.stringify({ schemaVersion: 2, kind: 'keyln-app-runtime', node: NODE_VERSION }) + '\n');
+  writeFileSync(join(runtime, '.keyln-runtime.json'), JSON.stringify({ schemaVersion: 2, kind: 'keyln-app-runtime', node: NODE_VERSION, version: JSON.parse(readFileSync('package.json', 'utf8')).version }) + '\n');
   run('/bin/chmod', ['-R', 'go-w', runtime]);
   // Inner code first, then the outer app, ad hoc and without --deep so Node keeps its own signature.
   run('/usr/bin/codesign', ['--force', '--sign', '-', '--identifier', 'local.keyln.helper', join(helpers, 'keyln-helper')]);

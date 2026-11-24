@@ -13,6 +13,7 @@ import { ScriptRegistry } from "./scripts.js";
 import { actionAdapter } from "./shell.js";
 import { ShortcutsCatalog } from "./shortcuts.js";
 import { localManagement } from "./local-management.js";
+import { readVersion } from "./version.js";
 import { IconifyClient, IconLibrary } from "./icon-library.js";
 import { AppUsage } from "./app-usage.js";
 import { RunningApps } from "./running-apps.js";
@@ -57,7 +58,7 @@ try {
     tls: { key: readFileSync(join(dir, "tls/server.key")), cert: readFileSync(join(dir, "tls/server.pem")) },
     onPair: (id, name) => console.log(`\nPairing request ${id} from ${JSON.stringify(name)}. Compare this ID on Surface, then type: approve ${id}`),
   });
-  const closeManagement = await localManagement(dir, admin, origin, nativeDiagnostics);
+  const closeManagement = await localManagement(dir, admin, origin, nativeDiagnostics, readVersion());
   server.on("error", error => { console.error(`Host stopped: ${error.message}`); process.exit(1); });
   server.listen(port, address, () => {
     console.log(`Keyln is listening at ${origin}\nInstalled apps: ${apps.length}. Data: ${dir}`);

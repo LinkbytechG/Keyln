@@ -122,23 +122,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     private func render() {
         let status = current
-        let symbol: String, words: String
+        let icon: StatusIconState, words: String
         if status.failure != nil {
-            symbol = "exclamationmark.triangle"; words = "status unavailable"
+            icon = .attention; words = "status unavailable"
         } else if !status.installed {
-            symbol = "pause.circle"; words = "not installed"
+            icon = .stopped; words = "not installed"
         } else if !status.running {
-            symbol = "pause.circle"; words = "stopped"
+            icon = .stopped; words = "stopped"
         } else if permissionsMissing(status) {
-            symbol = "exclamationmark.triangle"; words = "running, permission missing or unknown"
+            icon = .attention; words = "running, permission missing or unknown"
         } else {
-            symbol = "keyboard.fill"; words = "running"
+            icon = .running; words = "running"
         }
         if let button = item.button {
-            let image = NSImage(systemSymbolName: symbol, accessibilityDescription: "Keyln " + words)
-            image?.isTemplate = true
-            button.image = image
-            if image == nil { button.title = "K" } else { button.title = "" }
+            button.image = StatusIcon.image(icon, description: "Keyln " + words)
+            button.appearsDisabled = icon == .stopped
+            button.title = ""
             button.setAccessibilityLabel("Keyln: " + words)
             button.toolTip = "Keyln: " + words
         }
